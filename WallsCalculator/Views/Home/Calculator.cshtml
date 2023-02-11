@@ -1,0 +1,41 @@
+﻿@model WallsCalculator.Models.CalculationBaseInput
+@{
+    ViewData["Title"] = "Расчет стен";
+}
+
+
+
+<div class="text-center">
+    <div class="calculator-menu">
+        <div class="calculator-element"> 
+            <div class="calculator-header">
+                <span>Расчет стен по квадратуре</span>
+                <button type="button" onclick="@Url.Action("HideCalculator", "Home")">Открыть/Cкрыть</button>
+            </div>
+
+            @if(ViewBag.Hidden == null || !ViewBag.Hidden){
+            <div class="calculator-body">
+                <h3>Форма оформления покупки</h3>
+                @using (Html.BeginForm("Calculate", "Home", FormMethod.Post))
+                {
+                @Html.LabelFor(m => m.X,"Введите X")
+                <br />
+                @Html.TextBoxFor(m=>m.X)
+                <br />
+
+                <br />
+                @Html.LabelFor(m => m.Y, "Введите Y")
+                <br />
+                @Html.TextBoxFor(m=>m.Y)
+                <p><input type="submit" value="Расчет" /></p>
+                }
+            </div>
+            }
+        </div>
+    </div>
+
+    @if(ViewBag.Result != null)
+    {
+        <h5>Результат: @ViewBag.Result</h5>
+    }
+</div>
