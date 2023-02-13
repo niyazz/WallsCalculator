@@ -11,11 +11,11 @@
 
     <!--ТУТ ВКЛЮЧАЕТСЯ/ВЫКЛЮЧАЕТСЯ css-->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WallsCalculator.styles.css" asp-append-version="true" />
+    @*<link rel="stylesheet" href="~/WallsCalculator.styles.css" asp-append-version="true" />*@
     <!--ТУТ ВКЛЮЧАЕТСЯ/ВЫКЛЮЧАЕТСЯ css-->
 
 </head>
-<body>
+<body class="body">
     <div class="container">
         <header>
             <div class="header__nav d-flex justify-content-between py-3">
@@ -24,45 +24,71 @@
                     <span class="font-weight-bold h4">Calculator</span>
                 </div>
                 <nav class="d-flex align-items-center text-secondary">
-                    <a class="px-3 text-reset text-decoration-none font-weight-normal rounded-pill header__nav-btn" href="#">Главная</a>
-                    <a class="px-3 text-reset text-decoration-none font-weight-normal rounded-pill header__nav-btn" href="#">Калькуляторы</a>
-                    <a class="px-3 text-reset text-decoration-none font-weight-normal rounded-pill header__nav-btn" href="#">О сервисе</a>
+                    <a class="px-3 text-reset text-decoration-none font-weight-normal rounded-pill header__nav-btn"
+                       href="#">Главная</a>
+                    <a class="px-3 text-reset text-decoration-none font-weight-normal rounded-pill header__nav-btn"
+                       href="#">Калькуляторы</a>
+                    <a class="px-3 text-reset text-decoration-none font-weight-normal rounded-pill header__nav-btn"
+                       href="#">О сервисе</a>
                 </nav>
 
                 <div class="header__nav-info d-flex align-items-center text-secondary">
-                    <span class="font-weight-bold">Задать вопрос</span>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-light text-secondary" data-toggle="modal" data-target="#exampleModal">
+                        Задать вопрос
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Есть вопросы? Задавайте!</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Ваш email:</label>
+                                            <input type="email" class="form-control" id="recipient-name" aria-describedby="emailHelp" placeholder="primer@primer.ru">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Ваш вопрос:</label>
+                                            <textarea class="form-control" id="message-text" placeholder="Как задать вопрос?"></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                    <button type="button" class="btn btn-primary">Отправить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="header__content">
-                <div class="header__content-mask d-flex justify-content-center align-items-center">
+                <div class="header__content-mask d-flex flex-column justify-content-center align-items-center">
                     <span class="font-weight-bold text-secondary w-75  text-center h1">
-                        Lorem ipsum, dolor sit amet consectetur adipisicg elit. Nostrum, dolore?
+                        Расчёт стен жилого частного дома
+                    </span>
+                    <span class=" text-secondary text-center h3 mt-5">
+                            Онлайн-калькулятор позволяет рассчитать <br /> 
+                            основные параметры стен и материалы для жилого дома
                     </span>
                 </div>
             </div>
         </header>
 
-
         <div class="content">
             @RenderBody()
         </div>
 
-
         <footer class="border-top footer text-muted">
-            <div class="footer__top d-flex my-3">
-                <div class="footer__top-studentInfo mr-3">
-                    ФИО студента:
-                    <br />
-                    Адиля
-                </div>
-                <div class="footer__top-univerInfo mx-3">
-                    Университет, кафедра:
-                    <br />
-                    КГАСУ, ИСиТ
-                </div>
-
-            </div>
             <div class="footer__bottom py-3 pl-2 font-weight-bold  ">
                 <span>&copy; 2023 - WALLSCalculator</span>
             </div>
