@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -28,33 +29,31 @@ namespace WallsCalculator.Controllers
             return View();
         }
 
-        public IActionResult Calculator()
+        public IActionResult BrickCalculator()
         {
             return View();
         }
 
 
         [HttpPost]
-        public IActionResult Calculate([FromForm] CalculationBaseInput input)
+        public IActionResult Calculate([FromForm] BrickCalculationInput input)
         {
-            ViewBag.Result = input.X + input.Y;
-            return View("Views/Home/Calculator.cshtml");
+            return View("Views/Home/BrickCalculator.cshtml");
         }
 
-        [HttpGet]
         public IActionResult HideCalculator()
         {
-            if(ViewBag.Hidden == null)
+            if (TempData["Hidden"] == null)
             {
-                ViewBag.Hidden = true;
+                TempData["Hidden"] = true;
             }
 
             else
             {
-                ViewBag.Hidden = !ViewBag.Hidden;
+                TempData["Hidden"] = !(bool)TempData["Hidden"];
             }
 
-            return View("Views/Home/Calculator.cshtml");
+            return View("Views/Home/BrickCalculator.cshtml");
         }
 
 
