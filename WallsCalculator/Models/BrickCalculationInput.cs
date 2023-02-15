@@ -1,4 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using WallsCalculator.Utils;
+using static WallsCalculator.Utils.ErrorsConstants;
 
 namespace WallsCalculator.Models
 {
@@ -10,33 +14,43 @@ namespace WallsCalculator.Models
         /// <summary>
         /// Вид кирпича.
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = Required)]
+        [DisplayName("Вид кирпича")]
         public BrickType BrickType { get; set; }
 
         /// <summary>
         /// Общая длина всех стен.
         /// </summary>
-        [Required]
-        public decimal Perimeter { get; set; }
+        [Required(ErrorMessage = Required)]
+        [DisplayName("Общая длина всех стен (мм)")]
+        public double Perimeter { get; set; }
 
         /// <summary>
         /// Высота стен по углам.
         /// </summary>
-        public decimal AngleHeight { get; set; }
+        [Required(ErrorMessage = Required)]
+        [DisplayName("Высота стен по углам (мм)")]
+        public double AngleHeight { get; set; }
 
         /// <summary>
         /// Тощина стен.
         /// </summary>
-        public decimal Depth { get; set; }
+        [Required(ErrorMessage = Required)]
+        [DisplayName("Тощина стен (мм)")]
+        public double Depth { get; set; }
 
         /// <summary>
         /// Тощина раствора.
         /// </summary>
-        public decimal MortarDepth { get; set; } = 10.0m;
+        [Required(ErrorMessage = Required)]
+        [DisplayName("Тощина раствора (мм)")]
+        public double MortarDepth { get; set; }
 
         /// <summary>
         /// Цена кирпича.
         /// </summary>
+        [Required(ErrorMessage = Required)]
+        [DisplayName("Цена кирпича (мм)")]
         public decimal Price { get; set; }
     }
 }
