@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using WallsCalculator.Utils;
@@ -52,5 +53,10 @@ namespace WallsCalculator.Models
         [Required(ErrorMessage = Required)]
         [DisplayName("Цена кирпича (мм)")]
         public decimal Price { get; set; }
+
+        /// <summary>
+        /// Проёмы в стенах.
+        /// </summary>
+        public IEnumerable<Aperture> Aperturs { get; set; }
     }
 }

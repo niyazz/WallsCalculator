@@ -19,3 +19,21 @@ function isNumber(e) {
         e.preventDefault();
     }
 }
+
+function addApertureInput() {
+    var container = document.querySelector("#ElementsContainer");
+    
+    var widthInput = '<input type="text" id="widthInput" name="widthInput1" value="0 мм" />'
+    var heightInput = '<input type="text" id="heightInput" name="heightInput1" value="0 мм" />'
+
+    container.appendChild(createInput())
+    container.appendChild(heightInput)
+}
+
+function createInput(type, text, placeholder) {
+    var FN = document.createElement("input");
+    FN.setAttribute("type", type);
+    FN.setAttribute("name", text);
+    FN.setAttribute("id", text);
+    FN.setAttribute("placeholder", placeholder);
+}
