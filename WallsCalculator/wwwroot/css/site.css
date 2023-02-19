@@ -8,9 +8,7 @@ a.navbar-brand {
 .body {
     overflow: overlay;
 }
-.modal-open {
-    overflow: hidden!important;
-}
+
 .header__content {
     background: url('/img/chertezhi-domov.webp') no-repeat center center fixed;
 }
@@ -19,6 +17,10 @@ a.navbar-brand {
     height: 90vh;
     width: 100%;
     /* background: rgba(0, 0, 0, 0.5); */
+    background: rgb(237 235 245 / 72%);
+}
+
+.background-main-color {
     background: rgb(237 235 245 / 72%);
 }
 
@@ -48,4 +50,12 @@ a.navbar-brand {
 
 .ourAdvantages-banner-img {
     width: 500px;
+}
+
+.calculators-block-list-item-title-img {
+    width: 150px;
+}
+
+.calculators-block-list-item {
+    width: 350px;
 }

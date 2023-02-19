@@ -1,41 +1,56 @@
 ﻿@model WallsCalculator.Models.CalculationBaseInput
 @{
-    ViewData["Title"] = "Расчет стен";
+    ViewData["Title"] = "Калькуляторы";
 }
 
+<div class="calculators-block text-secondary">
+    <div class="calculators-block-title font-weight-bold h3 text-center my-5">
+        <span>Калькуляторы</span>
+    </div>
 
+    <div class="calculators-block-list d-flex justify-content-between my-5">
+        <div class="calculators-block-list-item background-main-color d-flex flex-column align-items-center p-3">
+            <span class="calculators-block-list-item-title h5">
+                Расчет строительных блоков
+            </span>
+            <img class="calculators-block-list-item-title-img" src="../img/3ce1e5cb28d45dbb1c785ce49f3b0a738575f4cf.png" alt="">
+        </div>
 
-<div class="text-center">
-    <div class="calculator-menu">
-        <div class="calculator-element"> 
-            <div class="calculator-header">
-                <span>Расчет стен по квадратуре</span>
-               <!-- <button type="button" onclick="@Url.Action("HideCalculator", "Home")">Открыть/Cкрыть</button>-->
-            </div>
+        <div class="calculators-block-list-item background-main-color d-flex flex-column align-items-center  p-3">
+            <span class="calculators-block-list-item-title h5">
+                Расчет кирпича
+            </span>
+            <img class="calculators-block-list-item-title-img" src="../img/kirpich-282x282-1.png" alt="">
+        </div>
 
-            @if(ViewBag.Hidden == null || !ViewBag.Hidden){
-            <div class="calculator-body">
-                <h3>Форма оформления покупки</h3>
-                @using (Html.BeginForm("Calculate", "Home", FormMethod.Post))
-                {
-                @Html.LabelFor(m => m.X,"Введите X")
-                <br />
-                @Html.TextBoxFor(m=>m.X)
-                <br />
-
-                <br />
-                @Html.LabelFor(m => m.Y, "Введите Y")
-                <br />
-                @Html.TextBoxFor(m=>m.Y)
-                <p><input type="submit" value="Расчет" /></p>
-                }
-            </div>
-            }
+        <div class="calculators-block-list-item background-main-color  d-flex flex-column align-items-center p-3">
+            <span class="calculators-block-list-item-title h5">
+                Расчет бруса
+            </span>
+            <img class="calculators-block-list-item-title-img" src="../img/vyborbrusa001-min.png" alt="">
         </div>
     </div>
 
-    @if(ViewBag.Result != null)
-    {
-        <h5>Результат: @ViewBag.Result</h5>
-    }
+    <div class="calculators-block-articles">
+
+        <div class="calculators-block-articles-item my-5">
+            <div class="calculators-block-articles-item-title font-weight-bold my-2">
+                Lorem, ipsum
+            </div>
+            <div class="calculators-block-articles-item-text background-main-color p-3">
+                Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+            </div>
+        </div>
+
+        <div class="calculators-block-articles-item my-5 ">
+            <div class="calculators-block-articles-item-title font-weight-bold my-2">
+                Lorem, ipsum
+            </div>
+            <div class="calculators-block-articles-item-text background-main-color p-3">
+                Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+            </div>
+        </div>
+
+    </div>
 </div>
+
