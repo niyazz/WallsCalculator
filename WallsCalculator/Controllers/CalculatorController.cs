@@ -10,7 +10,7 @@ namespace WallsCalculator.Controllers
         [HttpGet]
         public IActionResult BrickCalculatorIndex()
         {
-            return View(new BrickCalculationInput());
+            return View(new BrickCalculationInput { Apertures = new[] { new Aperture()} });
         }
 
 

@@ -29,33 +29,10 @@ namespace WallsCalculator.Controllers
             return View();
         }
 
-        public IActionResult BrickCalculator()
+        public IActionResult Calculator()
         {
             return View();
         }
-
-
-        [HttpPost]
-        public IActionResult Calculate([FromForm] BrickCalculationInput input)
-        {
-            return View("Views/Home/BrickCalculator.cshtml");
-        }
-
-        public IActionResult HideCalculator()
-        {
-            if (TempData["Hidden"] == null)
-            {
-                TempData["Hidden"] = true;
-            }
-
-            else
-            {
-                TempData["Hidden"] = !(bool)TempData["Hidden"];
-            }
-
-            return View("Views/Home/BrickCalculator.cshtml");
-        }
-
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

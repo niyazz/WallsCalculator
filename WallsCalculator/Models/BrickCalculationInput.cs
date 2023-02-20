@@ -57,6 +57,6 @@ namespace WallsCalculator.Models
         /// <summary>
         /// Проёмы в стенах.
         /// </summary>
-        public IEnumerable<Aperture> Apertures { get; set; } = new[] { new Aperture() };
+        public IEnumerable<Aperture> Apertures { get; set; }
     }
 }
