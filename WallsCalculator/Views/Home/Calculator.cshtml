@@ -1,5 +1,4 @@
-﻿@model WallsCalculator.Models.CalculationBaseInput
-@{
+﻿@{
     ViewData["Title"] = "Калькуляторы";
 }
 
@@ -18,7 +17,7 @@
 
         <div class="calculators-block-list-item background-main-color d-flex flex-column align-items-center  p-3">
             <span class="calculators-block-list-item-title h5">
-                Расчет кирпича
+                <a asp-controller="Calculator" asp-action="BrickCalculatorIndex">Расчет кирпича</a>
             </span>
             <img class="calculators-block-list-item-title-img" src="../img/kirpich-282x282-1.png" alt="">
         </div>
