@@ -51,12 +51,12 @@ namespace WallsCalculator.Models
         /// Цена кирпича.
         /// </summary>
         [Required(ErrorMessage = Required)]
-        [DisplayName("Цена кирпича (мм)")]
+        [DisplayName("Цена кирпича (руб.)")]
         public decimal Price { get; set; }
 
         /// <summary>
         /// Проёмы в стенах.
         /// </summary>
-        public IEnumerable<Aperture> Aperturs { get; set; }
+        public IEnumerable<Aperture> Apertures { get; set; } = new[] { new Aperture() };
     }
 }

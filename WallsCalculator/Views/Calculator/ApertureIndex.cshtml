@@ -1,0 +1,29 @@
+﻿@model IEnumerable<WallsCalculator.Models.Aperture>
+
+<h4>Aperture</h4>
+<hr />
+        @{
+            var Apertures = Model?.ToArray() ?? Array.Empty<Aperture>();
+
+            for (var i = 0; i < Apertures.Length; i++)
+            {
+                <div class = "aperture">
+                    <div class="form-group">
+                        <label asp-for="@Apertures[i].Width" class="control-label"></label>
+                        <input onkeypress="isNumber(event)" asp-for="@Apertures[i].Width" name="Apertures[@i].Width" class="form-control" placeholder="0 мм." />
+                        <span asp-validation-for="@Apertures[i].Width" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Apertures[i].Height" class="control-label"></label>
+                        <input onkeypress="isNumber(event)" asp-for="@Apertures[i].Height" name="Apertures[@i].Height" class="form-control" placeholder="0 мм." />
+                        <span asp-validation-for="@Apertures[i].Height" class="text-danger"></span>
+                    </div>
+                </div>
+            }
+        }
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

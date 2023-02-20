@@ -41,14 +41,21 @@
                 <input onkeypress="isNumber(event)" asp-for="Price" class="form-control" placeholder="0 руб." />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Расчитать" class="btn btn-primary" />
-            </div>
-            <div id = "ElementsContainer">
-                <button type ="button" onclick="AddApertureInput()">
+
+            <div id="apertures-container">
+
+                @{
+                    await Html.RenderPartialAsync("ApertureIndex", Model?.Apertures);
+                }
+
+                <button type="button" class="btn btn-primary" onclick="addApertureInput()">
                     Добавить проем
                 </button>
             </div>
+
+             <button type="submit" class="btn btn-primary">
+                    Расчитать
+             </button>
         </form>
     </div>
 </div>

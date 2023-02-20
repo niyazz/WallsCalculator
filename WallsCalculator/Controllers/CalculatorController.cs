@@ -10,12 +10,12 @@ namespace WallsCalculator.Controllers
         [HttpGet]
         public IActionResult BrickCalculatorIndex()
         {
-            return View();
+            return View(new BrickCalculationInput());
         }
 
 
         [HttpPost]
-        public IActionResult BrickCalculatorIndex([FromForm] BrickCalculationInput input, string TextBox1)
+        public IActionResult BrickCalculatorIndex([FromForm] BrickCalculationInput input)
         {
             if (ModelState.IsValid)
             {
@@ -23,17 +23,6 @@ namespace WallsCalculator.Controllers
             }
 
             return View(input);
-        }
-
-        [HttpPost]
-        public IActionResult Add([FromForm] BrickCalculationInput input, string TextBox1)
-        {
-            if (ModelState.IsValid)
-            {
-                Console.WriteLine("IsValid");
-            }
-
-            return View("Views/Calculator/BrickCalculatorIndex.cshtml", input);
         }
     }
 }

@@ -21,19 +21,28 @@ function isNumber(e) {
 }
 
 function addApertureInput() {
-    var container = document.querySelector("#ElementsContainer");
-    
-    var widthInput = '<input type="text" id="widthInput" name="widthInput1" value="0 мм" />'
-    var heightInput = '<input type="text" id="heightInput" name="heightInput1" value="0 мм" />'
+    const container = document.querySelector("#apertures-container");
+    const className = "aperture"
+    const apertures = document.getElementsByClassName(className);
+    const lastApertureIdx = apertures.length;
+    const clones = [...apertures[lastApertureIdx - 1].children].map(x => x.cloneNode(true))
+    const attributesToRewrite = ["for", "name", "id", "data-valmsg-for"]
+    var result = clones.map(formGroup => {
+        [...formGroup.children].map(child => {
+            for (const atrw of attributesToRewrite) 
+                if (child.getAttribute(atrw)) 
+                    child.setAttribute(atrw, child.getAttribute(atrw).replace(/\d/, lastApertureIdx))
 
-    container.appendChild(createInput())
-    container.appendChild(heightInput)
-}
+            return child;
+        })
 
-function createInput(type, text, placeholder) {
-    var FN = document.createElement("input");
-    FN.setAttribute("type", type);
-    FN.setAttribute("name", text);
-    FN.setAttribute("id", text);
-    FN.setAttribute("placeholder", placeholder);
+ 
+        return formGroup;
+    })
+
+        var aperture = document.createElement("div")
+        aperture.className = className
+
+        result.forEach(x => aperture.appendChild(x))
+        container.appendChild(aperture)
 }
