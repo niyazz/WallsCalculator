@@ -1,6 +1,44 @@
 ﻿@{
     ViewData["Title"] = "Информация";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="about-block text-secondary">
+    <div class="about-block-title font-weight-bold h3 text-center my-5">
+        <span>О сервисе</span>
+    </div>
+    <div class="about-block-content">
+        <div class="mask p-5">
+            <div class="about-block-content-title font-weight-bold h4 text-center mb-5">
+                <span>
+                    Dorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
+                </span>
+            </div>
+            <div class="about-block-content-articles-list">
+                <div class="about-block-content-articles-list-item h5">
+                    1. Norem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <div class="about-block-content-articles-list-item h5">
+                    2. Norem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <div class="about-block-content-articles-list-item h5">
+                    3. Norem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="about-block-form my-5">
+        <div class="about-block-form-title font-weight-bold h4 text-center mb-5">
+            Оставить отзыв о сервисе
+        </div>
+        <div class="form-content">
+            <span class="h5">Ваш email:</span>
+            <input type="text" class="mb-3" placeholder="primer@primer.ru">
+
+            <span class="h5">Ваш отзыв:</span>
+            <textarea class="mb-3" cols="30" rows="10" placeholder="Очень удобный сервис!"></textarea>
+
+            <button class="form-submitBtn h5 text-secondary">Отправить</button>
+        </div>
+    </div>
+</div>
