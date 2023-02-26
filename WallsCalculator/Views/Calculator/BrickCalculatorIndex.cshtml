@@ -4,8 +4,14 @@
     ViewData["Title"] = "Кирпичная стена";
 }
 
-<h4>Расчет кирпичных стен</h4>
-<hr />
+<div>
+    <a asp-controller="Home" asp-action="Index">Назад</a>
+</div>
+
+<div class="font-weight-bold h3 text-center my-5 text-secondary">
+    <span>Расчет кирпичных стен</span>
+</div>
+
 <div class="row">
     <div class="col-md-4">
         <form asp-controller="Calculator" asp-action="BrickCalculatorIndex">
@@ -53,16 +59,14 @@
                 </button>
             </div>
 
-             <button type="submit" class="btn btn-primary">
-                    Расчитать
-             </button>
+            <button type="submit" class="btn btn-primary">
+                Расчитать
+            </button>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-controller="Home" asp-action="Index">Назад</a>
-</div>
+
 
 @section Scripts {
     @{

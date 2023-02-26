@@ -52,6 +52,10 @@ a.navbar-brand {
     width: 500px;
 }
 
+.linkToCalculator:hover {
+    background: rgb(237 235 245 / 90%);
+}
+
 .calculators-block-list-item-title-img {
     width: 150px;
 }
@@ -90,5 +94,6 @@ a.navbar-brand {
 }
 
 .form-submitBtn:hover {
-    background-color: rgb(237 235 245);
+    background-color: rgb(237 235 245 / 90%);
 }
+
