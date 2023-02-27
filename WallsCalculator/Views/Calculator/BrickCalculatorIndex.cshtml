@@ -1,0 +1,75 @@
+﻿@model WallsCalculator.Models.BrickCalculationInput
+
+@{
+    ViewData["Title"] = "Кирпичная стена";
+}
+
+<div>
+    <a asp-controller="Home" asp-action="Index">Назад</a>
+</div>
+
+<div class="font-weight-bold h3 text-center my-5 text-secondary">
+    <span>Расчет кирпичных стен</span>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Calculator" asp-action="BrickCalculatorIndex">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BrickType" class="control-label"></label>
+                <select class="form-control" asp-for="BrickType" asp-items="Html.GetEnumSelectList<BrickType>()">
+                </select>
+                <span asp-validation-for="BrickType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Perimeter" class="control-label"></label>
+                <input onkeypress="isNumber(event)" asp-for="Perimeter" class="form-control" placeholder="0 мм" />
+                <span asp-validation-for="Perimeter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AngleHeight" class="control-label"></label>
+                <input onkeypress="isNumber(event)" asp-for="AngleHeight" class="form-control" placeholder="0 мм" />
+                <span asp-validation-for="AngleHeight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Depth" class="control-label"></label>
+                <input onkeypress="isNumber(event)" asp-for="Depth" class="form-control" placeholder="0 мм" />
+                <span asp-validation-for="Depth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MortarDepth" class="control-label"></label>
+                <input onkeypress="isNumber(event)" asp-for="MortarDepth" class="form-control" placeholder="0 мм" />
+                <span asp-validation-for="MortarDepth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input onkeypress="isNumber(event)" asp-for="Price" class="form-control" placeholder="0 руб." />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div id="apertures-container">
+
+                @{
+                    await Html.RenderPartialAsync("ApertureIndex", Model?.Apertures);
+                }
+
+                <button type="button" class="btn btn-primary" onclick="addApertureInput()">
+                    Добавить проем
+                </button>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Расчитать
+            </button>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

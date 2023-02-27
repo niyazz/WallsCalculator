@@ -1,6 +1,5 @@
-﻿@model WallsCalculator.Models.CalculationBaseInput
-@{
-    ViewData["Title"] = "Сервисы";
+﻿@{
+    ViewData["Title"] = "Калькуляторы";
 }
 
 <div class="calculators-block text-secondary">
@@ -9,21 +8,21 @@
     </div>
 
     <div class="calculators-block-list d-flex justify-content-between my-5">
-        <div class="calculators-block-list-item background-main-color d-flex flex-column align-items-center p-3">
+        <div class="calculators-block-list-item background-main-color d-flex flex-column align-items-center p-3 linkToCalculator">
             <span class="calculators-block-list-item-title h5">
                 Расчет строительных блоков
             </span>
             <img class="calculators-block-list-item-title-img" src="../img/3ce1e5cb28d45dbb1c785ce49f3b0a738575f4cf.png" alt="">
         </div>
 
-        <div class="calculators-block-list-item background-main-color d-flex flex-column align-items-center  p-3">
+        <div class="calculators-block-list-item background-main-color d-flex flex-column align-items-center  p-3 linkToCalculator">
             <span class="calculators-block-list-item-title h5">
-                Расчет кирпича
+                <a class="text-secondary" asp-controller="Calculator" asp-action="BrickCalculatorIndex">Расчет кирпича</a>
             </span>
             <img class="calculators-block-list-item-title-img" src="../img/kirpich-282x282-1.png" alt="">
         </div>
 
-        <div class="calculators-block-list-item background-main-color  d-flex flex-column align-items-center p-3">
+        <div class="calculators-block-list-item background-main-color  d-flex flex-column align-items-center p-3 linkToCalculator">
             <span class="calculators-block-list-item-title h5">
                 Расчет бруса
             </span>
