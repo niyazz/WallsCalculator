@@ -1,9 +1,9 @@
-﻿@model IEnumerable<WallsCalculator.Models.Aperture>
+﻿@model IEnumerable<WallsCalculator.Models.ApertureInput>
 
 <h4>Aperture</h4>
 <hr />
         @{
-            var Apertures = Model?.ToArray() ?? Array.Empty<Aperture>();
+            var Apertures = Model?.ToArray() ?? Array.Empty<ApertureInput>();
 
             for (var i = 0; i < Apertures.Length; i++)
             {

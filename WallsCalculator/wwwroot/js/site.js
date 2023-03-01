@@ -5,33 +5,30 @@
 
 
 function isNumber(e) {
-    console.log(e)
     const charCode = e.which || e.charCode;
     const separator = 44;
-    const alreadyHaveSeparator = e.target.value.toString().indexOf(String.fromCharCode(separator)) != -1;
-    if (charCode == separator && alreadyHaveSeparator) {
+    const alreadyHaveSeparator = e.target.value.toString().indexOf(String.fromCharCode(separator)) !== -1;
+    if (charCode === separator && alreadyHaveSeparator) {
         e.preventDefault();
     }
-
-
-    if (charCode != separator && charCode > 31
+    if (charCode !== separator && charCode > 31
         && (charCode < 48 || charCode > 57)) {
         e.preventDefault();
     }
 }
 
 function addApertureInput() {
-    const container = document.querySelector("#apertures-container");
-    const className = "aperture"
-    const apertures = document.getElementsByClassName(className);
+    const apertures_container = document.querySelector("#apertures-container");
+    const apertureClassName = "aperture"
+    const apertures = document.getElementsByClassName(apertureClassName);
     const lastApertureIdx = apertures.length;
     const clones = [...apertures[lastApertureIdx - 1].children].map(x => x.cloneNode(true))
     const attributesToRewrite = ["for", "name", "id", "data-valmsg-for"]
-    var result = clones.map(formGroup => {
+    const whInputs = clones.map(formGroup => {
         [...formGroup.children].map(child => {
             for (const atrw of attributesToRewrite) 
                 if (child.getAttribute(atrw)) 
-                    child.setAttribute(atrw, child.getAttribute(atrw).replace(/\d/, lastApertureIdx))
+                    child.setAttribute(atrw, child.getAttribute(atrw).replace(/\d/, lastApertureIdx.toString()))
 
             return child;
         })
@@ -40,9 +37,9 @@ function addApertureInput() {
         return formGroup;
     })
 
-        var aperture = document.createElement("div")
-        aperture.className = className
+        const apertureDiv = document.createElement("div")
+        apertureDiv.className = apertureClassName
 
-        result.forEach(x => aperture.appendChild(x))
-        container.appendChild(aperture)
+        whInputs.forEach(x => apertureDiv.appendChild(x))
+        apertures_container.appendChild(apertureDiv)
 }
