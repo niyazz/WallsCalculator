@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Globalization;
 
-namespace WallsCalculator.Utils
+namespace WallsCalculator.Utils.Bindings
 {
     /// <summary>
     /// Привязчик чисел с точкой из-за разной культуры.

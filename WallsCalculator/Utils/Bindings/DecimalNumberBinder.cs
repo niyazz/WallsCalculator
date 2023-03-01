@@ -1,10 +1,9 @@
-﻿
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Globalization;
 using System.Threading.Tasks;
 using System;
 
-namespace WallsCalculator.Utils
+namespace WallsCalculator.Utils.Bindings
 {
     /// <summary>
     /// Конвертирует число с точкой в число с запятой.

@@ -2,9 +2,8 @@
 using System.Globalization;
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
-namespace WallsCalculator.Utils
+namespace WallsCalculator.Utils.Bindings
 {
     /// <summary>
     /// Конвертирует число с точкой в число с запятой.

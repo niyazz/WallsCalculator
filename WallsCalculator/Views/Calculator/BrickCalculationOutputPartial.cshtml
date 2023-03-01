@@ -1,0 +1,30 @@
+﻿@model WallsCalculator.Models.WallsCalculator.Models.BrickCalculationOutput
+<h3>Частичное представление</h3>
+
+<p>@Model.BrickAmount шт.</p>
+<p>@Model.FullPrice руб.</p>
+<p>@Model.Area м2.</p>
+
+<!-- Эти инпуты не менянь, не трогать -->
+<form asp-controller="Calculator" asp-action="GetDocument">
+    <input type="hidden" asp-for="BrickAmount" value="@Model.BrickAmount"/>
+    <input type="hidden" asp-for="FullPrice" value="@Model.FullPrice"/>
+    <input type="hidden" asp-for="Area" value="@Model.Area"/>
+    <input type="hidden" asp-for="Input.DepthType" value="@Model.Input.DepthType"/>
+    <input type="hidden" asp-for="Input.Perimeter" value="@Model.Input.Perimeter"/>
+    <input type="hidden" asp-for="Input.Price" value="@Model.Input.Price"/>
+    <input type="hidden" asp-for="Input.MortarType" value="@Model.Input.MortarType"/>
+    <input type="hidden" asp-for="Input.AngleHeight" value="@Model.Input.AngleHeight"/>
+    <input type="hidden" asp-for="Input.BrickType" value="@Model.Input.BrickType"/>
+    @{
+        var apertures = Model?.Input.Apertures.ToArray() ?? Array.Empty<ApertureInput>();
+        for (var i = 0; i < apertures.Length; i++)
+        {
+            <input type="hidden" asp-for="Input.Apertures[@i].Width" name="Input.Apertures[@i].Width" value="@apertures[i].Width"/>
+            <input type="hidden" asp-for="Input.Apertures[@i].Height" name="Input.Apertures[@i].Height" value="@apertures[i].Height" />
+        }
+    }
+    <!-- Эти инпуты не менянь, не трогать -->
+    
+    <button type="submit" class="btn btn-primary">Получить Word</button>
+</form>

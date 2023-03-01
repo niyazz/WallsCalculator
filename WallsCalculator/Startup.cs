@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WallsCalculator.Services;
 
 namespace WallsCalculator
 {
@@ -23,6 +24,9 @@ namespace WallsCalculator
                 //   options.ModelBinderProviders.Insert(0, new NumberModelBinderProvider<double>());
                 //   options.ModelBinderProviders.Insert(1, new NumberModelBinderProvider<decimal>());
             });
+
+            services.AddTransient<IBrickCalculator, BrickCalculator>();
+            services.AddTransient<IWordGeneratorDocumentService, WordGeneratorDocumentService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

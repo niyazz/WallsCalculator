@@ -5,7 +5,7 @@ namespace WallsCalculator.Models
     /// <summary>
     /// Проём.
     /// </summary>
-    public class Aperture
+    public class ApertureInput
     {
         /// <summary>
         /// Ширина проема.

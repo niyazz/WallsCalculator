@@ -1,9 +1,9 @@
 ﻿@using WallsCalculator.Models.Enums
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@model WallsCalculator.Models.BrickCalculationInput
+@model WallsCalculator.Models.BalkCalculationInput
 
 @{
-    ViewData["Title"] = "Кирпичная стена";
+    ViewData["Title"] = "Стена из бруса";
 }
 
 <div>
@@ -11,19 +11,13 @@
 </div>
 
 <div class="font-weight-bold h3 text-center my-5 text-secondary">
-    <span>Расчет кирпичных стен</span>
+    <span>Расчет стен из бруса</span>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-controller="Calculator" asp-action="BrickCalculatorIndex">
+        <form asp-controller="Calculator" asp-action="BalkCalculatorIndex">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="BrickType" class="control-label"></label>
-                <select class="form-control" asp-for="BrickType" asp-items="Html.GetEnumSelectList<BrickType>()">
-                </select>
-                <span asp-validation-for="BrickType" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="Perimeter" class="control-label"></label>
                 <input onkeypress="isNumber(event)" asp-for="Perimeter" class="form-control" placeholder="0 мм"/>
@@ -35,23 +29,20 @@
                 <span asp-validation-for="AngleHeight" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DepthType" class="control-label"></label>
-                <select class="form-control" asp-for="DepthType" asp-items="Html.GetEnumSelectList<DepthType>()">
-                </select>
-                <span asp-validation-for="DepthType" class="text-danger"></span>
+                <label asp-for="BalkWidth" class="control-label"></label>
+                <input onkeypress="isNumber(event)" asp-for="BalkWidth" class="form-control" placeholder="0 мм"/>
+                <span asp-validation-for="BalkWidth" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MortarType" class="control-label"></label>
-                <select class="form-control" asp-for="MortarType" asp-items="Html.GetEnumSelectList<MortarType>()">
-                </select>
-                <span asp-validation-for="MortarType" class="text-danger"></span>
+                <label asp-for="BalkHeight" class="control-label"></label>
+                <input onkeypress="isNumber(event)" asp-for="BalkHeight" class="form-control" placeholder="0 мм"/>
+                <span asp-validation-for="BalkHeight" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
                 <input onkeypress="isNumber(event)" asp-for="Price" class="form-control" placeholder="0 руб."/>
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-
             <div id="apertures-container">
                 <button type="button" class="btn btn-primary" onclick="addApertureInput()">
                     Добавить проем
@@ -73,7 +64,7 @@
             {
                 if (ViewBag.IsCalculated)
                 {
-                    await Html.RenderPartialAsync("BrickCalculationOutputPartial", ViewData["Result"]);
+                    //await Html.RenderPartialAsync("BrickCalculationOutputPartial", ViewData["Result"]);
                 }
                 else
                 {
