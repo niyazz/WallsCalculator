@@ -4,7 +4,7 @@
 <div class="header__content">
     <div class="header__content-mask d-flex flex-column justify-content-center align-items-center">
         <span class="font-weight-bold text-secondary w-75  text-center h1">
-            Расчёт стен жилого частного дома
+            Расчёт устройства стен жилого частного дома
         </span>
         <span class=" text-secondary text-center h3 mt-5">
             Наши сервисы позволяют рассчитать <br/>
@@ -23,10 +23,10 @@
 
             <div class="ourSevices__list-item p-3 mr-3 linkToCalculator col">
                 <div class="ourServices_list-item-title h5 text-center my-3">
-                    Расчет строительных блоков
+                    Расчёт строительных блоков
                 </div>
                 <div class="ourServices_list-item-text text-center">
-                    Позволяет осуществить расчёт количества блоков на строительство дома.
+                    Предназначен для выполнения расчетов строительных материалов необходимых для постройки стен домов.
                 </div>
                 <div class="ourServices_list-item-img d-flex justify-content-center my-3">
                     <img src="../img/a93.svg" alt="">
@@ -34,27 +34,31 @@
             </div>
 
             <div class="ourSevices__list-item p-3  mr-3 linkToCalculator col">
-                <div class="ourServices_list-item-title h5 text-center my-3">
-                    <a class="text-secondary" asp-controller="Calculator" asp-action="BrickCalculatorIndex">Расчет кирпича</a>
-                </div>
-                <div class="ourServices_list-item-text text-center">
-                    Поможет вам рассчитать количество кирпича на дом в зависимости от размера и кладки кирпича,площади стен.
-                </div>
-                <div class="ourServices_list-item-img d-flex justify-content-center my-3">
-                    <img src="../img/a95.svg" alt="">
-                </div>
+                <a class="text-secondary text-decoration-none text-muted" asp-controller="Calculator" asp-action="BrickCalculatorIndex">
+                    <div class="ourServices_list-item-title h5 text-center my-3">
+                        Расчёт кирпича
+                    </div>
+                    <div class="ourServices_list-item-text text-center">
+                        Предназначен для расчета количества кирпича для дома , параметров и материалов, таких как количество кладочного раствора и кладочной сетки.
+                    </div>
+                    <div class="ourServices_list-item-img d-flex justify-content-center my-3">
+                        <img src="../img/a95.svg" alt="">
+                    </div>
+                </a>
             </div>
 
             <div class="ourSevices__list-item p-3 linkToCalculator col">
-                <div class="ourServices_list-item-title h5 text-center my-3">
-                    Расчет бруса
-                </div>
-                <div class="ourServices_list-item-text  text-center">
-                    Позволяет рассчитать количество брусьев для строительства дома.
-                </div>
-                <div class="ourServices_list-item-img d-flex justify-content-center my-3">
-                    <img src="../img/a96.svg" alt="">
-                </div>
+                <a class="text-secondary text-decoration-none text-muted" asp-controller="Calculator" asp-action="BalkCalculatorIndex">
+                    <div class="ourServices_list-item-title h5 text-center my-3">
+                        Расчёт бруса
+                    </div>
+                    <div class="ourServices_list-item-text  text-center">
+                        Предназначен для расчета количества и объема бревна на дом, с учетом фронтонов и внутренних перегородок.
+                    </div>
+                    <div class="ourServices_list-item-img d-flex justify-content-center my-3">
+                        <img src="../img/a96.svg" alt="">
+                    </div>
+                </a>
             </div>
         </div>
     </div>

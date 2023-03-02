@@ -10,45 +10,67 @@
     <div class="calculators-block-list d-flex justify-content-between my-5">
         <div class="calculators-block-list-item background-main-color d-flex flex-column align-items-center p-3 linkToCalculator">
             <span class="calculators-block-list-item-title h5">
-                Расчет строительных блоков
+                Расчёт строительных блоков
             </span>
             <img class="calculators-block-list-item-title-img" src="../img/3ce1e5cb28d45dbb1c785ce49f3b0a738575f4cf.png" alt="">
         </div>
-
-        <div class="calculators-block-list-item background-main-color d-flex flex-column align-items-center  p-3 linkToCalculator">
-            <span class="calculators-block-list-item-title h5">
-                <a class="text-secondary" asp-controller="Calculator" asp-action="BrickCalculatorIndex">Расчет кирпича</a>
-            </span>
-            <img class="calculators-block-list-item-title-img" src="../img/kirpich-282x282-1.png" alt="">
-        </div>
-
-        <div class="calculators-block-list-item background-main-color  d-flex flex-column align-items-center p-3 linkToCalculator">
-            <span class="calculators-block-list-item-title h5">
-                 <a class="text-secondary" asp-controller="Calculator" asp-action="BalkCalculatorIndex">Расчет бруса</a>
-            </span>
-            <img class="calculators-block-list-item-title-img" src="../img/vyborbrusa001-min.png" alt="">
-        </div>
+        <a class="text-secondary text-decoration-none text-muted" asp-controller="Calculator" asp-action="BrickCalculatorIndex">
+            <div class="calculators-block-list-item background-main-color d-flex flex-column align-items-center  p-3 linkToCalculator">
+                <span class="calculators-block-list-item-title h5">
+                    Расчёт кирпича
+                </span>
+                <img class="calculators-block-list-item-title-img" src="../img/kirpich-282x282-1.png" alt="">
+            </div>
+        </a>
+        <a class="text-secondary text-decoration-none text-muted" asp-controller="Calculator" asp-action="BalkCalculatorIndex">
+            <div class="calculators-block-list-item background-main-color  d-flex flex-column align-items-center p-3 linkToCalculator">
+                <span class="calculators-block-list-item-title h5">
+                    Расчёт бруса
+                </span>
+                <img class="calculators-block-list-item-title-img" src="../img/vyborbrusa001-min.png" alt="">
+            </div>
+        </a>
     </div>
 
     <div class="calculators-block-articles">
 
         <div class="calculators-block-articles-item my-5">
             <div class="calculators-block-articles-item-title font-weight-bold my-2">
-                Lorem, ipsum
+                Сервис расчёта кирпича
             </div>
             <div class="calculators-block-articles-item-text background-main-color p-3">
-                Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                предназначен для расчета количества строительного и облицовочного кирпича для дома и цоколя,
+                а так же сопутствующих параметров и материалов, таких как количество кладочного раствора,
+                кладочной сетки и гибких связей. Так же в расчетах могут быть учтены размеры оконных и
+                дверных проемов необходимого количества и размеров.
             </div>
         </div>
 
         <div class="calculators-block-articles-item my-5 ">
             <div class="calculators-block-articles-item-title font-weight-bold my-2">
-                Lorem, ipsum
+                Сервис расчёта строительных блоков
             </div>
             <div class="calculators-block-articles-item-text background-main-color p-3">
-                Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                предназначен для выполнения расчётов строительных материалов необходимых для постройки стен домов,
+                гаражей, хозяйственных и других помещений. В расчетах могут быть учтены размеры фронтонов постройки,
+                дверные и оконные проемы, а так же сопутствующие материалы, такие как строительный раствор и кладочная
+                сетка. Будьте внимательны при заполнении данных, обращайте особое внимание на единицы измерения.
             </div>
         </div>
+
+        <div class="calculators-block-articles-item my-5 ">
+            <div class="calculators-block-articles-item-title font-weight-bold my-2">
+                Сервис расчёта бруса
+            </div>
+            <div class="calculators-block-articles-item-text background-main-color p-3">
+                предназначен для расчёта количества и объема пиломатериала для строительства домов, бань и других построек.
+                Автоматически производится расчет количества межвенцевого утеплителя, нагелей, венцов, стоимости и
+                антикоррозийной пропитки по среднему значению. Для более точных расчетов обязательно обратитесь к
+                специалистам в вашем регионе.
+            </div>
+        </div>
+       
+        
 
     </div>
 </div>

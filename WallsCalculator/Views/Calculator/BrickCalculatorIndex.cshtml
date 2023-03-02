@@ -23,6 +23,7 @@
                 <select class="form-control" asp-for="BrickType" asp-items="Html.GetEnumSelectList<BrickType>()">
                 </select>
                 <span asp-validation-for="BrickType" class="text-danger"></span>
+                <img class="brickTypeImg" src="~/img/standartnyj-razmer-krasnogo-kirpicha_2.jpg" />
             </div>
             <div class="form-group">
                 <label asp-for="Perimeter" class="control-label"></label>
@@ -39,6 +40,7 @@
                 <select class="form-control" asp-for="DepthType" asp-items="Html.GetEnumSelectList<DepthType>()">
                 </select>
                 <span asp-validation-for="DepthType" class="text-danger"></span>
+                <img class="brickTypeImg" src="~/img/bricks_11.png" />
             </div>
             <div class="form-group">
                 <label asp-for="MortarType" class="control-label"></label>
@@ -53,15 +55,15 @@
             </div>
 
             <div id="apertures-container">
-                <button type="button" class="btn btn-primary" onclick="addApertureInput()">
-                    Добавить проем
+                <button type="button" class="btn btn-primary my-3" onclick="addApertureInput()">
+                    Добавить проём
                 </button>
                 @{
                     await Html.RenderPartialAsync("ApertureIndex", Model?.Apertures);
                 }
             </div>
 
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary my-3">
                 Расчитать
             </button>
         </form>
@@ -83,6 +85,27 @@
         }
     </div>
 </div>
+
+<div class="brickCalculator">
+    <span class="font-weight-bold h3 text-center my-5 text-secondary text-center">Общие сведения по результатам расчетов</span>
+    <pre class="my-3">
+Периметр строения
+    - Общая длина всех стен учтенных в расчетах.
+
+Общая площадь кладки
+    - Площадь внешней стороны стен. Соответствует площади необходимого утеплителя, если такой предусмотрен проектом.
+
+Толщина стены
+    - Толщина готовой стены с учетом толщины растворного шва. Может незначительно отличаться от конечного результата в 
+      зависимости от вида кладки.
+
+Количество
+    - Общее количество кирпичей необходимых для постройки стен по заданным параметрам
+    </pre>
+</div>
+
+
+
 
 
 @section Scripts {
