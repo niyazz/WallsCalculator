@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.Extensions.Options;
 using WallsCalculator.Models;
+using WallsCalculator.Models.Enums;
 using WallsCalculator.Models.WallsCalculator.Models;
 using WallsCalculator.Utils;
 
@@ -19,27 +21,46 @@ namespace WallsCalculator.Services
     
     public class BrickCalculator : IBrickCalculator
     {
-        private const int _mmToMeters = 1000000;
-        
+        private readonly BrickStandardOptions _options;
+        private const int MmToM = 1000;
+        private const int MToCm = 100;
+
+        public BrickCalculator(BrickStandardOptions options)
+        {
+            _options = options;
+        }
+
         public BrickCalculationOutput? Calculate(BrickCalculationInput input)
         {
-            var brickWallArea = input.Perimeter * input.AngleHeight;
-            var apertureAreaSum = input.Apertures.Select(x => x.Height * x.Width).Sum();
-
-            if (brickWallArea > apertureAreaSum)
-            {
-                brickWallArea -= apertureAreaSum;
-                    
-                if (input.BrickType.GetBrickVolume().HasValue)
+            var perimeterM = input.Perimeter;
+            var heightM = input.AngleHeight / MToCm;
+            
+            var areaToCover = perimeterM * heightM;
+            var apertureAreaSumM = input.Apertures
+                .Select(x => new
                 {
-                    var brickAmount = Convert.ToInt64(Math.Ceiling(brickWallArea / input.BrickType.GetBrickVolume()!.Value));
-                    return new BrickCalculationOutput
-                    {
-                        BrickAmount = brickAmount,
-                        FullPrice = brickAmount * input.Price,
-                        Area = brickWallArea / _mmToMeters
-                    };
-                }
+                    HeightM = x.Height / MmToM,
+                    WidthM = x.Width / MmToM
+                })
+                .Select(x => x.HeightM * x.WidthM).Sum();
+
+            if (areaToCover > apertureAreaSumM)
+            {
+                areaToCover -= apertureAreaSumM;
+                var bricksInOneSquareM = _options.Standards![input.DepthType][input.BrickType];
+                var brickAmountOnBrickWallArea = Convert.ToInt32(Math.Ceiling(areaToCover * bricksInOneSquareM));
+                var allWorkersPrice = input.Workers.Select(x => x.QuantityOfWorkers * x.Price * x.DurationInDays).Sum();
+               // var armGrid = 
+                return new BrickCalculationOutput
+                {
+                    Input = input,
+                    BricksInOneSquareM = bricksInOneSquareM,
+                    BricksAmount = brickAmountOnBrickWallArea,
+                    AllBricksPrice = brickAmountOnBrickWallArea * input.Price,
+                    AreaToCover = areaToCover,
+                    AreaToNotCover = apertureAreaSumM,
+                    AllWorkersPrice = allWorkersPrice
+                };
             }
 
             return null;
