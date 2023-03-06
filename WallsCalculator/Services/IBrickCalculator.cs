@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.Extensions.Options;
 using WallsCalculator.Models;
 using WallsCalculator.Models.Enums;
 using WallsCalculator.Models.WallsCalculator.Models;
@@ -22,8 +21,9 @@ namespace WallsCalculator.Services
     public class BrickCalculator : IBrickCalculator
     {
         private readonly BrickStandardOptions _options;
-        private const int MmToM = 1000;
+        private const int MToMm = 1000;
         private const int MToCm = 100;
+        private const int MmToCm = 10;
 
         public BrickCalculator(BrickStandardOptions options)
         {
@@ -34,32 +34,38 @@ namespace WallsCalculator.Services
         {
             var perimeterM = input.Perimeter;
             var heightM = input.AngleHeight / MToCm;
-            
-            var areaToCover = perimeterM * heightM;
-            var apertureAreaSumM = input.Apertures
+            var areaToCoverSm = perimeterM * heightM;
+            var areaToNotCoverSm = input.Apertures
                 .Select(x => new
                 {
-                    HeightM = x.Height / MmToM,
-                    WidthM = x.Width / MmToM
+                    HeightM = x.Height / MToMm,
+                    WidthM = x.Width / MToMm
                 })
                 .Select(x => x.HeightM * x.WidthM).Sum();
 
-            if (areaToCover > apertureAreaSumM)
+            if (areaToCoverSm > areaToNotCoverSm)
             {
-                areaToCover -= apertureAreaSumM;
-                var bricksInOneSquareM = _options.Standards![input.DepthType][input.BrickType];
-                var brickAmountOnBrickWallArea = Convert.ToInt32(Math.Ceiling(areaToCover * bricksInOneSquareM));
-                var allWorkersPrice = input.Workers.Select(x => x.QuantityOfWorkers * x.Price * x.DurationInDays).Sum();
-               // var armGrid = 
+                areaToCoverSm -= areaToNotCoverSm;
+                var oneSmBricksAmount = _options.Standards![input.DepthType][input.BrickType];
+                var totalBricksAmount = Convert.ToInt32(Math.Ceiling(areaToCoverSm * oneSmBricksAmount));
+                var columnBrickAmount = (int)(input.AngleHeight / (input.BrickType.GetBrickSizes().Item3 / MmToCm));
+                var masonryGridRowsAmount = columnBrickAmount / input.MasonryType.GetValue();
+                if (masonryGridRowsAmount == columnBrickAmount) masonryGridRowsAmount--;
+                var wallDepthCm = input.DepthType.GetDepth(input.BrickType, input.MortarType) / MmToCm;
+                
                 return new BrickCalculationOutput
                 {
                     Input = input,
-                    BricksInOneSquareM = bricksInOneSquareM,
-                    BricksAmount = brickAmountOnBrickWallArea,
-                    AllBricksPrice = brickAmountOnBrickWallArea * input.Price,
-                    AreaToCover = areaToCover,
-                    AreaToNotCover = apertureAreaSumM,
-                    AllWorkersPrice = allWorkersPrice
+                    OneSquareBricksAmount = oneSmBricksAmount,
+                    TotalBricksAmount = totalBricksAmount,
+                    TotalBricksPrice = totalBricksAmount * input.Price,
+                    ColumnBricksAmount = columnBrickAmount,
+                    AreaToCover = areaToCoverSm,
+                    AreaToNotCover = areaToNotCoverSm,
+                    AllWorkersPrice = input.Workers.Select(x => x.QuantityOfWorkers * x.Price * x.DurationInDays).Sum(),
+                    WallDepth = wallDepthCm,
+                    AreaForMasonryGrid = Math.Round(input.Perimeter * (wallDepthCm / MToCm) * masonryGridRowsAmount, 2),
+                    MasonryGridRowsAmount = masonryGridRowsAmount,
                 };
             }
 

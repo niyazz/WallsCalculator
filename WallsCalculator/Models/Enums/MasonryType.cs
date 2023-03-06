@@ -17,14 +17,14 @@ namespace WallsCalculator.Models.Enums
     
     public static class MasonryTypeExtensions
     {
-        public static double GetValue(this MasonryType type)
+        public static int GetValue(this MasonryType type)
             => type switch
             {
                 MasonryType.PerRow => 1,
                 MasonryType.PerOneRow => 2,
-                MasonryType.PerTwoRows => 20,
-                MasonryType.PerThreeRows => 20,
-                MasonryType.PerFourRows => 20,
+                MasonryType.PerTwoRows => 3,
+                MasonryType.PerThreeRows => 4,
+                MasonryType.PerFourRows => 5,
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
     }

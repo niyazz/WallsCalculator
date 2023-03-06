@@ -1,20 +1,45 @@
 ﻿@model WallsCalculator.Models.WallsCalculator.Models.BrickCalculationOutput
-<h3>Расчёты:</h3>
+<hr/>
+<h3>Результаты расчётов</h3>
 
-<p>Площадь кладки: @Model.AreaToCover м<sup>2</sup></p>
-<p>Количество выбранного типа кирпича и толщины в 1 м<sup>2</sup>: @Model.BricksInOneSquareM шт.</p>
-<p>Количестов кирпича необходимого для кладки: @Model.BricksAmount шт.</p>
-<p>Стоимость кирпичей: @Model.AllBricksPrice руб.</p>
-<p>Площадь, которой не нужна кладка: @Model.AreaToNotCover м<sup>2</sup></p>
-<p>Стоимость найма рабочих: @Model.AllWorkersPrice руб.</p>
+<table class="table table-bordered">
+    <tbody>
+    <tr>
+        <td>Площадь кладки</td>
+        <td>@Model.AreaToCover м<sup>2</sup></td>
+        <td>Толщина стены</td>
+        <td>@Model.WallDepth см</td>
+    </tr>
+    <tr>
+        <td>Количество выбранного типа кирпича и толщины в 1 м<sup>2</sup></td>
+        <td>@Model.OneSquareBricksAmount шт.</td>
+        <td>Количестов кирпича необходимого для кладки</td>
+        <td>@Model.TotalBricksAmount шт. </td>
+    </tr>
+    <tr>
+        <td>Стоимость кирпичей</td>
+        <td>@Model.TotalBricksPrice шт.</td>
+        <td>Площадь, которой не нужна кладка </td>
+        <td>@Model.AreaToNotCover м<sup>2</sup></td>
+    </tr>
+    <tr>
+        <td>Число рядов кладочной сетки</td>
+        <td>@Model.MasonryGridRowsAmount шт.</td>
+        <td>Площадь необходимой кладочной сетки</td>
+        <td> @Model.AreaForMasonryGrid м<sup>2</sup></td>
+    </tr>
+    <tr>
+        <td>Количество кирпичей в колонне</td>
+        <td>@Model.ColumnBricksAmount шт.</td>
+        <td>Стоимость найма рабочих</td>
+        <td>@Model.AllWorkersPrice руб.</td>
+    </tr>
+    </tbody>
+</table>
+
 
 <!-- Эти инпуты не менянь, не трогать -->
 <form asp-controller="Calculator" asp-action="GetDocument">
-    <input type="hidden" asp-for="BricksAmount" value="@Model.BricksAmount"/>
-    <input type="hidden" asp-for="AllBricksPrice" value="@Model.AllBricksPrice"/>
-    <input type="hidden" asp-for="AreaToCover" value="@Model.AreaToCover"/>
-    <input type="hidden" asp-for="AreaToNotCover" value="@Model.AreaToNotCover"/>
-    <input type="hidden" asp-for="BricksInOneSquareM" value="@Model.BricksInOneSquareM"/>
     <input type="hidden" asp-for="Input.DepthType" value="@Model.Input.DepthType"/>
     <input type="hidden" asp-for="Input.Perimeter" value="@Model.Input.Perimeter"/>
     <input type="hidden" asp-for="Input.Price" value="@Model.Input.Price"/>

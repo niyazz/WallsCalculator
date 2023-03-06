@@ -53,11 +53,11 @@ namespace WallsCalculator.Controllers
         }
 
         [HttpPost]
-        public IActionResult GetDocument([FromForm] BrickCalculationOutput output)
+        public IActionResult GetDocument([FromForm] BrickCalculationInput input)
         {
-            var result = _wordGenerator.Generate(output);
+            var result = _wordGenerator.Generate(input);
 
-            return File(result.Item2, result.Item3, result.Item1);
+            return File(result.Content, result.ContentType, result.FileName);
         }
     }
 }
