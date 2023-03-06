@@ -9,13 +9,13 @@ namespace WallsCalculator.Models.Enums
     public enum BrickType
     {
         [BrickProp("Облицовочный 1НФ", 250, 120, 65)]
-        [Display(Name = "Облицовочный (Одинарный)")]
+        [Display(Name = "Облицовочный 1НФ")]
         Facing = 0,
         [BrickProp("Полуторный 1.5НФ", 250, 120, 88)]
-        [Display(Name = "Полуторный")]
+        [Display(Name = "Полуторный 1.5НФ")]
         OneAndHalf,
-        [BrickProp("Двойной 2НФ", 250, 120, 140)]
-        [Display(Name = "Двойной")]
+        [BrickProp("Двойной 2.1НФ", 250, 120, 140)]
+        [Display(Name = "Двойной 2.1НФ")]
         Double
     }
 }

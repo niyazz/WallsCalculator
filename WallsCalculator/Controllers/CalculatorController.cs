@@ -18,13 +18,21 @@ namespace WallsCalculator.Controllers
         [HttpGet]
         public IActionResult BrickCalculatorIndex()
         {
-            return View(new BrickCalculationInput { Apertures = new[] { new ApertureInput()} });
+            return View(new BrickCalculationInput
+            {
+                Apertures = new[] { new ApertureInput()},
+                Workers = new []{new WorkerInput()}
+            });
         }
         
         [HttpGet]
         public IActionResult BalkCalculatorIndex()
         {
-            return View(new BalkCalculationInput { Apertures = new[] { new ApertureInput()} });
+            return View(new BalkCalculationInput
+            {
+                Apertures = new[] { new ApertureInput()},
+                Workers = new []{new WorkerInput()} 
+            });
         }
         
         [HttpPost]

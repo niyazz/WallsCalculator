@@ -18,6 +18,11 @@ namespace WallsCalculator
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
           Host.CreateDefaultBuilder(args)
+              .ConfigureAppConfiguration(options =>
+              {
+                  options.AddJsonFile("appsettings.json", reloadOnChange: true, optional: false);
+                  options.AddJsonFile("brickStandard.json", reloadOnChange: true, optional: false);
+              })
               .ConfigureWebHostDefaults(webBuilder =>
               {
                   webBuilder.UseStartup<Startup>();

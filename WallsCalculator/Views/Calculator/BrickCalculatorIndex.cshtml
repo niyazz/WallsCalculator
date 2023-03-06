@@ -14,62 +14,72 @@
     <span>Расчет кирпичных стен</span>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="Calculator" asp-action="BrickCalculatorIndex">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="BrickType" class="control-label"></label>
-                <select class="form-control" asp-for="BrickType" asp-items="Html.GetEnumSelectList<BrickType>()">
-                </select>
-                <span asp-validation-for="BrickType" class="text-danger"></span>
-                <img class="brickTypeImg" src="~/img/standartnyj-razmer-krasnogo-kirpicha_2.jpg" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Perimeter" class="control-label"></label>
-                <input onkeypress="isNumber(event)" asp-for="Perimeter" class="form-control" placeholder="0 мм"/>
-                <span asp-validation-for="Perimeter" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AngleHeight" class="control-label"></label>
-                <input onkeypress="isNumber(event)" asp-for="AngleHeight" class="form-control" placeholder="0 мм"/>
-                <span asp-validation-for="AngleHeight" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DepthType" class="control-label"></label>
-                <select class="form-control" asp-for="DepthType" asp-items="Html.GetEnumSelectList<DepthType>()">
-                </select>
-                <span asp-validation-for="DepthType" class="text-danger"></span>
-                <img class="brickTypeImg" src="~/img/bricks_11.png" />
-            </div>
-            <div class="form-group">
-                <label asp-for="MortarType" class="control-label"></label>
-                <select class="form-control" asp-for="MortarType" asp-items="Html.GetEnumSelectList<MortarType>()">
-                </select>
-                <span asp-validation-for="MortarType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input onkeypress="isNumber(event)" asp-for="Price" class="form-control" placeholder="0 руб."/>
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
+<div>
+    <form asp-controller="Calculator" asp-action="BrickCalculatorIndex">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div id="apertures-container">
-                <button type="button" class="btn btn-primary my-3" onclick="addApertureInput()">
-                    Добавить проём
+        <div class="row">
+            <div class="col-md">
+                <button type="submit" class="btn btn-primary">
+                    Расчитать
+                </button>
+                <hr/>
+                <div class="form-group">
+                    <label asp-for="BrickType" class="control-label"></label>
+                    <select class="form-control" asp-for="BrickType" asp-items="Html.GetEnumSelectList<BrickType>()">
+                    </select>
+                    <span asp-validation-for="BrickType" class="text-danger"></span>
+                    <img class="brickTypeImg" src="~/img/standartnyj-razmer-krasnogo-kirpicha_2.jpg"/>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MasonryType" class="control-label"></label>
+                    <select class="form-control" asp-for="MasonryType" asp-items="Html.GetEnumSelectList<MasonryType>()">
+                    </select>
+                    <span asp-validation-for="MasonryType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Perimeter" class="control-label"></label>
+                    <input onkeypress="isNumber(event)" asp-for="Perimeter" class="form-control" placeholder="0 мм"/>
+                    <span asp-validation-for="Perimeter" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AngleHeight" class="control-label"></label>
+                    <input onkeypress="isNumber(event)" asp-for="AngleHeight" class="form-control" placeholder="0 мм"/>
+                    <span asp-validation-for="AngleHeight" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DepthType" class="control-label"></label>
+                    <select class="form-control" asp-for="DepthType" asp-items="Html.GetEnumSelectList<DepthType>()">
+                    </select>
+                    <span asp-validation-for="DepthType" class="text-danger"></span>
+                    <img class="brickTypeImg" src="~/img/bricks_11.png"/>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input onkeypress="isNumber(event)" asp-for="Price" class="form-control" placeholder="0 руб."/>
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+            <div id="apertures-container" class="col-md">
+                <button type="button" class="btn btn-primary" onclick="addApertureInput('#apertures-container', 'aperture')">
+                    Добавить проем
                 </button>
                 @{
                     await Html.RenderPartialAsync("ApertureIndex", Model?.Apertures);
                 }
             </div>
+            <div id="workers-container" class="col-md">
+                <button type="button" class="btn btn-primary" onclick="addApertureInput('#workers-container', 'worker')">
+                    Добавить рабочего
+                </button>
+                @{
+                    await Html.RenderPartialAsync("WorkersIndex", Model?.Workers);
+                }
+            </div>
+        </div>
+    </form>
 
-            <button type="submit" class="btn btn-primary my-3">
-                Расчитать
-            </button>
-        </form>
-    </div>
-
-    <div class="col-md-4">
+    <div>
         @{
             if (ViewBag.IsCalculated != null)
             {
@@ -103,9 +113,6 @@
     - Общее количество кирпичей необходимых для постройки стен по заданным параметрам
     </pre>
 </div>
-
-
-
 
 
 @section Scripts {

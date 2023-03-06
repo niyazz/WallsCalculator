@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using WallsCalculator.Utils;
 
 namespace WallsCalculator.Models.Enums
 {
