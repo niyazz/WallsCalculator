@@ -17,17 +17,17 @@ namespace WallsCalculator.Models
             /// <summary>
             /// Кол-во кирпича для кладки в одного квадратного метра.
             /// </summary>
-            public int BricksInOneSquareM { get; set; }
+            public int OneSquareBricksAmount { get; set; }
             
             /// <summary>
             /// Кол-во кирпича для кладки.
             /// </summary>
-            public int BricksAmount { get; set; }
+            public int TotalBricksAmount { get; set; }
             
             /// <summary>
             /// Цена за все кирпичи.
             /// </summary>
-            public decimal AllBricksPrice { get; set; }
+            public decimal TotalBricksPrice { get; set; }
             
             /// <summary>
             /// Площадь на кладку.
@@ -43,6 +43,26 @@ namespace WallsCalculator.Models
             /// Стоимость найма всех работников.
             /// </summary>
             public decimal AllWorkersPrice { get; set; }
+            
+            /// <summary>
+            /// Толщина стены.
+            /// </summary>
+            public double WallDepth { get; set; }
+            
+            /// <summary>
+            /// Площадь кладочной сетки.
+            /// </summary>
+            public double AreaForMasonryGrid { get; set; }
+            
+            /// <summary>
+            /// Число рядов кладочной сетки.
+            /// </summary>
+            public double MasonryGridRowsAmount { get; set; }
+            
+            /// <summary>
+            /// Число кирпичей в колонне.
+            /// </summary>
+            public double ColumnBricksAmount { get; set; }
         }
     }
 }

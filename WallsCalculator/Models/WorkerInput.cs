@@ -14,9 +14,15 @@ namespace WallsCalculator.Models
         public int QuantityOfWorkers { get; set; }
         
         /// <summary>
-        /// Оплата труда работаника.
+        /// Оплата труда работаника в день.
         /// </summary>
-        [DisplayName("Оплата труда")]
+        [DisplayName("Оплата дня работы")]
         public decimal Price { get; set; }
+        
+        /// <summary>
+        ///  Число дней найма работника.
+        /// </summary>
+        [DisplayName("Число дней найма работника")]
+        public int DurationInDays { get; set; }
     }
 }
