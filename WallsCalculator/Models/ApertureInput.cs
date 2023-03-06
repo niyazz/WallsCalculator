@@ -1,12 +1,19 @@
 ﻿using System.ComponentModel;
+using WallsCalculator.Models.Enums;
 
 namespace WallsCalculator.Models
 {
     /// <summary>
-    /// Проём.
+    /// Проем.
     /// </summary>
     public class ApertureInput
     {
+        /// <summary>
+        /// Тип проема.
+        /// </summary>
+        [DisplayName("Тип проема")]
+        public ApertureType ApertureType { get; set; }
+        
         /// <summary>
         /// Ширина проема.
         /// </summary>

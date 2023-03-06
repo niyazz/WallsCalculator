@@ -44,11 +44,20 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div id="apertures-container">
-                <button type="button" class="btn btn-primary" onclick="addApertureInput()">
+                <button type="button" class="btn btn-primary" onclick="addApertureInput('#apertures-container', 'aperture')">
                     Добавить проем
                 </button>
                 @{
                     await Html.RenderPartialAsync("ApertureIndex", Model?.Apertures);
+                }
+            </div>
+
+            <div id="workers-container">
+                <button type="button" class="btn btn-primary" onclick="addApertureInput('#workers-container', 'worker')">
+                    Добавить рабочего
+                </button>
+                @{
+                    await Html.RenderPartialAsync("WorkersIndex", Model?.Workers);
                 }
             </div>
 

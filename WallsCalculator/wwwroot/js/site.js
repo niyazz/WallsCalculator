@@ -17,12 +17,11 @@ function isNumber(e) {
     }
 }
 
-function addApertureInput() {
-    const apertures_container = document.querySelector("#apertures-container");
-    const apertureClassName = "aperture"
-    const apertures = document.getElementsByClassName(apertureClassName);
-    const lastApertureIdx = apertures.length;
-    const clones = [...apertures[lastApertureIdx - 1].children].map(x => x.cloneNode(true))
+function addApertureInput(containerName, formGroupClassName) {
+    const container = document.querySelector(containerName);
+    const elements = document.getElementsByClassName(formGroupClassName);
+    const lastApertureIdx = elements.length;
+    const clones = [...elements[lastApertureIdx - 1].children].map(x => x.cloneNode(true))
     const attributesToRewrite = ["for", "name", "id", "data-valmsg-for"]
     const whInputs = clones.map(formGroup => {
         [...formGroup.children].map(child => {
@@ -38,8 +37,8 @@ function addApertureInput() {
     })
 
         const apertureDiv = document.createElement("div")
-        apertureDiv.className = apertureClassName
+        apertureDiv.className = formGroupClassName
 
         whInputs.forEach(x => apertureDiv.appendChild(x))
-        apertures_container.appendChild(apertureDiv)
+        container.appendChild(apertureDiv)
 }

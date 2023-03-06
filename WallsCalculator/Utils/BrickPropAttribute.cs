@@ -40,7 +40,7 @@ namespace WallsCalculator.Utils
     
     public static class BrickPropAttributeExtensions
     {
-        public static (double, double, double)? GetBrickSizes<T>(this T enm) where T : IConvertible
+        public static (double, double, double) GetBrickSizes<T>(this T enm) where T : IConvertible
         {
             if (enm is Enum)
             {
@@ -64,7 +64,7 @@ namespace WallsCalculator.Utils
                 }
             }
 
-            return null;
+            return (0, 0, 0);
         }
         
         public static double? GetBrickVolume<T>(this T enm) where T : IConvertible

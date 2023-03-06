@@ -1,0 +1,28 @@
+﻿@model IEnumerable<WallsCalculator.Models.WorkerInput>
+
+<hr/>
+@{
+    var workers = Model?.ToArray() ?? Array.Empty<WorkerInput>();
+
+    for (var i = 0; i < workers.Length; i++)
+    {
+        <div class="worker">
+            <div class="form-group">
+                <label asp-for="@workers[i].Price" class="control-label"></label>
+                <input onkeypress="isNumber(event)" asp-for="@workers[i].Price" name="Workers[@i].Price" class="form-control" placeholder="0 руб."/>
+                <span asp-validation-for="@workers[i].Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@workers[i].QuantityOfWorkers" class="control-label"></label>
+                <input onkeypress="isNumber(event)" asp-for="@workers[i].QuantityOfWorkers" name="Workers[@i].QuantityOfWorkers" class="form-control" placeholder="0"/>
+                <span asp-validation-for="@workers[i].QuantityOfWorkers" class="text-danger"></span>
+            </div>
+        </div>
+    }
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
