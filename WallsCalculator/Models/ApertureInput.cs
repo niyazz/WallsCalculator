@@ -11,19 +11,19 @@ namespace WallsCalculator.Models
         /// <summary>
         /// Тип проема.
         /// </summary>
-        [DisplayName("Тип проема")]
+        [DisplayName("Тип проёма")]
         public ApertureType ApertureType { get; set; }
         
         /// <summary>
         /// Ширина проема.
         /// </summary>
-        [DisplayName("Ширина проема (мм)")]
+        [DisplayName("Ширина проёма (мм)")]
         public double Width { get; set; }
 
         /// <summary>
         /// Высота проема.
         /// </summary>
-        [DisplayName("Высота проема (мм)")]
+        [DisplayName("Высота проёма (мм)")]
         public double Height { get; set; }
     }
 }

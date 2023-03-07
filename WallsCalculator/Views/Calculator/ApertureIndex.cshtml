@@ -1,30 +1,31 @@
 ﻿@using WallsCalculator.Models.Enums
 @model IEnumerable<WallsCalculator.Models.ApertureInput>
 
-<hr/>
+
 @{
     var apertures = Model?.ToArray() ?? Array.Empty<ApertureInput>();
 
     for (var i = 0; i < apertures.Length; i++)
-    {
-        <div class="aperture">
-            <div class="form-group">
-                <label asp-for="@apertures[i].ApertureType" class="control-label"></label>
-                <select class="form-control" asp-for="@apertures[i].ApertureType" asp-items="Html.GetEnumSelectList<ApertureType>()">
-                </select>
-                <span asp-validation-for="@apertures[i].ApertureType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="@apertures[i].Width" class="control-label"></label>
-                <input onkeypress="isNumber(event)" asp-for="@apertures[i].Width" name="Apertures[@i].Width" class="form-control" placeholder="0 мм."/>
-                <span asp-validation-for="@apertures[i].Width" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="@apertures[i].Height" class="control-label"></label>
-                <input onkeypress="isNumber(event)" asp-for="@apertures[i].Height" name="Apertures[@i].Height" class="form-control" placeholder="0 мм."/>
-                <span asp-validation-for="@apertures[i].Height" class="text-danger"></span>
-            </div>
+    {   
+    <div class="aperture">
+        <hr />
+        <div class="form-group">
+            <label asp-for="@apertures[i].ApertureType" class="control-label"></label>
+            <select class="form-control" asp-for="@apertures[i].ApertureType" asp-items="Html.GetEnumSelectList<ApertureType>()">
+            </select>
+            <span asp-validation-for="@apertures[i].ApertureType" class="text-danger"></span>
         </div>
+        <div class="form-group">
+            <label asp-for="@apertures[i].Width" class="control-label"></label>
+            <input onkeypress="isNumber(event)" asp-for="@apertures[i].Width" name="Apertures[@i].Width" class="form-control" placeholder="0 мм." />
+            <span asp-validation-for="@apertures[i].Width" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@apertures[i].Height" class="control-label"></label>
+            <input onkeypress="isNumber(event)" asp-for="@apertures[i].Height" name="Apertures[@i].Height" class="form-control" placeholder="0 мм." />
+            <span asp-validation-for="@apertures[i].Height" class="text-danger"></span>
+        </div>
+    </div>
     }
 }
 

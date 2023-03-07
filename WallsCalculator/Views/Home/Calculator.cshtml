@@ -3,19 +3,23 @@
 }
 
 <div class="calculators-block text-secondary">
-    <div class="calculators-block-title font-weight-bold h3 text-center my-5">
+    <div class="calculators-block-title font-weight-bold h3 text-center text-secondary lightViolet py-3">
         <span>Сервисы</span>
     </div>
 
+    <div class="lineAfter">
+        <a asp-controller="Home" asp-action="Index">Назад</a>
+    </div>
+
     <div class="calculators-block-list d-flex justify-content-between my-5">
-        <div class="calculators-block-list-item background-main-color d-flex flex-column align-items-center p-3 linkToCalculator">
+        <div class="calculators-block-list-item lightViolet d-flex flex-column align-items-center p-3 linkToCalculator">
             <span class="calculators-block-list-item-title h5">
                 Расчёт строительных блоков
             </span>
             <img class="calculators-block-list-item-title-img" src="../img/3ce1e5cb28d45dbb1c785ce49f3b0a738575f4cf.png" alt="">
         </div>
         <a class="text-secondary text-decoration-none text-muted" asp-controller="Calculator" asp-action="BrickCalculatorIndex">
-            <div class="calculators-block-list-item background-main-color d-flex flex-column align-items-center  p-3 linkToCalculator">
+            <div class="calculators-block-list-item lightViolet d-flex flex-column align-items-center  p-3 linkToCalculator">
                 <span class="calculators-block-list-item-title h5">
                     Расчёт кирпича
                 </span>
@@ -23,7 +27,7 @@
             </div>
         </a>
         <a class="text-secondary text-decoration-none text-muted" asp-controller="Calculator" asp-action="BalkCalculatorIndex">
-            <div class="calculators-block-list-item background-main-color  d-flex flex-column align-items-center p-3 linkToCalculator">
+            <div class="calculators-block-list-item lightViolet  d-flex flex-column align-items-center p-3 linkToCalculator">
                 <span class="calculators-block-list-item-title h5">
                     Расчёт бруса
                 </span>
@@ -38,11 +42,11 @@
             <div class="calculators-block-articles-item-title font-weight-bold my-2">
                 Сервис расчёта кирпича
             </div>
-            <div class="calculators-block-articles-item-text background-main-color p-3">
+            <div class="calculators-block-articles-item-text lightViolet p-3">
                 предназначен для расчета количества строительного и облицовочного кирпича для дома и цоколя,
                 а так же сопутствующих параметров и материалов, таких как количество кладочного раствора,
                 кладочной сетки и гибких связей. Так же в расчетах могут быть учтены размеры оконных и
-                дверных проемов необходимого количества и размеров.
+                дверных проёмов необходимого количества и размеров.
             </div>
         </div>
 
@@ -50,10 +54,10 @@
             <div class="calculators-block-articles-item-title font-weight-bold my-2">
                 Сервис расчёта строительных блоков
             </div>
-            <div class="calculators-block-articles-item-text background-main-color p-3">
+            <div class="calculators-block-articles-item-text lightViolet p-3">
                 предназначен для выполнения расчётов строительных материалов необходимых для постройки стен домов,
                 гаражей, хозяйственных и других помещений. В расчетах могут быть учтены размеры фронтонов постройки,
-                дверные и оконные проемы, а так же сопутствующие материалы, такие как строительный раствор и кладочная
+                дверные и оконные проёмы, а так же сопутствующие материалы, такие как строительный раствор и кладочная
                 сетка. Будьте внимательны при заполнении данных, обращайте особое внимание на единицы измерения.
             </div>
         </div>
@@ -62,15 +66,15 @@
             <div class="calculators-block-articles-item-title font-weight-bold my-2">
                 Сервис расчёта бруса
             </div>
-            <div class="calculators-block-articles-item-text background-main-color p-3">
+            <div class="calculators-block-articles-item-text lightViolet p-3">
                 предназначен для расчёта количества и объема пиломатериала для строительства домов, бань и других построек.
                 Автоматически производится расчет количества межвенцевого утеплителя, нагелей, венцов, стоимости и
                 антикоррозийной пропитки по среднему значению. Для более точных расчетов обязательно обратитесь к
                 специалистам в вашем регионе.
             </div>
         </div>
-       
-        
+
+
 
     </div>
 </div>

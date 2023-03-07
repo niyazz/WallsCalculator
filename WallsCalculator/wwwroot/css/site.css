@@ -5,6 +5,15 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.lightViolet {
+   background: rgb(237 235 245 / 72%);
+}
+.lineAfter {
+    border-bottom: 1px solid rgb(201 197 214);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
 .body {
     overflow: overlay;
 }
@@ -14,13 +23,9 @@ a.navbar-brand {
 }
 
 .header__content-mask {
-    height: 90vh;
+    height: 600px;
     width: 100%;
     /* background: rgba(0, 0, 0, 0.5); */
-    background: rgb(237 235 245 / 72%);
-}
-
-.background-main-color {
     background: rgb(237 235 245 / 72%);
 }
 
@@ -28,23 +33,11 @@ a.navbar-brand {
     background: url('/img/fon_2_0.webp') no-repeat center center fixed;
 }
 
-.ourAdvantages__list-mask {
-    background: rgb(237 235 245 / 72%);
-}
-
 .ourAdvantages__list-item-img {
     width: 60px;
 }
 
-.ourSevices__list-item {
-    background: rgb(237 235 245 / 72%);
-}
-
 .header__nav-btn:hover {
-    background: rgb(237 235 245 / 72%);
-}
-
-.footer__bottom {
     background: rgb(237 235 245 / 72%);
 }
 
@@ -64,10 +57,6 @@ a.navbar-brand {
 
 .calculators-block-list-item {
     width: 350px;
-}
-
-.mask {
-    background: rgb(237 235 245 / 72%);
 }
 
 .about-block-content {
@@ -99,7 +88,28 @@ a.navbar-brand {
     background-color: rgb(237 235 245 / 90%);
 }
 
-.brickTypeImg{
-    padding: 10px;
-    width: 370px;
+.brickTypeImg {
+    padding: 10px 0px;  
+    width: 585px;
+}
+
+.calculatorWrapperShadow {
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+}
+
+.calculatorBtnColor {
+    background-color: rgb(237 235 245 / 72%);
+    border: 0px;
+    color: #6c757d;
+    outline-color: none;
+}
+
+.calculatorBtnColor:hover {
+    background-color: rgb(167 162 189);
+    color: white;
+}
+
+.calculatorBtnColor:focus {
+    outline-color: none !important;
+    box-shadow: none!important;
 }

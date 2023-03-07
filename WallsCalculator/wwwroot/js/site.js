@@ -42,3 +42,9 @@ function addApertureInput(containerName, formGroupClassName) {
         whInputs.forEach(x => apertureDiv.appendChild(x))
         container.appendChild(apertureDiv)
 }
+
+
+// auto-scroll to result block after calculate
+$(function () {
+     $("html, body").delay(500).animate({ scrollTop: $('#brickResult').offset().top }, 500);
+});
