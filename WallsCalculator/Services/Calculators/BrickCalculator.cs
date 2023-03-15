@@ -5,20 +5,9 @@ using WallsCalculator.Models.Enums;
 using WallsCalculator.Models.WallsCalculator.Models;
 using WallsCalculator.Utils;
 
-namespace WallsCalculator.Services
+namespace WallsCalculator.Services.Calculators
 {
-    /// <summary>
-    /// Калькулятор для расчета по кирпичу.
-    /// </summary>
-    public interface IBrickCalculator
-    {
-        /// <summary>
-        /// Получить расчет по кирпичу.
-        /// </summary>
-        public BrickCalculationOutput? Calculate(BrickCalculationInput input);
-    }
-    
-    public class BrickCalculator : IBrickCalculator
+    public class BrickCalculator : ICalculator<BrickCalculationInput, BrickCalculationOutput>
     {
         private readonly BrickStandardOptions _options;
         private const int MToMm = 1000;
@@ -52,20 +41,23 @@ namespace WallsCalculator.Services
                 var masonryGridRowsAmount = columnBrickAmount / input.MasonryType.GetValue();
                 if (masonryGridRowsAmount == columnBrickAmount) masonryGridRowsAmount--;
                 var wallDepthCm = input.DepthType.GetDepth(input.BrickType, input.MortarType) / MmToCm;
-                
+                var totalMaterialPrice = totalBricksAmount * input.Price;
+                var allWorkersPrice = input.Workers.Select(x => x.QuantityOfWorkers * x.Price * x.DurationInDays).Sum();
                 return new BrickCalculationOutput
                 {
                     Input = input,
                     OneSquareBricksAmount = oneSmBricksAmount,
-                    TotalBricksAmount = totalBricksAmount,
-                    TotalBricksPrice = totalBricksAmount * input.Price,
+                    TotalMaterialAmount = totalBricksAmount,
+                    TotalMaterialPrice = totalMaterialPrice,
                     ColumnBricksAmount = columnBrickAmount,
-                    AreaToCover = areaToCoverSm,
-                    AreaToNotCover = areaToNotCoverSm,
+                    AreaToCoverSquareM = Math.Round(areaToCoverSm, 2),
+                    AreaToNotCoverSquareM = Math.Round(areaToNotCoverSm, 2),
                     AllWorkersPrice = input.Workers.Select(x => x.QuantityOfWorkers * x.Price * x.DurationInDays).Sum(),
-                    WallDepth = wallDepthCm,
+                    WallDepthCentimeters = Math.Round(wallDepthCm, 2),
                     AreaForMasonryGrid = Math.Round(input.Perimeter * (wallDepthCm / MToCm) * masonryGridRowsAmount, 2),
+                    TotalMaterialAndWorkersPrice = totalMaterialPrice + allWorkersPrice,
                     MasonryGridRowsAmount = masonryGridRowsAmount,
+                    TotalArea = Math.Round(perimeterM * heightM, 2)
                 };
             }
 

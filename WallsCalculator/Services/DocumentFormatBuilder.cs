@@ -6,11 +6,11 @@ namespace WallsCalculator.Services
     /// <summary>
     /// Построитель документа формата doc.
     /// </summary>
-    public class DocFormatBuilder
+    public class DocumentFormatBuilder
     {
         private readonly Document _document;
         
-        public DocFormatBuilder()
+        public DocumentFormatBuilder()
         {
             _document = new Document();
         }
@@ -26,7 +26,7 @@ namespace WallsCalculator.Services
             return page;
         }
 
-        public DocFormatBuilder AddStyle(string styleName, string fontName, float fontSize, HorizontalAlignment hAlignment, bool isBold)
+        public DocumentFormatBuilder AddStyle(string styleName, string fontName, float fontSize, HorizontalAlignment hAlignment, bool isBold)
         {
             var style = new ParagraphStyle(_document)
             {

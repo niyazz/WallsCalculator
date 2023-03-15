@@ -66,33 +66,7 @@ namespace WallsCalculator.Utils
 
             return (0, 0, 0);
         }
-        
-        public static double? GetBrickVolume<T>(this T enm) where T : IConvertible
-        {
-            if (enm is Enum)
-            {
-                var type = enm.GetType();
-                var enumValues = Enum.GetValues(type);
 
-                foreach (int val in enumValues)
-                {
-                    if (val == enm.ToInt32(CultureInfo.InvariantCulture))
-                    {
-                        var memInfo = type.GetMember(type.GetEnumName(val)!);
-
-                        if (memInfo[0]
-                                .GetCustomAttributes(typeof(BrickPropAttribute), false)
-                                .FirstOrDefault() is BrickPropAttribute brick)
-                        {
-                            return brick.Width * brick.Height * brick.Depth;
-                        }
-                    }
-                }
-            }
-
-            return null;
-        }
-        
         public static string GetBrickDescription<T>(this T enm) where T : IConvertible
         {
             if (enm is Enum)

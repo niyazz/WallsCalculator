@@ -1,5 +1,5 @@
-﻿@using WallsCalculator.Models.Enums
-@using Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using WallsCalculator.Models.Enums
 @model WallsCalculator.Models.BalkCalculationInput
 
 @{
@@ -29,6 +29,12 @@
                 <span asp-validation-for="AngleHeight" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="BalkType" class="control-label"></label>
+                <select class="form-control" asp-for="BalkType" asp-items="Html.GetEnumSelectList<BalkType>()">
+                </select>
+                <span asp-validation-for="BalkType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="BalkWidth" class="control-label"></label>
                 <input onkeypress="isNumber(event)" asp-for="BalkWidth" class="form-control" placeholder="0 мм"/>
                 <span asp-validation-for="BalkWidth" class="text-danger"></span>
@@ -37,6 +43,11 @@
                 <label asp-for="BalkHeight" class="control-label"></label>
                 <input onkeypress="isNumber(event)" asp-for="BalkHeight" class="form-control" placeholder="0 мм"/>
                 <span asp-validation-for="BalkHeight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BalkLength" class="control-label"></label>
+                <input onkeypress="isNumber(event)" asp-for="BalkLength" class="form-control" placeholder="0 руб."/>
+                <span asp-validation-for="BalkLength" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
@@ -73,11 +84,11 @@
             {
                 if (ViewBag.IsCalculated)
                 {
-                    //await Html.RenderPartialAsync("BrickCalculationOutputPartial", ViewData["Result"]);
+                    await Html.RenderPartialAsync("BalkCalculationOutputPartial", ViewData["Result"]);
                 }
                 else
                 {
-                    <h2>Во время расчета произошла ошибка, попробуйте переввести параметры.</h2>
+                    <h6>Во время расчета произошла ошибка, попробуйте переввести параметры.</h6>
                 }
             }
         }
