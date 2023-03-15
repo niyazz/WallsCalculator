@@ -21,7 +21,6 @@ namespace WallsCalculator
               .ConfigureAppConfiguration(options =>
               {
                   options.AddJsonFile("appsettings.json", reloadOnChange: true, optional: false);
-                  options.AddJsonFile("brickStandard.json", reloadOnChange: true, optional: false);
               })
               .ConfigureWebHostDefaults(webBuilder =>
               {

@@ -28,8 +28,8 @@ namespace WallsCalculator.Models
         /// Толщина раствора.
         /// </summary>
         [Required(ErrorMessage = Required)]
-        [DisplayName("Толщина раствора")]
-        public MortarType MortarType { get; set; }
+        [DisplayName("Толщина раствора (мм)")]
+        public double MortarValue { get; set; }
 
         /// <summary>
         /// Тип кладки.

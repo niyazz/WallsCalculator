@@ -17,13 +17,13 @@ namespace WallsCalculator.Models.Enums
 
     public static class DepthTypeExtensions
     {
-        public static double GetDepth(this DepthType type, BrickType brickType, MortarType mortarType) =>
+        public static double GetDepth(this DepthType type, BrickType brickType, double mortarValue) =>
             type switch
             {
                 DepthType.Half => brickType.GetBrickSizes().Item2,
                 DepthType.One => brickType.GetBrickSizes().Item1,
-                DepthType.OneAndHalf => brickType.GetBrickSizes().Item1 + brickType.GetBrickSizes().Item2 + mortarType.GetValue(),
-                DepthType.Double => brickType.GetBrickSizes().Item1 * 2 + mortarType.GetValue(),
+                DepthType.OneAndHalf => brickType.GetBrickSizes().Item1 + brickType.GetBrickSizes().Item2 + mortarValue,
+                DepthType.Double => brickType.GetBrickSizes().Item1 * 2 + mortarValue,
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
     }

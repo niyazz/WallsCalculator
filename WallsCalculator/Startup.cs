@@ -26,17 +26,6 @@ namespace WallsCalculator
         
         public void ConfigureServices(IServiceCollection services)
         {
-            var standards = Enum.GetValues(typeof(DepthType))
-                .Cast<DepthType>()
-                .ToDictionary(dt => dt, 
-                    dt => Configuration.GetSection(Enum.GetName(dt)).GetChildren()
-                        .ToDictionary(bt => (BrickType)Enum.Parse(typeof(BrickType), bt.Key), bt => int.Parse(bt.Value)));
-
-            services.AddSingleton(new BrickStandardOptions
-            {
-                Standards = standards
-            });
-            
             services.AddControllersWithViews(options =>
             {
                 // Use that section if you don`t want to rewrite Jquery validation issue

@@ -22,7 +22,7 @@ namespace WallsCalculator.Services.WordGenerators
         }
 
         public HttpFileContent Generate(BrickCalculationInput calculatorInput,
-            string fileName = "Результат расчёта")
+            string fileName = "Результат расчёта новые")
         {
             var calculated = _calculator.Calculate(calculatorInput)!;
             var builder = new DocumentFormatBuilder();
@@ -56,7 +56,7 @@ namespace WallsCalculator.Services.WordGenerators
                 .FillRowWith("Вид крипича", input.BrickType.GetBrickDescription())
                 .FillRowWith("Тип кладки кирпича", input.DepthType.GetEnumDisplayName())
                 .FillRowWith("Тип кладки сетки", input.MasonryType.GetEnumDisplayName())
-                .FillRowWith("Толщина раствора", input.MortarType.GetEnumDisplayName())
+                .FillRowWith("Толщина раствора", $"{input.MortarValue} мм.")
                 .FillRowWith("Цена кирпича", $"{input.Price} руб.")
                 .EndNiceTable();
             return tableIndex;

@@ -81,7 +81,7 @@ namespace WallsCalculator.Controllers
             [FromServices] IWordGeneratorDocumentService<BrickCalculationInput> brickWordGenerator,
             [FromForm] BrickCalculationInput input)
         {
-            var result = brickWordGenerator.Generate(input);
+            var result = brickWordGenerator.Generate(input, "хули нах");
 
             return File(result.Content, result.ContentType, result.FileName);
         }

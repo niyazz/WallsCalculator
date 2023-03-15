@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using WallsCalculator.Models.Enums;
 
 namespace WallsCalculator.Utils
 {
@@ -25,16 +26,16 @@ namespace WallsCalculator.Utils
         public double Height { get; set; }
         
         /// <summary>
-        /// Глубина
+        /// Длина.
         /// </summary>
-        public double Depth { get; set; }
+        public double Length { get; set; }
 
-        public BrickPropAttribute(string name, double width, double height, double depth)
+        public BrickPropAttribute(string name, double length, double width, double height)
         {
             Name = name;
             Width = width;
             Height = height;
-            Depth = depth;
+            Length = length;
         }
     }
     
@@ -57,8 +58,7 @@ namespace WallsCalculator.Utils
                                 .GetCustomAttributes(typeof(BrickPropAttribute), false)
                                 .FirstOrDefault() is BrickPropAttribute brick)
                         {
-                            return (brick.Width, brick.Height, 
-                                brick.Depth);
+                            return (brick.Length, brick.Width, brick.Height);
                         }
                     }
                 }
@@ -84,13 +84,49 @@ namespace WallsCalculator.Utils
                                 .GetCustomAttributes(typeof(BrickPropAttribute), false)
                                 .FirstOrDefault() is BrickPropAttribute brick)
                         {
-                            return $"'{brick.Name}' ({brick.Width}*{brick.Height}*{brick.Depth})";
+                            return $"{brick.Name} ({brick.Length}*{brick.Width}*{brick.Height})";
                         }
                     }
                 }
             }
 
             return string.Empty;
+        }
+        
+        public static int GetBricksAmountInSquareMeters(this BrickType brickType, DepthType depthType, double mortarValue)
+        {
+            const int oneMeter = 1000;
+            double l, w, h, cols, rows;
+            switch (depthType)
+            {
+                case DepthType.Half:
+                    (l, _, h) = brickType.GetBrickSizes();
+                    cols = oneMeter / (l + mortarValue);
+                    rows = oneMeter / (h + mortarValue) ;
+                    return Convert.ToInt32(Math.Floor(cols * rows));
+
+                case DepthType.One:
+                    (_, w, h) = brickType.GetBrickSizes();
+                    cols = oneMeter / (w + mortarValue);
+                    rows = oneMeter / (h + mortarValue);
+                    return Convert.ToInt32(Math.Floor(cols * rows));
+                
+                case DepthType.OneAndHalf:
+                    (l, w, h) = brickType.GetBrickSizes();
+                    var cols2 = oneMeter / (l + mortarValue);
+                    cols = oneMeter / (w + mortarValue);
+                    rows = oneMeter / (h + mortarValue);
+                    return Convert.ToInt32(Math.Floor(cols * rows + rows * cols2));
+                
+                case DepthType.Double:
+                    (_, w, h) = brickType.GetBrickSizes();
+                    cols = oneMeter / (w + mortarValue);
+                    rows = oneMeter / (h + mortarValue);
+                    return Convert.ToInt32(Math.Floor(cols * rows * 2));
+                
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(depthType), depthType, null);
+            }
         }
     }
 }
