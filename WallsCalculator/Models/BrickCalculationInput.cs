@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using WallsCalculator.Models.Enums;
 using static WallsCalculator.Utils.Errors;
@@ -9,7 +8,7 @@ namespace WallsCalculator.Models
     /// <summary>
     /// Данные формы для калькулятора кирпичных стен.
     /// </summary>
-    public class BrickCalculationInput : BaseCalculationInput
+    public class BrickCalculationInput : CalculationInput
     {
         /// <summary>
         /// Вид кирпича.
@@ -22,7 +21,7 @@ namespace WallsCalculator.Models
         /// Толщина стен.
         /// </summary>
         [Required(ErrorMessage = Required)]
-        [DisplayName("Толщина стен")]
+        [DisplayName("Тип кладки кирпича")]
         public DepthType DepthType { get; set; }
 
         /// <summary>
@@ -36,7 +35,7 @@ namespace WallsCalculator.Models
         /// Тип кладки.
         /// </summary>
         [Required(ErrorMessage = Required)]
-        [DisplayName("Тип кладки")]
+        [DisplayName("Тип кладки сетки")]
         public MasonryType MasonryType { get; set; }
         
         /// <summary>

@@ -8,7 +8,7 @@ namespace WallsCalculator.Models
     /// <summary>
     /// Входные данные расчета.
     /// </summary>
-    public class BaseCalculationInput
+    public class CalculationInput
     {
         /// <summary>
         /// Общая длина всех стен.

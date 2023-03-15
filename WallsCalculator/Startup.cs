@@ -5,8 +5,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WallsCalculator.Models;
 using WallsCalculator.Models.Enums;
+using WallsCalculator.Models.WallsCalculator.Models;
 using WallsCalculator.Services;
+using WallsCalculator.Services.Calculators;
+using WallsCalculator.Services.WordGenerators;
 using WallsCalculator.Utils;
 
 namespace WallsCalculator
@@ -40,9 +44,11 @@ namespace WallsCalculator
                 //   options.ModelBinderProviders.Insert(0, new NumberModelBinderProvider<double>());
                 //   options.ModelBinderProviders.Insert(1, new NumberModelBinderProvider<decimal>());
             });
-
-            services.AddTransient<IBrickCalculator, BrickCalculator>();
-            services.AddTransient<IWordGeneratorDocumentService, WordGeneratorDocumentService>();
+            
+            services.AddTransient<ICalculator<BrickCalculationInput, BrickCalculationOutput>, BrickCalculator>();
+            services.AddTransient<ICalculator<BalkCalculationInput, BalkCalculationOutput>, BalkCalculator>();
+            services.AddTransient<IWordGeneratorDocumentService<BrickCalculationInput>, BrickWordGeneratorService>();
+            services.AddTransient<IWordGeneratorDocumentService<BalkCalculationInput>, BalkWordGeneratorService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

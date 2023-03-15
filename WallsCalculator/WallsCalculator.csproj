@@ -15,4 +15,25 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Models\BrickCalculationOutput.cs">
+      <DependentUpon>BrickCalculationInput.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Models\BalkCalculationOutput.cs">
+      <DependentUpon>BalkCalculationInput.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Calculator\BalkCalculationOutputPartial.cshtml">
+      <DependentUpon>BalkCalculatorIndex.cshtml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Calculator\BrickCalculationOutputPartial.cshtml">
+      <DependentUpon>BrickCalculatorIndex.cshtml</DependentUpon>
+    </Content>
+    <Content Update="Views\Calculator\BalkCalculationOutputPartial.cshtml">
+      <DependentUpon>BalkCalculatorIndex.cshtml</DependentUpon>
+    </Content>
+  </ItemGroup>
+
 </Project>

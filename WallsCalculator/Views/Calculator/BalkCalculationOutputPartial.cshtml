@@ -1,0 +1,84 @@
+﻿@model BalkCalculationOutput
+
+<div class="row justify-content-md-center m-3" id="brickResult" xmlns="http://www.w3.org/1999/html">
+    <div class="col-7 calculatorWrapperShadow p-4">
+        <h3>Результаты расчётов</h3>
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <td>Площадь кладки</td>
+                <td>@Model.AreaToCoverSquareM м<sup>2</sup></td>
+            </tr>
+            <tr>
+                <td>Площадь, которой не нужна кладка </td>
+                <td>@Model.AreaToNotCoverSquareM м<sup>2</sup></td>
+            </tr>
+            <tr>
+                <td>Толщина стены</td>
+                <td>@Model.WallDepthCentimeters см</td>
+            </tr>
+            <tr>
+                <td>Количество выбранного типа бруса в 1 м<sup>3</sup></td>
+                <td>@Model.OneCubeBalkAmount шт.</td>
+            </tr>
+            <tr>
+                <td>Количество брусьев необходимого для создания конструкции</td>
+                <td>@Model.TotalMaterialAmount шт. </td>
+            </tr>
+            <tr>
+                <td>Объем кубов бруса необходимого для создания конструкции</td>
+                <td>@Model.AreaToCoverCubeM м<sup>3</sup> </td>
+            </tr>
+            <tr>
+                <td>Стоимость кубов бруса</td>
+                <td>@Model.TotalMaterialPrice руб.</td>
+            </tr>
+            <tr>
+                <td>Количество рядов бруса</td>
+                <td>@Model.BalkRowsAmount шт.</td>
+            </tr>
+            <tr>
+                <td>Вес конструкции</td>
+                <td>@Model.ConstructionWeight кг.</td>
+            </tr>
+            <tr>
+                <td>Стоимость найма рабочих</td>
+                <td>@Model.AllWorkersPrice руб.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<form asp-controller="Calculator" asp-action="BalkGetDocument">
+    <input type="hidden" asp-for="Input.BalkType" value="@Model.Input.BalkType"/>
+    <input type="hidden" asp-for="Input.Perimeter" value="@Model.Input.Perimeter"/>
+    <input type="hidden" asp-for="Input.Price" value="@Model.Input.Price"/>
+    <input type="hidden" asp-for="Input.BalkHeight" value="@Model.Input.BalkHeight"/>
+    <input type="hidden" asp-for="Input.AngleHeight" value="@Model.Input.AngleHeight"/>
+    <input type="hidden" asp-for="Input.BalkWidth" value="@Model.Input.BalkWidth"/>
+    <input type="hidden" asp-for="Input.BalkLength" value="@Model.Input.BalkLength"/>
+    @{
+        var apertures = Model?.Input.Apertures.ToArray() ?? Array.Empty<ApertureInput>();
+        for (var i = 0; i < apertures.Length; i++)
+        {
+            <input type="hidden" asp-for="Input.Apertures[@i].ApertureType" name="Input.Apertures[@i].ApertureType" value="@apertures[i].ApertureType"/>
+            <input type="hidden" asp-for="Input.Apertures[@i].Width" name="Input.Apertures[@i].Width" value="@apertures[i].Width"/>
+            <input type="hidden" asp-for="Input.Apertures[@i].Height" name="Input.Apertures[@i].Height" value="@apertures[i].Height"/>
+        }
+
+        var workers = Model?.Input.Workers.ToArray() ?? Array.Empty<WorkerInput>();
+        for (var i = 0; i < workers.Length; i++)
+        {
+            <input type="hidden" asp-for="Input.Workers[@i].DurationInDays" name="Input.Workers[@i].DurationInDays" value="@workers[i].DurationInDays"/>
+            <input type="hidden" asp-for="Input.Workers[@i].QuantityOfWorkers" name="Input.Workers[@i].QuantityOfWorkers" value="@workers[i].QuantityOfWorkers"/>
+            <input type="hidden" asp-for="Input.Workers[@i].Price" name="Input.Workers[@i].Price" value="@workers[i].Price"/>
+        }
+    }
+    <div class="row justify-content-md-center">
+        <div class="col-7">
+            <button type="submit" class="btn calculatorBtnColor">Получить Word</button>
+        </div>
+    </div>
+</form>

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using WallsCalculator.Models.Enums;
 using static WallsCalculator.Utils.Errors;
 
 namespace WallsCalculator.Models
@@ -8,7 +8,7 @@ namespace WallsCalculator.Models
     /// <summary>
     /// Данные формы для калькулятора стен из бруса.
     /// </summary>
-    public class BalkCalculationInput : BaseCalculationInput
+    public class BalkCalculationInput : CalculationInput
     {
         /// <summary>
         /// Ширина бруса.
@@ -25,9 +25,23 @@ namespace WallsCalculator.Models
         public double BalkHeight { get; set; }
         
         /// <summary>
-        /// Цена бруса.
+        /// Длина бруса.
         /// </summary>
-        [DisplayName("Цена бруса (руб.)")]
+        [Required(ErrorMessage = Required)]
+        [DisplayName("Длина бруса (м)")]
+        public double BalkLength { get; set; }
+        
+        /// <summary>
+        /// Вид бруса.
+        /// </summary>
+        [Required(ErrorMessage = Required)]
+        [DisplayName("Вид бруса")]
+        public BalkType BalkType { get; set; }
+        
+        /// <summary>
+        /// Цена за куб бруса.
+        /// </summary>
+        [DisplayName("Цена за куб (руб.)")]
         public decimal Price { get; set; }
     }
 }

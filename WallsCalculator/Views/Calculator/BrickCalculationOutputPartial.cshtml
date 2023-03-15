@@ -7,11 +7,11 @@
             <tbody>
                 <tr>
                     <td>Площадь кладки</td>
-                    <td>@Model.AreaToCover м<sup>2</sup></td>
+                    <td>@Model.AreaToCoverSquareM м<sup>2</sup></td>
                 </tr>
                 <tr>
                     <td>Толщина стены</td>
-                    <td>@Model.WallDepth см</td>
+                    <td>@Model.WallDepthCentimeters см</td>
                 </tr>
                 <tr>
                     <td>Количество выбранного типа кирпича и толщины в 1 м<sup>2</sup></td>
@@ -19,15 +19,15 @@
                 </tr>
                 <tr>
                     <td>Количестов кирпича необходимого для кладки</td>
-                    <td>@Model.TotalBricksAmount шт. </td>
+                    <td>@Model.TotalMaterialAmount шт. </td>
                 </tr>
                 <tr>
                     <td>Стоимость кирпичей</td>
-                    <td>@Model.TotalBricksPrice руб.</td>
+                    <td>@Model.TotalMaterialPrice руб.</td>
                 </tr>
                 <tr>
                     <td>Площадь, которой не нужна кладка </td>
-                    <td>@Model.AreaToNotCover м<sup>2</sup></td>
+                    <td>@Model.AreaToNotCoverSquareM м<sup>2</sup></td>
                 </tr>
                 <tr>
                     <td>Число рядов кладочной сетки</td>
@@ -51,11 +51,7 @@
 </div>
 
 
-
-
-
-<!-- Эти инпуты не менянь, не трогать -->
-<form asp-controller="Calculator" asp-action="GetDocument">
+<form asp-controller="Calculator" asp-action="BrickGetDocument">
     <input type="hidden" asp-for="Input.DepthType" value="@Model.Input.DepthType" />
     <input type="hidden" asp-for="Input.Perimeter" value="@Model.Input.Perimeter" />
     <input type="hidden" asp-for="Input.Price" value="@Model.Input.Price" />
@@ -80,7 +76,6 @@
             <input type="hidden" asp-for="Input.Workers[@i].Price" name="Input.Workers[@i].Price" value="@workers[i].Price" />
         }
     }
-    <!-- Эти инпуты не менянь, не трогать -->
     <div class="row justify-content-md-center">
         <div class="col-7">
             <button type="submit" class="btn calculatorBtnColor">Получить Word</button>
