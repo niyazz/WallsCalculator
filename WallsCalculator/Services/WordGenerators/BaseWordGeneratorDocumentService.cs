@@ -6,6 +6,7 @@ using WallsCalculator.Models.Enums;
 using WallsCalculator.Models.Shared;
 using static WallsCalculator.Utils.NiceStyles;
 // ReSharper disable HeapView.BoxingAllocation
+// ReSharper disable SpecifyACultureInStringConversionExplicitly
 
 namespace WallsCalculator.Services.WordGenerators
 {

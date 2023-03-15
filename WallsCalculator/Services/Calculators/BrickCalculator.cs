@@ -9,15 +9,9 @@ namespace WallsCalculator.Services.Calculators
 {
     public class BrickCalculator : ICalculator<BrickCalculationInput, BrickCalculationOutput>
     {
-        private readonly BrickStandardOptions _options;
         private const int MToMm = 1000;
         private const int MToCm = 100;
         private const int MmToCm = 10;
-
-        public BrickCalculator(BrickStandardOptions options)
-        {
-            _options = options;
-        }
 
         public BrickCalculationOutput? Calculate(BrickCalculationInput input)
         {
@@ -35,12 +29,12 @@ namespace WallsCalculator.Services.Calculators
             if (areaToCoverSm > areaToNotCoverSm)
             {
                 areaToCoverSm -= areaToNotCoverSm;
-                var oneSmBricksAmount = _options.Standards![input.DepthType][input.BrickType];
+                var oneSmBricksAmount = input.BrickType.GetBricksAmountInSquareMeters(input.DepthType, input.MortarValue);
                 var totalBricksAmount = Convert.ToInt32(Math.Ceiling(areaToCoverSm * oneSmBricksAmount));
-                var columnBrickAmount = (int)(input.AngleHeight / (input.BrickType.GetBrickSizes().Item3 / MmToCm));
+                var columnBrickAmount = (int) (input.AngleHeight / (input.BrickType.GetBrickSizes().Item3 / MmToCm));
                 var masonryGridRowsAmount = columnBrickAmount / input.MasonryType.GetValue();
                 if (masonryGridRowsAmount == columnBrickAmount) masonryGridRowsAmount--;
-                var wallDepthCm = input.DepthType.GetDepth(input.BrickType, input.MortarType) / MmToCm;
+                var wallDepthCm = input.DepthType.GetDepth(input.BrickType, input.MortarValue) / MmToCm;
                 var totalMaterialPrice = totalBricksAmount * input.Price;
                 var allWorkersPrice = input.Workers.Select(x => x.QuantityOfWorkers * x.Price * x.DurationInDays).Sum();
                 return new BrickCalculationOutput
