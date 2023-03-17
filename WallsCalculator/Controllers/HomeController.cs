@@ -7,16 +7,16 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WallsCalculator.Models;
+using WallsCalculator.Utils;
 
 namespace WallsCalculator.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly EditableSettings _settings;
+        public HomeController(EditableSettings settings)
         {
-            _logger = logger;
+            _settings = settings;
         }
 
         public IActionResult Index()
@@ -26,6 +26,7 @@ namespace WallsCalculator.Controllers
 
         public IActionResult Privacy()
         {
+            ViewBag.Author = _settings.Author;
             return View();
         }
 

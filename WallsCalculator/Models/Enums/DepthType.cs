@@ -9,21 +9,21 @@ namespace WallsCalculator.Models.Enums
     /// </summary>
     public enum DepthType
     {
-        [Display(Name = "Пол кирпича")] Half = 0,
-        [Display(Name = "1 кирпич")] One,
-        [Display(Name = "1,5 кирпича")] OneAndHalf,
-        [Display(Name = "2 кирпича")] Double
+        [Display(Name = "Пол изделия")] Half = 0,
+        [Display(Name = "1 изделие")] One,
+        [Display(Name = "1,5 изделия")] OneAndHalf,
+        [Display(Name = "2 изделия")] Double
     }
 
     public static class DepthTypeExtensions
     {
-        public static double GetDepth(this DepthType type, BrickType brickType, double mortarValue) =>
+        public static double GetDepth(this DepthType type, double length, double width, double height, double mortarValue) =>
             type switch
             {
-                DepthType.Half => brickType.GetBrickSizes().Item2,
-                DepthType.One => brickType.GetBrickSizes().Item1,
-                DepthType.OneAndHalf => brickType.GetBrickSizes().Item1 + brickType.GetBrickSizes().Item2 + mortarValue,
-                DepthType.Double => brickType.GetBrickSizes().Item1 * 2 + mortarValue,
+                DepthType.Half => width,
+                DepthType.One => length,
+                DepthType.OneAndHalf => width + length + mortarValue,
+                DepthType.Double => length * 2 + mortarValue,
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
     }

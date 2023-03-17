@@ -2,11 +2,19 @@
 using WallsCalculator.Models;
 using WallsCalculator.Models.WallsCalculator.Models;
 using WallsCalculator.Services;
+using WallsCalculator.Services.Abstractions;
+using WallsCalculator.Utils;
 
 namespace WallsCalculator.Controllers
 {
     public class CalculatorController : Controller
     {
+        private readonly EditableSettings _settings;
+        public CalculatorController(EditableSettings settings)
+        {
+            _settings = settings;
+        }
+        
         #region Ввод данных для расчёта
 
         [HttpGet]
@@ -23,6 +31,16 @@ namespace WallsCalculator.Controllers
         public IActionResult BalkCalculatorIndex()
         {
             return View(new BalkCalculationInput
+            {
+                Apertures = new[] { new ApertureInput()},
+                Workers = new []{new WorkerInput()} 
+            });
+        }
+        
+        [HttpGet]
+        public IActionResult BlockCalculatorIndex()
+        {
+            return View(new BlockCalculationInput
             {
                 Apertures = new[] { new ApertureInput()},
                 Workers = new []{new WorkerInput()} 
@@ -70,6 +88,25 @@ namespace WallsCalculator.Controllers
 
             return View(input);
         }
+        
+        [HttpPost]
+        public IActionResult BlockCalculatorIndex(
+            [FromServices] ICalculator<BlockCalculationInput, BlockCalculationOutput> balkCalculator,
+            [FromForm] BlockCalculationInput input)
+        {
+            if (ModelState.IsValid)
+            {
+                var resultModel = balkCalculator.Calculate(input);
+                if (resultModel != null)
+                {
+                    resultModel.Input = input;
+                    ViewData["Result"] = resultModel;
+                }
+                ViewBag.IsCalculated = resultModel != null;
+            }
+
+            return View(input);
+        }
 
         #endregion
 
@@ -81,7 +118,7 @@ namespace WallsCalculator.Controllers
             [FromServices] IWordGeneratorDocumentService<BrickCalculationInput> brickWordGenerator,
             [FromForm] BrickCalculationInput input)
         {
-            var result = brickWordGenerator.Generate(input);
+            var result = brickWordGenerator.Generate(input, _settings.BrickDocumentName);
 
             return File(result.Content, result.ContentType, result.FileName);
         }
@@ -92,7 +129,18 @@ namespace WallsCalculator.Controllers
             [FromServices] IWordGeneratorDocumentService<BalkCalculationInput> balkWordGenerator,
             [FromForm] BalkCalculationInput input)
         {
-            var result = balkWordGenerator.Generate(input);
+            var result = balkWordGenerator.Generate(input, _settings.BalkDocumentName);
+
+            return File(result.Content, result.ContentType, result.FileName);
+        }
+        
+        [ActionName("BlockGetDocument")]
+        [HttpPost]
+        public IActionResult GetDocument(
+            [FromServices] IWordGeneratorDocumentService<BlockCalculationInput> balkWordGenerator,
+            [FromForm] BlockCalculationInput input)
+        {
+            var result = balkWordGenerator.Generate(input, _settings.BlockDocumentName);
 
             return File(result.Content, result.ContentType, result.FileName);
         }

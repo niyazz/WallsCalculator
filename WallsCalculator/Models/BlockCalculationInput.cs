@@ -6,26 +6,27 @@ using static WallsCalculator.Utils.Errors;
 namespace WallsCalculator.Models
 {
     /// <summary>
-    /// Данные формы для калькулятора кирпичных стен.
+    /// Данные формы для калькулятора блочных стен.
     /// </summary>
-    public class BrickCalculationInput : CalculationInput
+    public class BlockCalculationInput : CalculationInput
     {
         /// <summary>
-        /// Вид кирпича.
+        /// Вид блока.
         /// </summary>
         [Required(ErrorMessage = Required)]
-        [DisplayName("Вид кирпича")]
-        public BrickType BrickType { get; set; }
+        [DisplayName("Вид блока")]
+        public BlockType BlockType { get; set; }
 
         /// <summary>
         /// Толщина стен.
         /// </summary>
         [Required(ErrorMessage = Required)]
-        [DisplayName("Тип кладки кирпича")]
+        [DisplayName("Тип кладки блока")]
         public DepthType DepthType { get; set; }
 
         /// <summary>
         /// Толщина раствора.
+        /// </summary>
         [DisplayName("Толщина раствора (мм)")]
         public double MortarValue { get; set; }
 
@@ -37,9 +38,15 @@ namespace WallsCalculator.Models
         public MasonryType MasonryType { get; set; }
         
         /// <summary>
-        /// Цена кирпича.
+        /// Вес блока.
         /// </summary>
-        [DisplayName("Цена кирпича (руб.)")]
-        public decimal Price { get; set; }
+        [DisplayName("Вес блока (кг)")]
+        public double BlockWeight { get; set; }
+        
+        /// <summary>
+        /// Цена блока.
+        /// </summary>
+        [DisplayName("Цена блока (руб.)")]
+        public decimal Price { get; set; }  
     }
 }

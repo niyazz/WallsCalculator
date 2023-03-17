@@ -5,17 +5,18 @@ namespace WallsCalculator.Models.Enums
 {
     /// <summary>
     /// Тип бруса.
+    /// <remarks>Плотность в кг/м.</remarks>
     /// </summary>
     public enum BalkType
     {
-        [BalkProp(480)]
-        [Display(Name = "Сосна 480 кг/м")]
+        [MaterialInfoProp(плотность:480)]
+        [Display(Name = "Сосна")]
         Pine = 0,
-        [BalkProp(420)]
-        [Display(Name = "Ель 420 кг/м")]
+        [MaterialInfoProp(плотность:420)]
+        [Display(Name = "Ель")]
         Spruce,
-        [BalkProp(655)]
-        [Display(Name = "Дуб 655 кг/м")]
+        [MaterialInfoProp(плотность:655)]
+        [Display(Name = "Дуб")]
         Oak
     }
 }

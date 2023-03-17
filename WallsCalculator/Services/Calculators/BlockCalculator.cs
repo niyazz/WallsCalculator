@@ -7,13 +7,13 @@ using WallsCalculator.Utils;
 
 namespace WallsCalculator.Services.Calculators
 {
-    public class BrickCalculator : ICalculator<BrickCalculationInput, BrickCalculationOutput>
+    public class BlockCalculator : ICalculator<BlockCalculationInput, BlockCalculationOutput>
     {
         private const int MToMm = 1000;
         private const int MToCm = 100;
         private const int MmToCm = 10;
 
-        public BrickCalculationOutput? Calculate(BrickCalculationInput input)
+        public BlockCalculationOutput? Calculate(BlockCalculationInput input)
         {
             var perimeterM = input.Perimeter;
             var heightM = input.AngleHeight / MToCm;
@@ -29,22 +29,22 @@ namespace WallsCalculator.Services.Calculators
             if (areaToCoverSm > areaToNotCoverSm)
             {
                 areaToCoverSm -= areaToNotCoverSm;
-                var (l, w, h) = input.BrickType.GetMaterialSizes();
-                var oneSmBricksAmount = input.DepthType.GetMaterialAmountInSquareMeters(l, w, h, input.MortarValue);
-                var totalBricksAmount = Convert.ToInt32(Math.Ceiling(areaToCoverSm * oneSmBricksAmount));
-                var columnBrickAmount = (int) (input.AngleHeight / (input.BrickType.GetMaterialSizes().Item3 / MmToCm));
-                var masonryGridRowsAmount = columnBrickAmount / input.MasonryType.GetValue();
-                if (masonryGridRowsAmount == columnBrickAmount) masonryGridRowsAmount--;
+                var (l, w, h) = input.BlockType.GetMaterialSizes();
+                var oneSmBlocksAmount = input.DepthType.GetMaterialAmountInSquareMeters(l, w, h, input.MortarValue);
+                var totalBlockAmount = Convert.ToInt32(Math.Ceiling(areaToCoverSm * oneSmBlocksAmount));
+                var columnBlocksAmount = (int) (input.AngleHeight / (input.BlockType.GetMaterialSizes().Item3 / MmToCm));
+                var masonryGridRowsAmount = columnBlocksAmount / input.MasonryType.GetValue();
+                if (masonryGridRowsAmount == columnBlocksAmount) masonryGridRowsAmount--;
                 var wallDepthCm = input.DepthType.GetDepth(l, w, h, input.MortarValue) / MmToCm;
-                var totalMaterialPrice = totalBricksAmount * input.Price;
+                var totalMaterialPrice = totalBlockAmount * input.Price;
                 var allWorkersPrice = input.Workers.Select(x => x.QuantityOfWorkers * x.Price * x.DurationInDays).Sum();
-                return new BrickCalculationOutput
+                return new BlockCalculationOutput
                 {
                     Input = input,
-                    OneSquareBricksAmount = oneSmBricksAmount,
-                    TotalMaterialAmount = totalBricksAmount,
+                    OneSquareBlocksAmount = oneSmBlocksAmount,
+                    TotalMaterialAmount = totalBlockAmount,
                     TotalMaterialPrice = totalMaterialPrice,
-                    ColumnBricksAmount = columnBrickAmount,
+                    ColumnBlocksAmount = columnBlocksAmount,
                     AreaToCoverSquareM = Math.Round(areaToCoverSm, 2),
                     AreaToNotCoverSquareM = Math.Round(areaToNotCoverSm, 2),
                     AllWorkersPrice = input.Workers.Select(x => x.QuantityOfWorkers * x.Price * x.DurationInDays).Sum(),
@@ -52,6 +52,7 @@ namespace WallsCalculator.Services.Calculators
                     AreaForMasonryGrid = Math.Round(input.Perimeter * (wallDepthCm / MToCm) * masonryGridRowsAmount, 2),
                     TotalMaterialAndWorkersPrice = totalMaterialPrice + allWorkersPrice,
                     MasonryGridRowsAmount = masonryGridRowsAmount,
+                    ConstructionWeight = totalBlockAmount * input.BlockWeight,
                     TotalArea = Math.Round(perimeterM * heightM, 2)
                 };
             }

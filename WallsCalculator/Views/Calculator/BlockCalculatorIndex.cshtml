@@ -1,15 +1,15 @@
 ﻿@using WallsCalculator.Models.Enums
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using WallsCalculator.Utils
-@model WallsCalculator.Models.BrickCalculationInput
+@model WallsCalculator.Models.BlockCalculationInput
 
 @{
-    ViewData["Title"] = "Кирпичная стена";
+    ViewData["Title"] = "Стена из блоков";
 }
 
 
 <div class="font-weight-bold h3 text-center text-secondary lightViolet py-3">
-    <span>Расчет кирпичных стен</span>
+    <span>Расчет блочных стен</span>
 </div>
 
 <div class="lineAfter">
@@ -17,23 +17,23 @@
 </div>
 
 <div class="lineAfter">
-    <form asp-controller="Calculator" asp-action="BrickCalculatorIndex">
+    <form asp-controller="Calculator" asp-action="BlockCalculatorIndex">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <div class="row justify-content-md-center">
             <div class="col-7">
                 <div class="calculatorWrapperShadow p-4 mb-4">
                     <div class="form-group">
-                        <label asp-for="BrickType" class="control-label"></label>
-                        <select class="form-control" asp-for="BrickType">
-                            @foreach (var enumAlias in Enum.GetValues(typeof(BrickType)).Cast<BrickType>())
+                        <label asp-for="BlockType" class="control-label"></label>
+                        <select class="form-control" asp-for="BlockType">
+                            @foreach (var enumAlias in Enum.GetValues(typeof(BlockType)).Cast<BlockType>())
                             {
-                                var enumValue = (int)enumAlias;
+                                var enumValue = (int) enumAlias;
                                 <option value="@enumValue">@enumAlias.GetMaterialDescription(enumAlias.GetEnumDisplayName())</option>
                             }
                         </select>
-                        <span asp-validation-for="BrickType" class="text-danger"></span>
-                        <img class="brickTypeImg" src="~/img/standartnyj-razmer-krasnogo-kirpicha_2.jpg"/>
+                        <span asp-validation-for="BlockType" class="text-danger"></span>
+                        <!-- <img class="brickTypeImg" src="~/img/standartnyj-razmer-krasnogo-kirpicha_2.jpg"/> -->
                     </div>
                     <div class="form-group">
                         <label asp-for="MasonryType" class="control-label"></label>
@@ -56,12 +56,17 @@
                         <select class="form-control" asp-for="DepthType" asp-items="Html.GetEnumSelectList<DepthType>()">
                         </select>
                         <span asp-validation-for="DepthType" class="text-danger"></span>
-                        <img class="brickTypeImg" src="~/img/bricks_11.png"/>
+                        <!--  <img class="brickTypeImg" src="~/img/bricks_11.png"/> -->
                     </div>
                     <div class="form-group">
                         <label asp-for="MortarValue" class="control-label"></label>
                         <input onkeypress="isNumber(event)" asp-for="MortarValue" class="form-control" placeholder="0 мм"/>
                         <span asp-validation-for="MortarValue" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BlockWeight" class="control-label"></label>
+                        <input onkeypress="isNumber(event)" asp-for="BlockWeight" class="form-control" placeholder="0 кг"/>
+                        <span asp-validation-for="BlockWeight" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Price" class="control-label"></label>
@@ -102,7 +107,7 @@
         {
             if (ViewBag.IsCalculated)
             {
-                await Html.RenderPartialAsync("BrickCalculationOutputPartial", ViewData["Result"]);
+                await Html.RenderPartialAsync("BlockCalculationOutputPartial", ViewData["Result"]);
             }
             else
             {
@@ -143,7 +148,7 @@
         <div class="lightViolet p-3 my-4">
             Количество
             <br/>
-            - Общее количество кирпичей необходимых для постройки стен по заданным параметрам
+            - Общее количество блоков необходимых для постройки стен по заданным параметрам
         </div>
     </div>
 </div>

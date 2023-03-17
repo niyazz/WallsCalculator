@@ -12,12 +12,14 @@
     </div>
 
     <div class="calculators-block-list d-flex justify-content-between my-5">
-        <div class="calculators-block-list-item lightViolet d-flex flex-column align-items-center p-3 linkToCalculator">
-            <span class="calculators-block-list-item-title h5">
-                Расчёт строительных блоков
-            </span>
-            <img class="calculators-block-list-item-title-img" src="../img/3ce1e5cb28d45dbb1c785ce49f3b0a738575f4cf.png" alt="">
-        </div>
+        <a class="text-secondary text-decoration-none text-muted" asp-controller="Calculator" asp-action="BlockCalculatorIndex">
+            <div class="calculators-block-list-item lightViolet d-flex flex-column align-items-center p-3 linkToCalculator">
+                <span class="calculators-block-list-item-title h5">
+                    Расчёт строительных блоков
+                </span>
+                <img class="calculators-block-list-item-title-img" src="../img/3ce1e5cb28d45dbb1c785ce49f3b0a738575f4cf.png" alt="">
+            </div>
+        </a>
         <a class="text-secondary text-decoration-none text-muted" asp-controller="Calculator" asp-action="BrickCalculatorIndex">
             <div class="calculators-block-list-item lightViolet d-flex flex-column align-items-center  p-3 linkToCalculator">
                 <span class="calculators-block-list-item-title h5">
@@ -75,7 +77,5 @@
         </div>
 
 
-
     </div>
 </div>
-

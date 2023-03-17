@@ -2,7 +2,7 @@
 
 <div class="row justify-content-md-center m-3" id="brickResult" xmlns="http://www.w3.org/1999/html">
     <div class="col-7 calculatorWrapperShadow p-4">
-        <h3>Результаты расчётов</h3>
+        <h3>Результаты расчётов стены из бруса</h3>
         <table class="table table-bordered">
             <tbody>
             <tr>
@@ -11,7 +11,14 @@
             </tr>
             <tr>
                 <td>Площадь, которой не нужна кладка </td>
-                <td>@Model.AreaToNotCoverSquareM м<sup>2</sup></td>
+                @if (Model.AreaToNotCoverSquareM > 0)
+                {
+                    <td>@Model.AreaToNotCoverSquareM м<sup>2</sup></td>
+                }
+                else
+                {
+                    <td>Без проемов</td>
+                }
             </tr>
             <tr>
                 <td>Толщина стены</td>
@@ -43,7 +50,14 @@
             </tr>
             <tr>
                 <td>Стоимость найма рабочих</td>
-                <td>@Model.AllWorkersPrice руб.</td>
+                @if (Model.AllWorkersPrice > 0)
+                {
+                    <td>@Model.AllWorkersPrice руб.</td>
+                }
+                else
+                {
+                    <td>Без найма</td>
+                }
             </tr>
             </tbody>
         </table>
