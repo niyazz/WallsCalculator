@@ -25,6 +25,9 @@
     <Compile Update="Views\Calculator\BalkCalculationOutputPartial.cshtml">
       <DependentUpon>BalkCalculatorIndex.cshtml</DependentUpon>
     </Compile>
+    <Compile Update="Models\BlockCalculationOutput.cs">
+      <DependentUpon>BlockCalculationInput.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

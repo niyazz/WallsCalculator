@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @using WallsCalculator.Models.Enums
+@using WallsCalculator.Utils
 @model WallsCalculator.Models.BalkCalculationInput
 
 @{
@@ -30,7 +31,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="BalkType" class="control-label"></label>
-                <select class="form-control" asp-for="BalkType" asp-items="Html.GetEnumSelectList<BalkType>()">
+                <select class="form-control" asp-for="BalkType">
+                    @foreach (var enumAlias in Enum.GetValues(typeof(BalkType)).Cast<BalkType>())
+                    {
+                        var enumValue = (int) enumAlias;
+                        <option value="@enumValue">@enumAlias.GetMaterialDescription(enumAlias.GetEnumDisplayName())</option>
+                    }
                 </select>
                 <span asp-validation-for="BalkType" class="text-danger"></span>
             </div>

@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Spire.Doc;
 using WallsCalculator.Models;
+using WallsCalculator.Services.Abstractions;
 using WallsCalculator.Utils;
 using static WallsCalculator.Utils.NiceStyles;
 // ReSharper disable HeapView.BoxingAllocation
@@ -20,8 +21,7 @@ namespace WallsCalculator.Services.WordGenerators
             _calculator = calculator;
         }
 
-        public HttpFileContent Generate(BalkCalculationInput calculatorInput,
-            string fileName = "Результат расчёта")
+        public HttpFileContent Generate(BalkCalculationInput calculatorInput, string fileName)
         {
             var calculated = _calculator.Calculate(calculatorInput)!;
             var builder = new DocumentFormatBuilder();
@@ -52,7 +52,7 @@ namespace WallsCalculator.Services.WordGenerators
         {
             var input = output.Input;
             AddBaseInputsTable(output.Input, output, lastPage, ref tableIndex, 8, 2)
-                .FillRowWith("Вид бруса", input.BalkType.GetEnumDisplayName())
+                .FillRowWith("Тип бруса", input.BalkType.GetMaterialDescription(input.BalkType.GetEnumDisplayName())!)
                 .FillRowWith("Ширина бруса", $"{input.BalkWidth} мм")
                 .FillRowWith("Высота бруса", $"{input.BalkHeight} мм")
                 .FillRowWith("Длина бруса", $"{input.BalkLength} м")

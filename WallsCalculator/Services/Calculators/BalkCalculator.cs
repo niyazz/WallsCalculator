@@ -46,7 +46,7 @@ namespace WallsCalculator.Services.Calculators
                     AreaToNotCoverSquareM = Math.Round(areaToNotCoverSm, 2),
                     AllWorkersPrice = allWorkersPrice,
                     WallDepthCentimeters = Math.Round(input.BalkWidth / MmToCm, 2),
-                    ConstructionWeight = Math.Round(areaToCoverCubeM * input.BalkType.GetDensity(), 2),
+                    ConstructionWeight = Math.Round(areaToCoverCubeM * input.BalkType.GetMaterialDensity()!.Value, 2),
                     BalkRowsAmount = balkRowsAmount,
                     BalkVolumeCubeM = balkVolumeCubeM,
                     TotalMaterialAndWorkersPrice = totalMaterialPrice + allWorkersPrice,

@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using Spire.Doc;
 using WallsCalculator.Models;
-using WallsCalculator.Models.WallsCalculator.Models;
 using WallsCalculator.Services.Abstractions;
 using WallsCalculator.Utils;
 using static WallsCalculator.Utils.NiceStyles;
@@ -11,25 +10,25 @@ using static WallsCalculator.Utils.NiceStyles;
 
 namespace WallsCalculator.Services.WordGenerators
 {
-    public class BrickWordGeneratorService 
-        : BaseWordGeneratorDocumentService, IWordGeneratorDocumentService<BrickCalculationInput>
+    public class BlockWordGeneratorService 
+        : BaseWordGeneratorDocumentService, IWordGeneratorDocumentService<BlockCalculationInput>
     {
-        private readonly ICalculator<BrickCalculationInput, BrickCalculationOutput> _calculator;
+        private readonly ICalculator<BlockCalculationInput, BlockCalculationOutput> _calculator;
 
-        public BrickWordGeneratorService(
-            ICalculator<BrickCalculationInput, BrickCalculationOutput> calculator)
+        public BlockWordGeneratorService(
+            ICalculator<BlockCalculationInput, BlockCalculationOutput> calculator)
         {
             _calculator = calculator;
         }
 
-        public HttpFileContent Generate(BrickCalculationInput calculatorInput, string fileName)
+        public HttpFileContent Generate(BlockCalculationInput calculatorInput, string fileName)
         {
             var calculated = _calculator.Calculate(calculatorInput)!;
             var builder = new DocumentFormatBuilder();
             var tableIndex = 1;
             
             var lastPage = AddPage(builder)
-                .AddNiceText($"Расчет кирпичной стены от {DateTime.Now:dd/MM/yyyy}\n", BigHeading, MidLineSpacing);
+                .AddNiceText($"Расчет стены из блока {DateTime.Now:dd/MM/yyyy}\n", BigHeading, MidLineSpacing);
             tableIndex = AddInputsTable(calculated, lastPage, tableIndex);
             tableIndex = AddAperturesTable(calculated.Input.Apertures.ToArray(), lastPage, ref tableIndex);
             tableIndex = AddWorkersTable(calculated.Input.Workers.ToArray(), lastPage, ref tableIndex);
@@ -49,26 +48,28 @@ namespace WallsCalculator.Services.WordGenerators
             };
         }
 
-        private int AddInputsTable(BrickCalculationOutput output, Section lastPage, int tableIndex)
+        private int AddInputsTable(BlockCalculationOutput output, Section lastPage, int tableIndex)
         {
             var input = output.Input;
-            AddBaseInputsTable(output.Input, output, lastPage, ref tableIndex, 8, 2)
-                .FillRowWith("Вид крипича", input.BrickType.GetMaterialDescription(input.BrickType.GetEnumDisplayName())!)
-                .FillRowWith("Тип кладки кирпича", input.DepthType.GetEnumDisplayName())
+            AddBaseInputsTable(output.Input, output, lastPage, ref tableIndex, 9, 2)
+                .FillRowWith("Вид блока", input.BlockType.GetMaterialDescription(input.BlockType.GetEnumDisplayName())!)
+                .FillRowWith("Тип кладки блока", input.DepthType.GetEnumDisplayName())
                 .FillRowWith("Тип кладки сетки", input.MasonryType.GetEnumDisplayName())
                 .FillRowWith("Толщина раствора", $"{input.MortarValue} мм.")
-                .FillRowWith("Цена кирпича", $"{input.Price} руб.")
+                .FillRowWith("Вес блока", $"{input.BlockWeight} мм.")
+                .FillRowWith("Цена блока", $"{input.Price} руб.")
                 .EndNiceTable();
             return tableIndex;
         }
 
-        private int AddResultsTable(BrickCalculationOutput output, Section lastPage, int tableIndex)
+        private int AddResultsTable(BlockCalculationOutput output, Section lastPage, int tableIndex)
         {
-            AddBaseResultsTable(output, lastPage, ref tableIndex, 11, 2)
-                .FillRowWith("Количество кирпича для кладки одного квадратного метра", $"{output.OneSquareBricksAmount} шт.")
+            AddBaseResultsTable(output, lastPage, ref tableIndex, 12, 2)
+                .FillRowWith("Количество блока для кладки одного квадратного метра", $"{output.OneSquareBlocksAmount} шт.")
                 .FillRowWith("Площадь кладочной сетки", $"{output.AreaForMasonryGrid} кв.м.")
                 .FillRowWith("Число рядов кладочной сетки", $"{output.MasonryGridRowsAmount} шт.")
-                .FillRowWith("Число кирпичей в колонне", $"{output.ColumnBricksAmount} шт.")
+                .FillRowWith("Число блока в колонне", $"{output.ColumnBlocksAmount} шт.")
+                .FillRowWith("Общий вес конструкции", $"{output.ConstructionWeight} шт.")
                 .EndNiceTable();
             return tableIndex;
         }
