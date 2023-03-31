@@ -37,6 +37,15 @@
     <Content Update="Views\Calculator\BalkCalculationOutputPartial.cshtml">
       <DependentUpon>BalkCalculatorIndex.cshtml</DependentUpon>
     </Content>
+    <Content Update="Views\Calculator\BlockCalculationOutputPartial.cshtml">
+      <DependentUpon>BlockCalculatorIndex.cshtml</DependentUpon>
+    </Content>
+    <Content Update="Views\Calculator\ApertureOutputPartial.cshtml">
+      <DependentUpon>ApertureIndex.cshtml</DependentUpon>
+    </Content>
+    <Content Update="Views\Calculator\WorkersOutputPartial.cshtml">
+      <DependentUpon>WorkersIndex.cshtml</DependentUpon>
+    </Content>
   </ItemGroup>
 
 </Project>

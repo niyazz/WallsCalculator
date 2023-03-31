@@ -26,6 +26,7 @@ namespace WallsCalculator.Models
 
         /// <summary>
         /// Толщина раствора.
+        /// </summary>
         [DisplayName("Толщина раствора (мм)")]
         public double MortarValue { get; set; }
 

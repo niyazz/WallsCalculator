@@ -1,0 +1,28 @@
+﻿@using WallsCalculator.Utils
+@model IEnumerable<WallsCalculator.Models.ApertureInput>
+
+<h4>Детали проемов</h4>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Номер проема</th>
+        <th>Тип проема</th>
+        <th>Ширина, мм</th>
+        <th>Высота, мм</th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+        var apertures = Model.OrderBy(x => x.ApertureType).ToArray();
+        for (var i = 0; i < apertures.Length; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>@apertures[i].ApertureType.GetEnumDisplayName()</td>
+                <td>@apertures[i].Width</td>
+                <td>@apertures[i].Height</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

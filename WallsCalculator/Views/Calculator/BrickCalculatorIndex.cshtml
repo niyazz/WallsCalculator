@@ -28,7 +28,7 @@
                         <select class="form-control" asp-for="BrickType">
                             @foreach (var enumAlias in Enum.GetValues(typeof(BrickType)).Cast<BrickType>())
                             {
-                                var enumValue = (int)enumAlias;
+                                var enumValue = (int) enumAlias;
                                 <option value="@enumValue">@enumAlias.GetMaterialDescription(enumAlias.GetEnumDisplayName())</option>
                             }
                         </select>
@@ -43,12 +43,12 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Perimeter" class="control-label"></label>
-                        <input onkeypress="isNumber(event)" asp-for="Perimeter" class="form-control" placeholder="0 мм"/>
+                        <input onkeypress="isNumber(event)" asp-for="Perimeter" class="form-control" placeholder="0 м"/>
                         <span asp-validation-for="Perimeter" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="AngleHeight" class="control-label"></label>
-                        <input onkeypress="isNumber(event)" asp-for="AngleHeight" class="form-control" placeholder="0 мм"/>
+                        <input onkeypress="isNumber(event)" asp-for="AngleHeight" class="form-control" placeholder="0 см"/>
                         <span asp-validation-for="AngleHeight" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -120,30 +120,89 @@
     <div class="font-weight-bold h3 text-center my-5 text-secondary text-center">Общие сведения по результатам расчетов</div>
     <div class="my-3">
         <div class="lightViolet p-3 my-4">
+            Общая площадь
+            <br/>
+            - Сумма площади внезависимости от необходимости кладки.
+        </div>
+        <div class="lightViolet p-3 my-4">
             Площадь проемов
             <br/>
-            - При слишком малой площади проемов (< 0.01 кв.м.) она приравнивается к нулю.
+            - Площадь внешней стороны стен и соответствует площади необходимого утеплителя.
         </div>
         <div class="lightViolet p-3 my-4">
-            Периметр строения
+            Общая длина всех стен
             <br/>
-            - Общая длина всех стен учтенных в расчетах.
+            - Периметр всех стен.
         </div>
         <div class="lightViolet p-3 my-4">
-            Общая площадь кладки
+            Высота стен по углам
             <br/>
-            - Площадь внешней стороны стен. Соответствует площади необходимого утеплителя, если такой предусмотрен проектом.
+            - Высота потолков в углах стен. Используется среднее значение.
         </div>
         <div class="lightViolet p-3 my-4">
             Толщина стены
             <br/>
-            - Толщина готовой стены с учетом толщины растворного шва. Может незначительно отличаться от конечного результата в
-            зависимости от вида кладки.
+            - Толщина готовой стены с учетом толщины растворного шва. Может незначительно отличаться от конечного результата в зависимости от вида кладки.
         </div>
         <div class="lightViolet p-3 my-4">
-            Количество
+            Площадь, которой не нужна кладка
             <br/>
-            - Общее количество кирпичей необходимых для постройки стен по заданным параметрам
+            - Общая площадь всех проёмов (окон и дверей), где не нужна кладка.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Вид кирпича
+            <br/>
+            - Вид кирпича выбранного для расчета.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Количество выбранного типа кирпича и толщины в 1 м2
+            <br/>
+            - Сколько кирпича в 1 м² кладки – в зависимости от видов материала и толщины шва.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Количество кирпича необходимого для кладки
+            <br/>
+            - Общее количество кирпичей необходимых для постройки стен по заданным параметрам.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Количество кирпичей в колонне
+            <br/>
+            - Необходимое количество кирпичей в колонне.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Стоимость одного кирпича
+            <br/>
+            - Стоимость единицы материала выбранного вида кирпича.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Стоимость кирпичей
+            <br/>
+            - Стоимость материалов для возведения кирпичной стены.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Толщина раствора
+            <br/>
+            - Высота шва между кирпичами.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Тип кладки кирпича
+            <br/>
+            - Способ кладки изделия для возведения стены.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Число рядов кладочной сетки
+            <br/>
+            - Количество рядов кладочной сетки, которое будет необходимо.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Площадь необходимой кладочной сетки
+            <br/>
+            - Площадь кладочной сетки, которую нужна для кладки.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Стоимость найма рабочих
+            <br/>
+            - Стоимость найма всех работников, которые будут наняты для работы.
         </div>
     </div>
 </div>

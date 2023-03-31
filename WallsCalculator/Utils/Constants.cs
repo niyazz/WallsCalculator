@@ -12,6 +12,8 @@
         public const string TableHeading = "TableHeading";
         public const string CenterText = "CenterText";
         public const string LeftText = "LeftText";
+        public const string JustifyText = "JustifyText";
+        public const string JustifyTextBold = "JustifyTextBold";
         public const string TimesNewRoman = "Times New Roman";
         public const float HighLineSpacing = 20;
         public const float MidLineSpacing = 15;
