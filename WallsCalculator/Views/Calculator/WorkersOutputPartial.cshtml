@@ -1,0 +1,27 @@
+﻿@model IEnumerable<WallsCalculator.Models.WorkerInput>
+
+<h4>Детали найма рабочих</h4>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Номер типа рабочего</th>
+        <th>Оплата труда в день, руб.</th>
+        <th>Число рабочих</th>
+        <th>Продолжительность, дни</th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+        var workers = Model.ToArray();
+        for (var i = 0; i < workers.Length; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>@workers[i].Price</td>
+                <td>@workers[i].QuantityOfWorkers</td>
+                <td>@workers[i].DurationInDays</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

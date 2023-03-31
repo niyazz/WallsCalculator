@@ -14,21 +14,28 @@ namespace WallsCalculator.Services.WordGenerators
     {
         protected const string MsWord = "application/msword";
         
-        protected Section AddPage(DocumentFormatBuilder builder)
+        protected Section AddPage(DocumentFormatBuilder builder, bool addStyle = true)
         {
+            if (addStyle)
+            {
+                return builder
+                    .AddStyle(BigHeading, TimesNewRoman, 18, HorizontalAlignment.Center, isBold: true)
+                    .AddStyle(TableHeading, TimesNewRoman, 14, HorizontalAlignment.Left, isBold: true)
+                    .AddStyle(CenterText, TimesNewRoman, 14, HorizontalAlignment.Center, isBold: false)
+                    .AddStyle(LeftText, TimesNewRoman, 14, HorizontalAlignment.Left, isBold: false)
+                    .AddStyle(JustifyText, TimesNewRoman, 12, HorizontalAlignment.Justify, isBold: false)
+                    .AddStyle(JustifyTextBold, TimesNewRoman, 12, HorizontalAlignment.Justify, isBold: true)
+                    .AddPage();
+            }
+            
             return builder
-                .AddStyle(BigHeading, TimesNewRoman, 18, HorizontalAlignment.Center, isBold: true)
-                .AddStyle(TableHeading, TimesNewRoman, 14, HorizontalAlignment.Left, isBold: true)
-                .AddStyle(CenterText, TimesNewRoman, 14, HorizontalAlignment.Center, isBold: false)
-                .AddStyle(LeftText, TimesNewRoman, 14, HorizontalAlignment.Left, isBold: false)
                 .AddPage();
         }
 
         protected Table AddBaseInputsTable(CalculationInput input, CalculationOutput output, Section lastPage,
             ref int tableIndex, int rows, int cols)
         {
-            return lastPage.AddNiceText($"Таблица {tableIndex++}. Общие входные данные \n", TableHeading,
-                    LowLineSpacing)
+            return lastPage.AddNiceText($"\nТаблица {tableIndex++}. Общие входные данные", TableHeading, MidLineSpacing)
                 .AddNiceTable(rows, cols)
                 .SetNiceTableStyle(LeftText, HighLineSpacing)
                 .FillRowWith("Общая длина всех стен", $"{input.Perimeter} м")
@@ -41,8 +48,7 @@ namespace WallsCalculator.Services.WordGenerators
             if (doorApertures.Any(x => x.Height != 0 && x.Width != 0))
             {
                 var table = lastPage
-                    .AddNiceText($"\n\nТаблица {tableIndex++}. Дверные проемы в стенах, мм \n", TableHeading,
-                        LowLineSpacing)
+                    .AddNiceText($"\nТаблица {tableIndex++}. Дверные проемы в стенах, мм", TableHeading, MidLineSpacing)
                     .AddNiceTable(doorApertures.Length + 1, 3)
                     .SetNiceTableStyle(CenterText, HighLineSpacing)
                     .FillRowWith("Номер проема", "Ширина", "Высота");
@@ -60,8 +66,7 @@ namespace WallsCalculator.Services.WordGenerators
             if (windowsApertures.Any(x => x.Height != 0 && x.Width != 0))
             {
                 var table = lastPage
-                    .AddNiceText($"\n\nТаблица {tableIndex++}. Оконные проемы в стенах, мм \n", TableHeading,
-                        LowLineSpacing)
+                    .AddNiceText($"\nТаблица {tableIndex++}. Оконные проемы в стенах, мм", TableHeading, MidLineSpacing)
                     .AddNiceTable(windowsApertures.Length + 1, 3)
                     .SetNiceTableStyle(CenterText, HighLineSpacing)
                     .FillRowWith("Номер проема", "Ширина", "Высота");
@@ -83,7 +88,7 @@ namespace WallsCalculator.Services.WordGenerators
             if (workers.Any(x => x.DurationInDays != 0))
             {
                 var table = lastPage
-                    .AddNiceText($"\n\nТаблица {tableIndex++}. Наемные рабочие \n", TableHeading, LowLineSpacing)
+                    .AddNiceText($"\nТаблица {tableIndex++}. Наемные рабочие", TableHeading, MidLineSpacing)
                     .AddNiceTable(workers.Length + 1, 4)
                     .SetNiceTableStyle(CenterText, HighLineSpacing)
                     .FillRowWith("Номер типа рабочего", "Оплата труда в день", "Число рабочих",
@@ -105,15 +110,15 @@ namespace WallsCalculator.Services.WordGenerators
             ref int tableIndex, int rows, int cols)
         {
             return lastPage
-                .AddNiceText($"\n\nТаблица {tableIndex++}. Результаты расчета \n", TableHeading, LowLineSpacing)
+                .AddNiceText($"\nТаблица {tableIndex++}. Результаты расчета", TableHeading, MidLineSpacing)
                 .AddNiceTable(rows, cols)
                 .SetNiceTableStyle(LeftText, HighLineSpacing)
-                .FillRowWith("Общая площадь", $"{output.TotalArea} кв.м.")
-                .FillRowWith("Площадь возведения стен", $"{output.AreaToCoverSquareM} кв.м.")
-                .FillRowWith("Площадь проемов", output.AreaToNotCoverSquareM > 0 ? $"{output.AreaToNotCoverSquareM} кв.м." : "Без проемов")
-                .FillRowWith("Необходимое количество материала", $"{output.TotalMaterialAmount} шт.")
-                .FillRowWith("Стоимость материалов для возведения стен", $"{output.TotalMaterialPrice} руб.")
-                .FillRowWith("Стоимость найма всех работников", output.AllWorkersPrice > 0 ? $"{output.AllWorkersPrice} руб." : "Без найма")
+                .FillRowWith("Общая площадь", $"{output.TotalArea} м².")
+                .FillRowWith("Площадь кладки", $"{output.AreaToCoverSquareM} м².")
+                .FillRowWith("Площадь, которой не нужна кладка", output.AreaToNotCoverSquareM > 0 ? $"{output.AreaToNotCoverSquareM} м²." : "Без проемов")
+                .FillRowWith("Количество материала необходимого для возведения стены", $"{output.TotalMaterialAmount} шт.")
+                .FillRowWith("Стоимость материалов", $"{output.TotalMaterialPrice} руб.")
+                .FillRowWith("Стоимость найма рабочих", output.AllWorkersPrice > 0 ? $"{output.AllWorkersPrice} руб." : "Без найма")
                 .FillRowWith("Итоговая стоимость работ с учетом найма работников и закупки материалов", $"{output.TotalMaterialAndWorkersPrice} руб.");
         }
     }

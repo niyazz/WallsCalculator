@@ -22,7 +22,6 @@ namespace WallsCalculator.Services
             page.PageSetup.Margins.Top = top;
             page.PageSetup.Margins.Left = left;
             page.PageSetup.Margins.Right = right;
-
             return page;
         }
 

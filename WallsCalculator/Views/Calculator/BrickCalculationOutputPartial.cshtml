@@ -1,4 +1,6 @@
-﻿@model WallsCalculator.Models.WallsCalculator.Models.BrickCalculationOutput
+﻿@using WallsCalculator.Utils
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model WallsCalculator.Models.WallsCalculator.Models.BrickCalculationOutput
 
 <div class="row justify-content-md-center m-3" id="brickResult">
     <div class="col-7 calculatorWrapperShadow p-4">
@@ -6,27 +8,27 @@
         <table class="table table-bordered">
             <tbody>
             <tr>
+                <td>Общая площадь</td>
+                <td>@Model.TotalArea м<sup>2</sup></td>
+            </tr>
+            <tr>
                 <td>Площадь кладки</td>
                 <td>@Model.AreaToCoverSquareM м<sup>2</sup></td>
+            </tr>
+            <tr>
+                <td>Общая длина всех стен</td>
+                <td>@Model.Input.Perimeter м</td>
+            </tr>
+            <tr>
+                <td>Высота стен по углам</td>
+                <td>@Model.Input.AngleHeight см</td>
             </tr>
             <tr>
                 <td>Толщина стены</td>
                 <td>@Model.WallDepthCentimeters см</td>
             </tr>
             <tr>
-                <td>Количество выбранного типа кирпича и толщины в 1 м<sup>2</sup></td>
-                <td>@Model.OneSquareBricksAmount шт.</td>
-            </tr>
-            <tr>
-                <td>Количестов кирпича необходимого для кладки</td>
-                <td>@Model.TotalMaterialAmount шт. </td>
-            </tr>
-            <tr>
-                <td>Стоимость кирпичей</td>
-                <td>@Model.TotalMaterialPrice руб.</td>
-            </tr>
-            <tr>
-                <td>Площадь, которой не нужна кладка </td>
+                <td>Площадь, которой не нужна кладка</td>
                 @if (Model.AreaToNotCoverSquareM > 0)
                 {
                     <td>@Model.AreaToNotCoverSquareM м<sup>2</sup></td>
@@ -37,16 +39,48 @@
                 }
             </tr>
             <tr>
+                <td>Вид кирпича</td>
+                <td>@Model.Input.BrickType.GetMaterialDescription(@Model.Input.BrickType.GetEnumDisplayName())</td>
+            </tr>
+            <tr>
+                <td>Количество выбранного типа кирпича и толщины в 1 м<sup>2</sup></td>
+                <td>@Model.OneSquareBricksAmount шт.</td>
+            </tr>
+            <tr>
+                <td>Количество кирпича необходимого для кладки</td>
+                <td>@Model.TotalMaterialAmount шт. </td>
+            </tr>
+            <tr>
+                <td>Количество кирпичей в колонне</td>
+                <td>@Model.ColumnBricksAmount шт.</td>
+            </tr>
+            <tr>
+                <td>Стоимость одного кирпича</td>
+                <td>@Model.Input.Price руб.</td>
+            </tr>
+            <tr>
+                <td>Стоимость кирпичей</td>
+                <td>@Model.TotalMaterialPrice руб.</td>
+            </tr>
+            <tr>
+                <td>Толщина раствора</td>
+                <td>@Model.Input.MortarValue мм</td>
+            </tr>
+            <tr>
+                <td>Тип кладки кирпича</td>
+                <td>@Model.Input.DepthType.GetEnumDisplayName()</td>
+            </tr>
+            <tr>
+                <td>Тип кладки сетки</td>
+                <td>@Model.Input.MasonryType.GetEnumDisplayName()</td>
+            </tr>
+            <tr>
                 <td>Число рядов кладочной сетки</td>
                 <td>@Model.MasonryGridRowsAmount шт.</td>
             </tr>
             <tr>
                 <td>Площадь необходимой кладочной сетки</td>
                 <td> @Model.AreaForMasonryGrid м<sup>2</sup></td>
-            </tr>
-            <tr>
-                <td>Количество кирпичей в колонне</td>
-                <td>@Model.ColumnBricksAmount шт.</td>
             </tr>
             <tr>
                 <td>Стоимость найма рабочих</td>
@@ -59,8 +93,18 @@
                     <td>Без найма</td>
                 }
             </tr>
+            <tr>
+                <td>Итоговая стоимость работ с учетом найма работников и закупки материалов</td>
+                <td>@Model.TotalMaterialAndWorkersPrice руб.</td>
+            </tr>
             </tbody>
         </table>
+
+        @{
+            await Html.RenderPartialAsync("ApertureOutputPartial", @Model.Input.Apertures);
+            await Html.RenderPartialAsync("WorkersOutputPartial", @Model.Input.Workers);
+        }
+
     </div>
 </div>
 

@@ -43,12 +43,12 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Perimeter" class="control-label"></label>
-                        <input onkeypress="isNumber(event)" asp-for="Perimeter" class="form-control" placeholder="0 мм"/>
+                        <input onkeypress="isNumber(event)" asp-for="Perimeter" class="form-control" placeholder="0 м"/>
                         <span asp-validation-for="Perimeter" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="AngleHeight" class="control-label"></label>
-                        <input onkeypress="isNumber(event)" asp-for="AngleHeight" class="form-control" placeholder="0 мм"/>
+                        <input onkeypress="isNumber(event)" asp-for="AngleHeight" class="form-control" placeholder="0 см"/>
                         <span asp-validation-for="AngleHeight" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -125,30 +125,99 @@
     <div class="font-weight-bold h3 text-center my-5 text-secondary text-center">Общие сведения по результатам расчетов</div>
     <div class="my-3">
         <div class="lightViolet p-3 my-4">
+            Общая площадь
+            <br/>
+            - Сумма площади внезависимости от необходимости кладки.
+        </div>
+        <div class="lightViolet p-3 my-4">
             Площадь проемов
             <br/>
-            - При слишком малой площади проемов (< 0.01 кв.м.) она приравнивается к нулю.
+            - Площадь внешней стороны стен и соответствует площади необходимого утеплителя.
         </div>
         <div class="lightViolet p-3 my-4">
-            Периметр строения
+            Общая длина всех стен
             <br/>
-            - Общая длина всех стен учтенных в расчетах.
+            - Периметр всех стен.
         </div>
         <div class="lightViolet p-3 my-4">
-            Общая площадь кладки
+            Высота стен по углам
             <br/>
-            - Площадь внешней стороны стен. Соответствует площади необходимого утеплителя, если такой предусмотрен проектом.
+            - Высота потолков в углах стен. Используется среднее значение.
         </div>
         <div class="lightViolet p-3 my-4">
             Толщина стены
             <br/>
-            - Толщина готовой стены с учетом толщины растворного шва. Может незначительно отличаться от конечного результата в
-            зависимости от вида кладки.
+            - Толщина готовой стены с учетом толщины растворного шва. Может незначительно отличаться от конечного результата в зависимости от вида кладки.
         </div>
         <div class="lightViolet p-3 my-4">
-            Количество
+            Общий вес конструкции
             <br/>
-            - Общее количество блоков необходимых для постройки стен по заданным параметрам
+            - Вес всех стен в совокупности в зависимости от типа выбранного блока.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Площадь, которой не нужна кладка
+            <br/>
+            - Общая площадь всех проёмов (окон и дверей), где не нужна кладка.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Вид блока
+            <br/>
+            - Вид блока выбранного для расчета.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Вес блока
+            <br/>
+            - Вес блока в килограммах.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Количество выбранного типа блока и толщины в 1 м2
+            <br/>
+            - Сколько блоков в 1 м² кладки – в зависимости от видов материала и толщины шва.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Количество блоков необходимого для кладки
+            <br/>
+            - Общее количество блоков необходимых для постройки стен по заданным параметрам.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Количество блоков в колонне
+            <br/>
+            - Необходимое количество блоков в колонне.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Стоимость одного блока
+            <br/>
+            - Стоимость единицы материала выбранного вида блока.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Стоимость блоков
+            <br/>
+            - Стоимость материалов для возведения стены из блока.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Толщина раствора
+            <br/>
+            - Высота шва между блоками.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Тип кладки блоков
+            <br/>
+            - Способ кладки изделия для возведения стены.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Число рядов кладочной сетки
+            <br/>
+            - Количество рядов кладочной сетки, которое будет необходимо.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Площадь необходимой кладочной сетки
+            <br/>
+            - Площадь кладочной сетки, которую нужна для кладки.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Стоимость найма рабочих
+            <br/>
+            - Стоимость найма всех работников, которые будут наняты для работы.
         </div>
     </div>
 </div>
