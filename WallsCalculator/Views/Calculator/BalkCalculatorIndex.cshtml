@@ -7,103 +7,143 @@
     ViewData["Title"] = "Стена из бруса";
 }
 
-<div>
-    <a asp-controller="Home" asp-action="Index">Назад</a>
-</div>
 
-<div class="font-weight-bold h3 text-center my-5 text-secondary">
+<div class="font-weight-bold h3 text-center text-secondary lightViolet py-3">
     <span>Расчет стен из бруса</span>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="Calculator" asp-action="BalkCalculatorIndex">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Perimeter" class="control-label"></label>
-                <input onkeypress="isNumber(event)" asp-for="Perimeter" class="form-control" placeholder="0 м"/>
-                <span asp-validation-for="Perimeter" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AngleHeight" class="control-label"></label>
-                <input onkeypress="isNumber(event)" asp-for="AngleHeight" class="form-control" placeholder="0 см"/>
-                <span asp-validation-for="AngleHeight" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BalkType" class="control-label"></label>
-                <select class="form-control" asp-for="BalkType">
-                    @foreach (var enumAlias in Enum.GetValues(typeof(BalkType)).Cast<BalkType>())
-                    {
-                        var enumValue = (int) enumAlias;
-                        <option value="@enumValue">@enumAlias.GetMaterialDescription(enumAlias.GetEnumDisplayName())</option>
-                    }
-                </select>
-                <span asp-validation-for="BalkType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BalkWidth" class="control-label"></label>
-                <input onkeypress="isNumber(event)" asp-for="BalkWidth" class="form-control" placeholder="0 мм"/>
-                <span asp-validation-for="BalkWidth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BalkHeight" class="control-label"></label>
-                <input onkeypress="isNumber(event)" asp-for="BalkHeight" class="form-control" placeholder="0 мм"/>
-                <span asp-validation-for="BalkHeight" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BalkLength" class="control-label"></label>
-                <input onkeypress="isNumber(event)" asp-for="BalkLength" class="form-control" placeholder="0 м."/>
-                <span asp-validation-for="BalkLength" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input onkeypress="isNumber(event)" asp-for="Price" class="form-control" placeholder="0 руб."/>
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div id="apertures-container">
-                <button type="button" class="btn btn-primary" onclick="addApertureInput('#apertures-container', 'aperture')">
-                    Добавить проём
-                </button>
-                @{
-                    await Html.RenderPartialAsync("ApertureIndex", Model?.Apertures);
-                }
-            </div>
-
-            <div id="workers-container">
-                <button type="button" class="btn btn-primary" onclick="addApertureInput('#workers-container', 'worker')">
-                    Добавить рабочего
-                </button>
-                @{
-                    await Html.RenderPartialAsync("WorkersIndex", Model?.Workers);
-                }
-            </div>
-
-            <button type="submit" class="btn btn-primary">
-                Расчитать
-            </button>
-        </form>
-    </div>
-
-    <div class="col-md-4">
-        @{
-            if (ViewBag.IsCalculated != null)
-            {
-                if (ViewBag.IsCalculated)
-                {
-                    await Html.RenderPartialAsync("BalkCalculationOutputPartial", ViewData["Result"]);
-                }
-                else
-                {
-                    <h6>Во время расчета произошла ошибка, попробуйте переввести параметры.</h6>
-                }
-            }
-        }
-    </div>
+<div class="lineAfter">
+    <a asp-controller="Home" asp-action="Index">Назад</a>
 </div>
 
 
-@section Scripts {
+<div class="lineAfter">
+    <form asp-controller="Calculator" asp-action="BalkCalculatorIndex">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row justify-content-md-center">
+            <div class="col-7">
+                <div class="calculatorWrapperShadow p-4 mb-4">
+                    <div class="form-group">
+                        <label asp-for="Perimeter" class="control-label"></label>
+                        <input onkeypress="isNumber(event)" asp-for="Perimeter" class="form-control" placeholder="0 мм" />
+                        <span asp-validation-for="Perimeter" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="AngleHeight" class="control-label"></label>
+                        <input onkeypress="isNumber(event)" asp-for="AngleHeight" class="form-control" placeholder="0 мм" />
+                        <span asp-validation-for="AngleHeight" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BalkType" class="control-label"></label>
+                        <select class="form-control" asp-for="BalkType">
+                            @foreach (var enumAlias in Enum.GetValues(typeof(BalkType)).Cast<BalkType>())
+                            {
+                                var enumValue = (int)enumAlias;
+                                <option value="@enumValue">@enumAlias.GetMaterialDescription(enumAlias.GetEnumDisplayName())</option>
+                            }
+                        </select>
+                        <span asp-validation-for="BalkType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BalkWidth" class="control-label"></label>
+                        <input onkeypress="isNumber(event)" asp-for="BalkWidth" class="form-control" placeholder="0 мм" />
+                        <span asp-validation-for="BalkWidth" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BalkHeight" class="control-label"></label>
+                        <input onkeypress="isNumber(event)" asp-for="BalkHeight" class="form-control" placeholder="0 мм" />
+                        <span asp-validation-for="BalkHeight" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BalkLength" class="control-label"></label>
+                        <input onkeypress="isNumber(event)" asp-for="BalkLength" class="form-control" placeholder="0 руб." />
+                        <span asp-validation-for="BalkLength" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price" class="control-label"></label>
+                        <input onkeypress="isNumber(event)" asp-for="Price" class="form-control" placeholder="0 руб." />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div id="apertures-container" class="calculatorWrapperShadow p-4 mb-4">
+                    <img class="brickTypeImg" src="~/img/wd.jpg" />
+                    <button type="button" class="btn calculatorBtnColor" onclick="addApertureInput('#apertures-container', 'aperture')">
+                        Добавить проём
+                    </button>
+                    @{
+                        await Html.RenderPartialAsync("ApertureIndex", Model?.Apertures);
+                    }
+                </div>
+
+                <div id="workers-container" class="calculatorWrapperShadow p-4 mb-4">
+                    <button type="button" class="btn calculatorBtnColor" onclick="addApertureInput('#workers-container', 'worker')">
+                        Добавить рабочего
+                    </button>
+                    @{
+                        await Html.RenderPartialAsync("WorkersIndex", Model?.Workers);
+                    }
+                </div>
+
+                <button type="submit" class="btn calculatorBtnColor">
+                    Расчитать
+                </button>
+            </div>
+        </div>
+    </form>
+
+
+
     @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        if (ViewBag.IsCalculated != null)
+        {
+            if (ViewBag.IsCalculated)
+            {
+                await Html.RenderPartialAsync("BalkCalculationOutputPartial", ViewData["Result"]);
+            }
+            else
+            {
+                <h6>Во время расчета произошла ошибка, попробуйте переввести параметры.</h6>
+            }
+        }
     }
-}
+
+</div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+
+<div class="brickCalculator mt-5 text-secondary">
+    <div class="font-weight-bold h3 text-center my-5 text-secondary text-center">Общие сведения по результатам расчетов</div>
+    <div class="my-3">
+        <div class="lightViolet p-3 my-4">
+            Площадь проемов
+            <br />
+            - При слишком малой площади проемов (< 0.01 кв.м.) она приравнивается к нулю.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Периметр строения
+            <br />
+            - Общая длина всех стен учтенных в расчетах.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Общая площадь кладки
+            <br />
+            - Площадь внешней стороны стен. Соответствует площади необходимого утеплителя, если такой предусмотрен проектом.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Толщина стены
+            <br />
+            - Толщина готовой стены с учетом толщины растворного шва. Может незначительно отличаться от конечного результата в
+            зависимости от вида кладки.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Количество
+            <br />
+            - Общее количество кирпичей необходимых для постройки стен по заданным параметрам
+        </div>
+    </div>
+</div>
