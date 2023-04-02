@@ -46,5 +46,5 @@ function addApertureInput(containerName, formGroupClassName) {
 
 // auto-scroll to result block after calculate
 $(function () {
-     $("html, body").delay(500).animate({ scrollTop: $('#errorResult').offset().top }, 500);
+    $("html, body").delay(500).animate({ scrollTop: $('#outputResult').offset().top }, 500);
 });
