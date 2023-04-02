@@ -6,7 +6,7 @@
 <div class="about-block text-secondary">
 
     <div class="about-block-title font-weight-bold h3 text-center text-secondary lightViolet py-3">
-        <span>О проекте</span>
+        <span>О сервисе</span>
     </div>
     <div class="lineAfter">
         <a asp-controller="Home" asp-action="Index">Назад</a>
@@ -14,22 +14,34 @@
 
     <div class="about-block-content">
         <div class="lightViolet p-5">
-            <div class="about-block-content-title font-weight-bold h4 text-center mb-5">
-                <span>
-                    Dorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-                </span>
-            </div>
             <div class="about-block-content-articles-list">
                 <div class="about-block-content-articles-list-item h5">
-                    1. Владелец проекта: @ViewBag.Author
+                    <img src="../img/benefit-1.jpg" style="height:100px;border-radius: 30px;"/>
+                    <div>
+                        Наш онлайн-сервис позволяет сэкономить время на самостоятельные расчеты,
+                        а также на расходы работ проектировщиков, сметчиков и т.д.
+                        Ведь сейчас время-ценный ресурс, поэтому если можно облегчить себе работу,
+                        то нужно пользоваться этим. А наш сайт с абсолютной точностью Вам это обеспечит!
+                    </div>
                 </div>
                 <div class="about-block-content-articles-list-item h5">
-                    2. Norem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <img src="../img/benefit-2.jpg" style="height:100px;border-radius: 30px;"/>
+                    <div>
+                        Удобство в использовании является важным факторов, который в нашем сервисе точно обеспечен.
+                        Минималистичный дизайн, который не надоедает, понятность и легкость в вводе параметров.
+                        Также имеется информация специально для того, чтобы каждый строитель мог изучить и применить данную информацию в расчетах.
+                    </div>
                 </div>
                 <div class="about-block-content-articles-list-item h5">
-                    3. Norem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <img src="../img/benefit-3.jpg" style="height:100px;border-radius: 30px;"/>
+                    <div>
+                        Наш сервис с точностью выполнит любой расчёт.
+                        Мы используем только качественную и проверенную информацию, только из достоверных источников.
+                        Будьте уверены в том, что расчет стен будет производиться без ошибок,
+                        а если и найдете или у вас возникнут вопросы, то обязательно сообщите нам! Ведь нам важно  качество работы.
+                    </div>
                 </div>
+                Владелец проекта: @ViewBag.Author
             </div>
         </div>
     </div>
