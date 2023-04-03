@@ -26,66 +26,62 @@ namespace WallsCalculator.Services.WordGenerators
             var calculated = _calculator.Calculate(calculatorInput)!;
             var builder = new DocumentFormatBuilder();
             var tableIndex = 1;
+
+            var firstPage = AddPage(builder).AddNiceText($"Расчет стены из блока {DateTime.Now:dd/MM/yyyy}", BigHeading, MidLineSpacing);
+            tableIndex = AddInputsTable(calculated, firstPage, tableIndex);
+            tableIndex = AddAperturesTable(calculated.Input.Apertures.ToArray(), firstPage, ref tableIndex);
+            tableIndex = AddWorkersTable(calculated.Input.Workers.ToArray(), firstPage, ref tableIndex);
+            _ = AddResultsTable(calculated, firstPage, tableIndex);
+
+            #region Общие сведения
             
-            var lastPage = AddPage(builder)
-                .AddNiceText($"Расчет стены из блока {DateTime.Now:dd/MM/yyyy}\n", BigHeading, MidLineSpacing)
+            //var lastPage = AddPage(builder, addStyle:false);
+            firstPage
+                .AddNiceText("\nОбщие сведения по результатам расчетов", BigHeading, MidLineSpacing)
                 .AddNiceText("\nОбщая площадь", JustifyTextBold, MidLineSpacing)
-                    .AddNiceText("- Сумма площади внезависимости от необходимости кладки.", JustifyText, MidLineSpacing)
-                .AddNiceText("\nПлощадь кладки", JustifyTextBold, MidLineSpacing)
+                    .AddNiceText("- Сумма всех площадей помещений дома.", JustifyText, MidLineSpacing)
+                .AddNiceText("Площадь кладки", JustifyTextBold, MidLineSpacing)
                     .AddNiceText("- Площадь внешней стороны стен и соответствует площади необходимого утеплителя.", JustifyText, MidLineSpacing)
                 .AddNiceText("Общая длина всех стен.", JustifyTextBold, MidLineSpacing)
-                    .AddNiceText("- Периметр всех стен.", JustifyText, MidLineSpacing)
+                    .AddNiceText("- Сумма длин стен всех помещений дома.", JustifyText, MidLineSpacing)
                 .AddNiceText("Высота стен по углам.", JustifyTextBold, MidLineSpacing)
-                    .AddNiceText("- Высота потолков в углах стен. Используется среднее значение.", JustifyText, MidLineSpacing)
+                    .AddNiceText("- Высота стен дома.", JustifyText, MidLineSpacing)
                 .AddNiceText("Толщина стены.", JustifyTextBold, MidLineSpacing)
                     .AddNiceText("- Толщина готовой стены с учетом толщины растворного шва. Может незначительно отличаться от конечного результата в зависимости от вида кладки.", JustifyText, MidLineSpacing)
                 .AddNiceText("Общий вес конструкции.", JustifyTextBold, MidLineSpacing)
-                    .AddNiceText("- Вес всех стен в совокупности в зависимости от типа выбранного блока.", JustifyText, MidLineSpacing)
+                    .AddNiceText("- Вес нагрузки конструкции.", JustifyText, MidLineSpacing)
                 .AddNiceText("Площадь, которой не нужна кладка.", JustifyTextBold, MidLineSpacing)
                     .AddNiceText("- Общая площадь всех проёмов (окон и дверей), где не нужна кладка.", JustifyText, MidLineSpacing)
                 .AddNiceText("Вид блока.", JustifyTextBold, MidLineSpacing)
-                    .AddNiceText("- Вид блока выбранного для расчета.", JustifyText, MidLineSpacing)
+                    .AddNiceText("- Разновидности блоков: Керамзитобетонные, Газобетонные, Пенобетонные.", JustifyText, MidLineSpacing)
                 .AddNiceText("Вес блока.", JustifyTextBold, MidLineSpacing)
-                    .AddNiceText("- Вес блока в килограммах.", JustifyText, MidLineSpacing)
+                    .AddNiceText("- Вес одного блока.", JustifyText, MidLineSpacing)
                 .AddNiceText("Количество выбранного типа блока и толщины в 1 м².", JustifyTextBold, MidLineSpacing)
-                    .AddNiceText("- Сколько блока в 1 м² кладки – в зависимости от видов материала и толщины шва.", JustifyText, MidLineSpacing)
-                .AddNiceText("Количество блоков необходимого для кладки.", JustifyTextBold, MidLineSpacing)
+                    .AddNiceText("- Сколько блоков в 1 м² кладки – в зависимости от видов материала и толщины шва.", JustifyText, MidLineSpacing)
+                .AddNiceText("Количество блока необходимого для кладки.", JustifyTextBold, MidLineSpacing)
                     .AddNiceText("- Общее количество блоков необходимых для постройки стен по заданным параметрам.", JustifyText, MidLineSpacing)
                 .AddNiceText("Количество блоков в колонне.", JustifyTextBold, MidLineSpacing)
-                    .AddNiceText("- Расчетное количество блоков в колонне в зависимости от высоты стены.", JustifyText, MidLineSpacing)
+                    .AddNiceText("- Необходимое количество блоков в колонне.", JustifyText, MidLineSpacing)
                 .AddNiceText("Стоимость одного блока.", JustifyTextBold, MidLineSpacing)
-                    .AddNiceText("- Стоимость единицы материала выбранного вида блока.", JustifyText, MidLineSpacing)
+                    .AddNiceText("- Цена за один блок.", JustifyText, MidLineSpacing)
                 .AddNiceText("Стоимость блоков.", JustifyTextBold, MidLineSpacing)
-                    .AddNiceText("- Стоимость материалов для возведения стены из блока.", JustifyText, MidLineSpacing)
+                    .AddNiceText("- Стоимость блоков для возведения блочной стены.", JustifyText, MidLineSpacing)
                 .AddNiceText("Толщина раствора.", JustifyTextBold, MidLineSpacing)
-                    .AddNiceText("- Высота шва между блоками.", JustifyText, MidLineSpacing)
-                .AddNiceText("Тип кладки блоков.", JustifyTextBold, MidLineSpacing)
-                    .AddNiceText("- Способ кладки изделия для возведения стены.", JustifyText, MidLineSpacing)
+                    .AddNiceText("- Толщина раствора между блоками.", JustifyText, MidLineSpacing)
+                .AddNiceText("Тип кладки блока.", JustifyTextBold, MidLineSpacing)
+                    .AddNiceText("- Типы кладки блока могут быть в пол изделия, в 1 изделие, в 1,5 изделия, в 2 изделия.", JustifyText, MidLineSpacing)
                 .AddNiceText("Тип кладки сетки.", JustifyTextBold, MidLineSpacing)
-                    .AddNiceText("- Способ покрытия кладочной сетки для возведения стены.", JustifyText, MidLineSpacing)
+                    .AddNiceText("- Типы кладки сетки могут быть: каждый ряд, через ряд, через 2 ряда, через 3 ряда, через 4 ряда.", JustifyText, MidLineSpacing)
                 .AddNiceText("Число рядов кладочной сетки.", JustifyTextBold, MidLineSpacing)
                     .AddNiceText("- Количество рядов кладочной сетки, которое будет необходимо.", JustifyText, MidLineSpacing)
                 .AddNiceText("Площадь необходимой кладочной сетки.", JustifyTextBold, MidLineSpacing)
                     .AddNiceText("- Площадь кладочной сетки, которую нужна для кладки.", JustifyText, MidLineSpacing)
                 .AddNiceText("Стоимость найма рабочих.", JustifyTextBold, MidLineSpacing)
                     .AddNiceText("- Стоимость найма всех работников, которые будут наняты для работы.", JustifyText, MidLineSpacing);
-            tableIndex = AddInputsTable(calculated, lastPage, tableIndex);
-            tableIndex = AddAperturesTable(calculated.Input.Apertures.ToArray(), lastPage, ref tableIndex);
-            tableIndex = AddWorkersTable(calculated.Input.Workers.ToArray(), lastPage, ref tableIndex);
-            _ = AddResultsTable(calculated, lastPage, tableIndex);
 
-            var document = builder.Build();
-            var stream = new MemoryStream();
-            document.SaveToStream(stream, FileFormat.Doc);
+            #endregion
 
-            return new()
-            {
-                FileName = fileName.LastIndexOf(".") == -1
-                    ? $"{fileName}.doc"
-                    : $"{fileName[..fileName.LastIndexOf('.')]}.doc",
-                Content = stream.ToArray(),
-                ContentType = MsWord
-            };
+            return CreateDocument(fileName, builder);
         }
 
         private int AddInputsTable(BlockCalculationOutput output, Section lastPage, int tableIndex)
@@ -95,8 +91,8 @@ namespace WallsCalculator.Services.WordGenerators
                 .FillRowWith("Вид блока", input.BlockType.GetMaterialDescription(input.BlockType.GetEnumDisplayName())!)
                 .FillRowWith("Тип кладки блока", input.DepthType.GetEnumDisplayName())
                 .FillRowWith("Тип кладки сетки", input.MasonryType.GetEnumDisplayName())
-                .FillRowWith("Толщина раствора", $"{input.MortarValue} мм.")
-                .FillRowWith("Вес блока", $"{input.BlockWeight} мм.")
+                .FillRowWith("Толщина раствора", $"{input.MortarValue} мм")
+                .FillRowWith("Вес блока", $"{input.BlockWeight} мм")
                 .FillRowWith("Стоимость одного блока", $"{input.Price} руб.")
                 .EndNiceTable();
             return tableIndex;
@@ -105,11 +101,17 @@ namespace WallsCalculator.Services.WordGenerators
         private int AddResultsTable(BlockCalculationOutput output, Section lastPage, int tableIndex)
         {
             AddBaseResultsTable(output, lastPage, ref tableIndex, 12, 2)
+                .FillRowWith("Площадь кладки", $"{output.AreaToCoverSquareM} м²")
+                .FillRowWith("Площадь, которой не нужна кладка", output.AreaToNotCoverSquareM > 0 ? $"{output.AreaToNotCoverSquareM} м²" : "Без проемов")
                 .FillRowWith("Количество выбранного типа блока и толщины в 1 м²", $"{output.OneSquareBlocksAmount} шт.")
-                .FillRowWith("Площадь необходимой кладочной сетки", $"{output.AreaForMasonryGrid} м².")
-                .FillRowWith("Число рядов кладочной сетки", $"{output.MasonryGridRowsAmount} шт.")
+                .FillRowWith("Количество блока необходимого для кладки", $"{output.TotalMaterialAmount} шт.")
                 .FillRowWith("Количество блоков в колонне", $"{output.ColumnBlocksAmount} шт.")
-                .FillRowWith("Общий вес конструкции", $"{output.ConstructionWeight} шт.")
+                .FillRowWith("Стоимость блоков", $"{output.TotalMaterialPrice} руб.")
+                .FillRowWith("Число рядов кладочной сетки", $"{output.MasonryGridRowsAmount} шт.")
+                .FillRowWith("Площадь необходимой кладочной сетки", $"{output.AreaForMasonryGrid} м²")
+                .FillRowWith("Общий вес конструкции", $"{output.ConstructionWeight} кг")
+                .FillRowWith("Стоимость найма рабочих", output.AllWorkersPrice > 0 ? $"{output.AllWorkersPrice} руб." : "Без найма")
+                .FillRowWith("Итоговая стоимость работ с учетом найма работников и закупки материалов", $"{output.TotalMaterialAndWorkersPrice} руб.")
                 .EndNiceTable();
             return tableIndex;
         }

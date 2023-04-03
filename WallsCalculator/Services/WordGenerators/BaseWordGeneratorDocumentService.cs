@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using Spire.Doc;
 using Spire.Doc.Documents;
 using WallsCalculator.Models;
@@ -13,6 +14,22 @@ namespace WallsCalculator.Services.WordGenerators
     public class BaseWordGeneratorDocumentService
     {
         protected const string MsWord = "application/msword";
+        
+        protected static HttpFileContent CreateDocument(string fileName, DocumentFormatBuilder builder)
+        {
+            var document = builder.Build();
+            var stream = new MemoryStream();
+            document.SaveToStream(stream, FileFormat.Doc);
+
+            return new()
+            {
+                FileName = fileName.LastIndexOf(".") == -1
+                    ? $"{fileName}.doc"
+                    : $"{fileName[..fileName.LastIndexOf('.')]}.doc",
+                Content = stream.ToArray(),
+                ContentType = MsWord
+            };
+        }
         
         protected Section AddPage(DocumentFormatBuilder builder, bool addStyle = true)
         {
@@ -113,13 +130,7 @@ namespace WallsCalculator.Services.WordGenerators
                 .AddNiceText($"\nТаблица {tableIndex++}. Результаты расчета", TableHeading, MidLineSpacing)
                 .AddNiceTable(rows, cols)
                 .SetNiceTableStyle(LeftText, HighLineSpacing)
-                .FillRowWith("Общая площадь", $"{output.TotalArea} м².")
-                .FillRowWith("Площадь кладки", $"{output.AreaToCoverSquareM} м².")
-                .FillRowWith("Площадь, которой не нужна кладка", output.AreaToNotCoverSquareM > 0 ? $"{output.AreaToNotCoverSquareM} м²." : "Без проемов")
-                .FillRowWith("Количество материала необходимого для возведения стены", $"{output.TotalMaterialAmount} шт.")
-                .FillRowWith("Стоимость материалов", $"{output.TotalMaterialPrice} руб.")
-                .FillRowWith("Стоимость найма рабочих", output.AllWorkersPrice > 0 ? $"{output.AllWorkersPrice} руб." : "Без найма")
-                .FillRowWith("Итоговая стоимость работ с учетом найма работников и закупки материалов", $"{output.TotalMaterialAndWorkersPrice} руб.");
+                .FillRowWith("Общая площадь", $"{output.TotalArea} м²");
         }
     }
 }

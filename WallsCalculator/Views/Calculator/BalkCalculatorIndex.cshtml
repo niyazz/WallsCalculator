@@ -25,12 +25,12 @@
                 <div class="calculatorWrapperShadow p-4 mb-4">
                     <div class="form-group">
                         <label asp-for="Perimeter" class="control-label"></label>
-                        <input onkeypress="isNumber(event)" asp-for="Perimeter" class="form-control" placeholder="0 мм" />
+                        <input onkeypress="isNumber(event)" asp-for="Perimeter" class="form-control" placeholder="0 мм"/>
                         <span asp-validation-for="Perimeter" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="AngleHeight" class="control-label"></label>
-                        <input onkeypress="isNumber(event)" asp-for="AngleHeight" class="form-control" placeholder="0 мм" />
+                        <input onkeypress="isNumber(event)" asp-for="AngleHeight" class="form-control" placeholder="0 мм"/>
                         <span asp-validation-for="AngleHeight" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -38,7 +38,7 @@
                         <select class="form-control" asp-for="BalkType">
                             @foreach (var enumAlias in Enum.GetValues(typeof(BalkType)).Cast<BalkType>())
                             {
-                                var enumValue = (int)enumAlias;
+                                var enumValue = (int) enumAlias;
                                 <option value="@enumValue">@enumAlias.GetMaterialDescription(enumAlias.GetEnumDisplayName())</option>
                             }
                         </select>
@@ -46,28 +46,28 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="BalkWidth" class="control-label"></label>
-                        <input onkeypress="isNumber(event)" asp-for="BalkWidth" class="form-control" placeholder="0 мм" />
+                        <input onkeypress="isNumber(event)" asp-for="BalkWidth" class="form-control" placeholder="0 мм"/>
                         <span asp-validation-for="BalkWidth" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="BalkHeight" class="control-label"></label>
-                        <input onkeypress="isNumber(event)" asp-for="BalkHeight" class="form-control" placeholder="0 мм" />
+                        <input onkeypress="isNumber(event)" asp-for="BalkHeight" class="form-control" placeholder="0 мм"/>
                         <span asp-validation-for="BalkHeight" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="BalkLength" class="control-label"></label>
-                        <input onkeypress="isNumber(event)" asp-for="BalkLength" class="form-control" placeholder="0 руб." />
+                        <input onkeypress="isNumber(event)" asp-for="BalkLength" class="form-control" placeholder="0 руб."/>
                         <span asp-validation-for="BalkLength" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Price" class="control-label"></label>
-                        <input onkeypress="isNumber(event)" asp-for="Price" class="form-control" placeholder="0 руб." />
+                        <input onkeypress="isNumber(event)" asp-for="Price" class="form-control" placeholder="0 руб."/>
                         <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div id="apertures-container" class="calculatorWrapperShadow p-4 mb-4">
-                    <img class="brickTypeImg" src="~/img/wd.jpg" />
+                    <img class="brickTypeImg" src="~/img/wd.jpg"/>
                     <button type="button" class="btn calculatorBtnColor" onclick="addApertureInput('#apertures-container', 'aperture')">
                         Добавить проём
                     </button>
@@ -93,7 +93,6 @@
     </form>
 
 
-
     @{
         if (ViewBag.IsCalculated != null)
         {
@@ -114,40 +113,59 @@
 
 </div>
 
-    @section Scripts {
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+}
 
 <div class="brickCalculator mt-5 text-secondary">
     <div class="font-weight-bold h3 text-center my-5 text-secondary text-center">Общие сведения по результатам расчетов</div>
     <div class="my-3">
         <div class="lightViolet p-3 my-4">
-            Площадь проемов
-            <br />
-            - При слишком малой площади проемов (< 0.01 кв.м.) она приравнивается к нулю.
+            Площадь кладки
+            <br/>
+            - Площадь внешней стороны стен и соответствует площади необходимого утеплителя.
         </div>
         <div class="lightViolet p-3 my-4">
-            Периметр строения
-            <br />
-            - Общая длина всех стен учтенных в расчетах.
+            Площадь, которой не нужна кладка
+            <br/>
+            - Общая площадь всех проёмов (окон и дверей), где не нужна кладка.
         </div>
         <div class="lightViolet p-3 my-4">
-            Общая площадь кладки
-            <br />
-            - Площадь внешней стороны стен. Соответствует площади необходимого утеплителя, если такой предусмотрен проектом.
+            Количество выбранного типа бруса в 1 м<sup>3</sup>
+            <br/>
+            - Сколько брусьев в 1 м<sup>3</sup> понадобится.
         </div>
         <div class="lightViolet p-3 my-4">
-            Толщина стены
-            <br />
-            - Толщина готовой стены с учетом толщины растворного шва. Может незначительно отличаться от конечного результата в
-            зависимости от вида кладки.
+            Количество брусьев необходимого для создания конструкции
+            <br/>
+            - Общее количество брусьев необходимых для постройки стен по заданным параметрам.
         </div>
         <div class="lightViolet p-3 my-4">
-            Количество
-            <br />
-            - Общее количество кирпичей необходимых для постройки стен по заданным параметрам
+            Объем кубов бруса необходимого для создания конструкции
+            <br/>
+            - Необходимый объём кубов бруса.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Стоимость кубов бруса
+            <br/>
+            - Стоимость кубов бруса в рублях.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Количество рядов бруса
+            <br/>
+            - Необходимое количество рядов бруса.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Общий вес конструкции
+            <br/>
+            - Общий вес всей конструкции.
+        </div>
+        <div class="lightViolet p-3 my-4">
+            Стоимость найма рабочих
+            <br/>
+            - Стоимость найма всех работников, которые будут наняты для работы.
         </div>
     </div>
 </div>
