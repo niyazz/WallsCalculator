@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using WallsCalculator.Models.Enums;
+#nullable enable
 
 namespace WallsCalculator.Utils
 {

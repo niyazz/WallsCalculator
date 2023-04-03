@@ -1,4 +1,6 @@
-namespace WallsCalculator.Models
+#nullable enable
+
+namespace WallsCalculator.Models.Shared
 {
     public class ErrorViewModel
     {

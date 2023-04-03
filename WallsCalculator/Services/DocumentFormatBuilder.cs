@@ -1,5 +1,6 @@
 ﻿using Spire.Doc;
 using Spire.Doc.Documents;
+#nullable enable
 
 namespace WallsCalculator.Services
 {

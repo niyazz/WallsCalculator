@@ -1,4 +1,6 @@
-﻿namespace WallsCalculator.Services
+﻿#nullable enable
+
+namespace WallsCalculator.Services.Abstractions
 {
     /// <summary>
     /// Калькулятор для расчета конструкции.
