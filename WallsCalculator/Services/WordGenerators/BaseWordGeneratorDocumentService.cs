@@ -113,13 +113,7 @@ namespace WallsCalculator.Services.WordGenerators
                 .AddNiceText($"\nТаблица {tableIndex++}. Результаты расчета", TableHeading, MidLineSpacing)
                 .AddNiceTable(rows, cols)
                 .SetNiceTableStyle(LeftText, HighLineSpacing)
-                .FillRowWith("Общая площадь", $"{output.TotalArea} м².")
-                .FillRowWith("Площадь кладки", $"{output.AreaToCoverSquareM} м².")
-                .FillRowWith("Площадь, которой не нужна кладка", output.AreaToNotCoverSquareM > 0 ? $"{output.AreaToNotCoverSquareM} м²." : "Без проемов")
-                .FillRowWith("Количество материала необходимого для возведения стены", $"{output.TotalMaterialAmount} шт.")
-                .FillRowWith("Стоимость материалов", $"{output.TotalMaterialPrice} руб.")
-                .FillRowWith("Стоимость найма рабочих", output.AllWorkersPrice > 0 ? $"{output.AllWorkersPrice} руб." : "Без найма")
-                .FillRowWith("Итоговая стоимость работ с учетом найма работников и закупки материалов", $"{output.TotalMaterialAndWorkersPrice} руб.");
+                .FillRowWith("Общая площадь", $"{output.TotalArea} м²");
         }
     }
 }

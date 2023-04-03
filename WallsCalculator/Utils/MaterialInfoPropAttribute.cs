@@ -115,7 +115,7 @@ namespace WallsCalculator.Utils
                             if (materialInfo.Density.HasValue)
                                 return $"{name} ({materialInfo.Density} кг/м)";
                             
-                            return $"{name} ({materialInfo.Length}*{materialInfo.Width}*{materialInfo.Height} мм))";
+                            return $"{name} ({materialInfo.Length}*{materialInfo.Width}*{materialInfo.Height} мм)";
                         }
                     }
                 }
