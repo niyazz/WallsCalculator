@@ -118,3 +118,16 @@ a.navbar-brand {
     outline-color: none !important;
     box-shadow: none!important;
 }
+
+p.absac {
+    margin:0;
+    text-indent: 1.5em;
+}
+
+.more {
+    display: none;
+}
+.myBtn {
+    cursor: pointer;
+    font-weight: 700;
+}
