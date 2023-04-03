@@ -27,8 +27,7 @@ namespace WallsCalculator.Services.WordGenerators
             var builder = new DocumentFormatBuilder();
             var tableIndex = 1;
 
-            var firstPage = AddPage(builder)
-                .AddNiceText($"Расчет стены из блока {DateTime.Now:dd/MM/yyyy}\n", BigHeading, MidLineSpacing);
+            var firstPage = AddPage(builder).AddNiceText($"Расчет стены из блока {DateTime.Now:dd/MM/yyyy}", BigHeading, MidLineSpacing);
             tableIndex = AddInputsTable(calculated, firstPage, tableIndex);
             tableIndex = AddAperturesTable(calculated.Input.Apertures.ToArray(), firstPage, ref tableIndex);
             tableIndex = AddWorkersTable(calculated.Input.Workers.ToArray(), firstPage, ref tableIndex);
@@ -82,22 +81,7 @@ namespace WallsCalculator.Services.WordGenerators
 
             #endregion
 
-            #region Создание документа
-
-            var document = builder.Build();
-            var stream = new MemoryStream();
-            document.SaveToStream(stream, FileFormat.Doc);
-
-            return new()
-            {
-                FileName = fileName.LastIndexOf(".") == -1
-                    ? $"{fileName}.doc"
-                    : $"{fileName[..fileName.LastIndexOf('.')]}.doc",
-                Content = stream.ToArray(),
-                ContentType = MsWord
-            };
-
-            #endregion
+            return CreateDocument(fileName, builder);
         }
 
         private int AddInputsTable(BlockCalculationOutput output, Section lastPage, int tableIndex)
@@ -107,8 +91,8 @@ namespace WallsCalculator.Services.WordGenerators
                 .FillRowWith("Вид блока", input.BlockType.GetMaterialDescription(input.BlockType.GetEnumDisplayName())!)
                 .FillRowWith("Тип кладки блока", input.DepthType.GetEnumDisplayName())
                 .FillRowWith("Тип кладки сетки", input.MasonryType.GetEnumDisplayName())
-                .FillRowWith("Толщина раствора", $"{input.MortarValue} мм.")
-                .FillRowWith("Вес блока", $"{input.BlockWeight} мм.")
+                .FillRowWith("Толщина раствора", $"{input.MortarValue} мм")
+                .FillRowWith("Вес блока", $"{input.BlockWeight} мм")
                 .FillRowWith("Стоимость одного блока", $"{input.Price} руб.")
                 .EndNiceTable();
             return tableIndex;

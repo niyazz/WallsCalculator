@@ -29,9 +29,7 @@ namespace WallsCalculator.Services.WordGenerators
             var builder = new DocumentFormatBuilder();
             var tableIndex = 1;
 
-            var firstPage = AddPage(builder)
-                .AddNiceText($"Расчет кирпичной стены от {DateTime.Now:dd/MM/yyyy}", BigHeading, MidLineSpacing);
-            
+            var firstPage = AddPage(builder).AddNiceText($"Расчет кирпичной стены от {DateTime.Now:dd/MM/yyyy}", BigHeading, MidLineSpacing);
             tableIndex = AddInputsTable(calculated, firstPage, tableIndex);
             tableIndex = AddAperturesTable(calculated.Input.Apertures.ToArray(), firstPage, ref tableIndex);
             tableIndex = AddWorkersTable(calculated.Input.Workers.ToArray(), firstPage, ref tableIndex);
@@ -80,30 +78,15 @@ namespace WallsCalculator.Services.WordGenerators
                     .AddNiceText("- Стоимость найма всех работников, которые будут наняты для работы.", JustifyText, MidLineSpacing);
 
             #endregion
-
-            #region Создание документа
-
-            var document = builder.Build();
-            var stream = new MemoryStream();
-            document.SaveToStream(stream, FileFormat.Doc);
-
-            return new()
-            {
-                FileName = fileName.LastIndexOf(".") == -1
-                    ? $"{fileName}.doc"
-                    : $"{fileName[..fileName.LastIndexOf('.')]}.doc",
-                Content = stream.ToArray(),
-                ContentType = MsWord
-            };
-
-            #endregion
+            
+            return CreateDocument(fileName, builder);
         }
 
         private int AddInputsTable(BrickCalculationOutput output, Section lastPage, int tableIndex)
         {
             var input = output.Input;
             AddBaseInputsTable(output.Input, output, lastPage, ref tableIndex, 8, 2)
-                .FillRowWith("Вид крипича", input.BrickType.GetMaterialDescription(input.BrickType.GetEnumDisplayName())!)
+                .FillRowWith("Вид кирпича", input.BrickType.GetMaterialDescription(input.BrickType.GetEnumDisplayName())!)
                 .FillRowWith("Тип кладки кирпича", input.DepthType.GetEnumDisplayName())
                 .FillRowWith("Тип кладки сетки", input.MasonryType.GetEnumDisplayName())
                 .FillRowWith("Толщина раствора", $"{input.MortarValue} мм")

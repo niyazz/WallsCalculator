@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using Spire.Doc;
 using Spire.Doc.Documents;
 using WallsCalculator.Models;
@@ -13,6 +14,22 @@ namespace WallsCalculator.Services.WordGenerators
     public class BaseWordGeneratorDocumentService
     {
         protected const string MsWord = "application/msword";
+        
+        protected static HttpFileContent CreateDocument(string fileName, DocumentFormatBuilder builder)
+        {
+            var document = builder.Build();
+            var stream = new MemoryStream();
+            document.SaveToStream(stream, FileFormat.Doc);
+
+            return new()
+            {
+                FileName = fileName.LastIndexOf(".") == -1
+                    ? $"{fileName}.doc"
+                    : $"{fileName[..fileName.LastIndexOf('.')]}.doc",
+                Content = stream.ToArray(),
+                ContentType = MsWord
+            };
+        }
         
         protected Section AddPage(DocumentFormatBuilder builder, bool addStyle = true)
         {

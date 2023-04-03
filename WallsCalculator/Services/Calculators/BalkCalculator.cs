@@ -40,7 +40,7 @@ namespace WallsCalculator.Services.Calculators
                     Input = input,
                     OneCubeBalkAmount = oneCubeBalkAmount,
                     TotalMaterialAmount = Convert.ToInt32(areaToCoverCubeM * oneCubeBalkAmount),
-                    TotalMaterialPrice =totalMaterialPrice,
+                    TotalMaterialPrice = totalMaterialPrice,
                     AreaToCoverCubeM = Math.Round(areaToCoverCubeM, 2),
                     AreaToCoverSquareM = Math.Round(areaToCoverSm, 2),
                     AreaToNotCoverSquareM = Math.Round(areaToNotCoverSm, 2),
