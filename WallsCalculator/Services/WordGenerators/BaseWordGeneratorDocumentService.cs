@@ -62,36 +62,36 @@ namespace WallsCalculator.Services.WordGenerators
         protected int AddAperturesTable(ApertureInput[] apertures, Section lastPage, ref int tableIndex)
         {
             var doorApertures = apertures.Where(x => x.ApertureType == ApertureType.Door).ToArray();
-            if (doorApertures.Any(x => x.Height != 0 && x.Width != 0))
+            if (doorApertures.Any(x => x.Height != 0 && x.Width != 0 && x.Quantity != 0))
             {
                 var table = lastPage
                     .AddNiceText($"\nТаблица {tableIndex++}. Дверные проемы в стенах, мм", TableHeading, MidLineSpacing)
-                    .AddNiceTable(doorApertures.Length + 1, 3)
+                    .AddNiceTable(doorApertures.Length + 1, 4)
                     .SetNiceTableStyle(CenterText, HighLineSpacing)
-                    .FillRowWith("Номер проема", "Ширина", "Высота");
+                    .FillRowWith("Номер проема", "Ширина", "Высота", "Количество");
 
                 for (int i = 0; i < doorApertures.Length; i++)
                 {
                     table.FillRowWith((i + 1).ToString(), doorApertures[i].Width.ToString(),
-                        doorApertures[i].Height.ToString());
+                        doorApertures[i].Height.ToString(), doorApertures[i].Quantity.ToString());
                 }
 
                 table.EndNiceTable();
             }
 
             var windowsApertures = apertures.Where(x => x.ApertureType == ApertureType.Window).ToArray();
-            if (windowsApertures.Any(x => x.Height != 0 && x.Width != 0))
+            if (windowsApertures.Any(x => x.Height != 0 && x.Width != 0 && x.Quantity != 0))
             {
                 var table = lastPage
                     .AddNiceText($"\nТаблица {tableIndex++}. Оконные проемы в стенах, мм", TableHeading, MidLineSpacing)
-                    .AddNiceTable(windowsApertures.Length + 1, 3)
+                    .AddNiceTable(windowsApertures.Length + 1, 4)
                     .SetNiceTableStyle(CenterText, HighLineSpacing)
-                    .FillRowWith("Номер проема", "Ширина", "Высота");
+                    .FillRowWith("Номер проема", "Ширина", "Высота", "Количество");
 
                 for (int i = 0; i < windowsApertures.Length; i++)
                 {
                     table.FillRowWith((i + 1).ToString(), windowsApertures[i].Width.ToString(),
-                        windowsApertures[i].Height.ToString());
+                        windowsApertures[i].Height.ToString(), doorApertures[i].Quantity.ToString());
                 }
 
                 table.EndNiceTable();

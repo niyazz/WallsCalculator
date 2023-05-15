@@ -24,9 +24,10 @@ namespace WallsCalculator.Services.Calculators
                 .Select(x => new
                 {
                     HeightM = x.Height / MToMm,
-                    WidthM = x.Width / MToMm
+                    WidthM = x.Width / MToMm,
+                    x.Quantity
                 })
-                .Select(x => x.HeightM * x.WidthM).Sum();
+                .Select(x => x.HeightM * x.WidthM * x.Quantity).Sum();
 
             if (areaToCoverSm > areaToNotCoverSm)
             {
@@ -49,7 +50,7 @@ namespace WallsCalculator.Services.Calculators
                     ColumnBricksAmount = columnBrickAmount,
                     AreaToCoverSquareM = Math.Round(areaToCoverSm, 2),
                     AreaToNotCoverSquareM = Math.Round(areaToNotCoverSm, 2),
-                    AllWorkersPrice = input.Workers.Select(x => x.QuantityOfWorkers * x.Price * x.DurationInDays).Sum(),
+                    AllWorkersPrice = allWorkersPrice,
                     WallDepthCentimeters = Math.Round(wallDepthCm, 2),
                     AreaForMasonryGrid = Math.Round(input.Perimeter * (wallDepthCm / MToCm) * masonryGridRowsAmount, 2),
                     TotalMaterialAndWorkersPrice = totalMaterialPrice + allWorkersPrice,

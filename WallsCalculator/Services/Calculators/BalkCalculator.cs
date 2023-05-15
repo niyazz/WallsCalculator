@@ -22,9 +22,10 @@ namespace WallsCalculator.Services.Calculators
                 .Select(x => new
                 {
                     HeightM = x.Height / MToMm,
-                    WidthM = x.Width / MToMm
+                    WidthM = x.Width / MToMm,
+                    x.Quantity
                 })
-                .Select(x => x.HeightM * x.WidthM).Sum();
+                .Select(x => x.HeightM * x.WidthM * x.Quantity).Sum();
 
             if (areaToCoverSm > areaToNotCoverSm)
             {

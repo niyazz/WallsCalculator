@@ -25,5 +25,11 @@ namespace WallsCalculator.Models
         /// </summary>
         [DisplayName("Высота проёма (мм)")]
         public double Height { get; set; }
+        
+        /// <summary>
+        /// Число таких проёмов.
+        /// </summary>
+        [DisplayName("Количество")]
+        public double Quantity { get; set; }
     }
 }

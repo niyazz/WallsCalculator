@@ -132,6 +132,7 @@
             <input type="hidden" asp-for="Input.Apertures[@i].ApertureType" name="Input.Apertures[@i].ApertureType" value="@apertures[i].ApertureType"/>
             <input type="hidden" asp-for="Input.Apertures[@i].Width" name="Input.Apertures[@i].Width" value="@apertures[i].Width"/>
             <input type="hidden" asp-for="Input.Apertures[@i].Height" name="Input.Apertures[@i].Height" value="@apertures[i].Height"/>
+            <input type="hidden" asp-for="Input.Apertures[@i].Quantity" name="Input.Apertures[@i].Quantity" value="@apertures[i].Quantity"/>
         }
 
         var workers = Model?.Input.Workers.ToArray() ?? Array.Empty<WorkerInput>();
