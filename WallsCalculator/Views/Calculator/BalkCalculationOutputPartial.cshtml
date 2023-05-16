@@ -5,64 +5,68 @@
         <h3>Результаты расчётов стены из бруса</h3>
         <table class="table table-bordered">
             <tbody>
-            <tr>
-                <td>Площадь кладки</td>
-                <td>@Model.AreaToCoverSquareM м<sup>2</sup></td>
-            </tr>
-            <tr>
-                <td>Площадь, которой не нужна кладка </td>
-                @if (Model.AreaToNotCoverSquareM > 0)
-                {
-                    <td>@Model.AreaToNotCoverSquareM м<sup>2</sup></td>
-                }
-                else
-                {
-                    <td>Без проемов</td>
-                }
-            </tr>
-            <tr>
-                <td>Толщина стены</td>
-                <td>@Model.WallDepthCentimeters см</td>
-            </tr>
-            <tr>
-                <td>Количество выбранного типа бруса в 1 м<sup>3</sup></td>
-                <td>@Model.OneCubeBalkAmount шт.</td>
-            </tr>
-            <tr>
-                <td>Количество брусьев необходимого для создания конструкции</td>
-                <td>@Model.TotalMaterialAmount шт. </td>
-            </tr>
-            <tr>
-                <td>Объем бруса в кубе</td>
-                <td>@Model.BalkVolumeCubeM м<sup>3</sup> </td>
-            </tr>
-            <tr>
-                <td>Объем кубов бруса необходимого для создания конструкции</td>
-                <td>@Model.AreaToCoverCubeM м<sup>3</sup> </td>
-            </tr>
-            <tr>
-                <td>Стоимость кубов бруса</td>
-                <td>@Model.TotalMaterialPrice руб.</td>
-            </tr>
-            <tr>
-                <td>Количество рядов бруса</td>
-                <td>@Model.BalkRowsAmount шт.</td>
-            </tr>
-            <tr>
-                <td>Общий вес конструкции</td>
-                <td>@Model.ConstructionWeight кг</td>
-            </tr>
-            <tr>
-                <td>Стоимость найма рабочих</td>
-                @if (Model.AllWorkersPrice > 0)
-                {
-                    <td>@Model.AllWorkersPrice руб.</td>
-                }
-                else
-                {
-                    <td>Без найма</td>
-                }
-            </tr>
+                <tr>
+                    <td>Площадь кладки</td>
+                    <td>@Model.AreaToCoverSquareM м<sup>2</sup></td>
+                </tr>
+                <tr>
+                    <td>Площадь, которой не нужна кладка </td>
+                    @if (Model.AreaToNotCoverSquareM > 0)
+                    {
+                        <td>@Model.AreaToNotCoverSquareM м<sup>2</sup></td>
+                    }
+                    else
+                    {
+                        <td>Без проемов</td>
+                    }
+                </tr>
+                <tr>
+                    <td>Толщина стены</td>
+                    <td>@Model.WallDepthCentimeters см</td>
+                </tr>
+                <tr>
+                    <td>Количество выбранного типа бруса в 1 м<sup>3</sup></td>
+                    <td>@Model.OneCubeBalkAmount шт.</td>
+                </tr>
+                <tr>
+                    <td>Количество брусьев необходимого для создания конструкции</td>
+                    <td>@Model.TotalMaterialAmount шт. </td>
+                </tr>
+                <tr>
+                    <td>Объем бруса в кубе</td>
+                    <td>@Model.BalkVolumeCubeM м<sup>3</sup> </td>
+                </tr>
+                <tr>
+                    <td>Объем кубов бруса необходимого для создания конструкции</td>
+                    <td>@Model.AreaToCoverCubeM м<sup>3</sup> </td>
+                </tr>
+                <tr>
+                    <td>Стоимость кубов бруса</td>
+                    <td>@Model.TotalMaterialPrice руб.</td>
+                </tr>
+                <tr>
+                    <td>Количество рядов бруса</td>
+                    <td>@Model.BalkRowsAmount шт.</td>
+                </tr>
+                <tr>
+                    <td>Общий вес конструкции</td>
+                    <td>@Model.ConstructionWeight кг</td>
+                </tr>
+                <tr>
+                    <td>Стоимость найма рабочих</td>
+                    @if (Model.AllWorkersPrice > 0)
+                    {
+                        <td>@Model.AllWorkersPrice руб.</td>
+                    }
+                    else
+                    {
+                        <td>Без найма</td>
+                    }
+                </tr>
+                <tr>
+                    <td>Итоговая стоимость работ с учетом найма работников и закупки материалов</td>
+                    <td>@Model.TotalMaterialAndWorkersPrice руб.</td>
+                </tr>
             </tbody>
         </table>
         @{
