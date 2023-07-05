@@ -46,6 +46,12 @@
     <Content Update="Views\Calculator\WorkersOutputPartial.cshtml">
       <DependentUpon>WorkersIndex.cshtml</DependentUpon>
     </Content>
+    <Content Include="..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
+    <Content Include="..\README.md">
+      <Link>README.md</Link>
+    </Content>
   </ItemGroup>
 
 </Project>
