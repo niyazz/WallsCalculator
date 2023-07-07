@@ -12,7 +12,7 @@ The results table can be uploaded to ``Microsoft Word (.doc)``.
 - ASP.NET Core MVC 5
 - Bootstrap v4.3.1
 - HTML, CSS
-- JQuery cleint-side validation for ASP.NET
+- JQuery client-side validation for ASP.NET
 
 ## Launching the app
 There are several options for launching the application with and without using ``Docker``:
